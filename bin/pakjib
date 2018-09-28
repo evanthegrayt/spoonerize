@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require_relative '../lib/pakjib'
+
+USAGE = "USAGE: #{File.basename(__FILE__)} [OPTIONS] [WORDS]..."
+opts = {}
+OptionParser.new do |o|
+  o.banner = USAGE
+  o.on('-r', '--[no-]reverse', 'Reverse flipping') { |v| opts[:reverse] = v }
+  o.on('-l', '--[no-]lazy', 'Skip small words') { |v| opts[:lazy] = v }
+  o.on('-s', '--[no-]save', 'Save results in log') { |v| opts[:save] = v }
+  o.on('--exclude=WORDS', Array, 'Words to skip') { |v| opts[:exclude] = v }
+end.parse!(ARGV)
+
+abort(USAGE) if ARGV.empty?
+
+words = PakJib.new(ARGV, opts)
+words.pakjib
+puts words.results
+words.save if opts[:save]
+
