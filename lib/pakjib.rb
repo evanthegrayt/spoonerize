@@ -57,11 +57,11 @@ class PakJib
   end
 
   def vowels
-    /((?<!q)u|[aeio]).*$/
+    /((?<!q)u|[aeioy]).*$/
   end
 
   def consonants
-    /^([bcdfghjklmnprstvwxyz]+|qu)/
+    /^([bcdfghjklmnprstvwxyz]+|qu)(?<!y)/
   end
 
   def flipped_words
