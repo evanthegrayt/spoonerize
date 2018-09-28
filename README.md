@@ -25,7 +25,7 @@ To uninstall, run `rake uninstall`, or simply `rm /usr/local/bin/pakjib`
 ## Usage
 Just pass the phrase as arguments:
 ```sh
-pakjib this is my phrase
+pakjib this is a sentence # => is sis a thentence
 ```
 Options include:
 ```sh
@@ -50,5 +50,7 @@ leading consonants from the next non-excluded word.
 - "Q" and "U" should stay together (like "queen").
 
 ## Known issues
-I haven't written the unit tests yet...
+- I haven't written the unit tests yet...
+- Words like "my" aren't processed correctly because I forgot to make a rule for
+"y" when it's a vowel.
 
