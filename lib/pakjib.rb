@@ -74,8 +74,9 @@ class PakJib
   end
 
   def logger
-    @logger ||=
-      Logger.new(File.join(__dir__, '..', 'log', 'pakjib.log'), 0, 1048576)
+    @logger ||= Logger.new(
+      File.join(File.dirname(__FILE__), '..', 'log', 'pakjib.log'), 0, 1048576
+    )
   end
 
 end
