@@ -18,15 +18,19 @@ class PakJib
   end
 
   def pakjib
-    words.each_with_index { |word, idx| flipped_words << flip_words(word, idx) }
-  end
-
-  def results
-    flipped_words.join(' ')
+    @pakjib ||= words.map.with_index do |word, idx|
+      word = flip_words(word, idx)
+    end.join(' ')
   end
 
   def save
-    logger.info(results)
+    logger.info(pakjib)
+  end
+
+  def logfile
+    @logfile ||= File.expand_path(
+      File.join(File.dirname(__FILE__), '..', 'log', 'pakjib.log')
+    )
   end
 
   private
@@ -36,10 +40,6 @@ class PakJib
     return word if excluded?(idx)
     bumper = bump(bumper) until !excluded?(bumper)
     words[bumper].match(consonants).to_s + word.match(vowels).to_s
-  end
-
-  def excluded?(index)
-    excluded_words.include?(words[index])
   end
 
   def set_bumper(idx)
@@ -52,16 +52,20 @@ class PakJib
     bumper == words.size ? 0 : bumper
   end
 
+  def excluded?(index)
+    excluded_words.include?(words[index])
+  end
+
   def enough_flippable_words?
     (words - excluded_words).size > 1
   end
 
   def vowels
-    /((?<!q)u|[aeioy]).*$/
+    /((?<!q)u|[aeio]|(?<=[bcdfghjklmnprstvwxz])y).*$/
   end
 
   def consonants
-    /^([bcdfghjklmnprstvwxyz]+|qu)(?<!y)/
+    /^(y|[bcdfghjklmnprstvwxz]+|qu)/
   end
 
   def flipped_words
@@ -74,9 +78,7 @@ class PakJib
   end
 
   def logger
-    @logger ||= Logger.new(
-      File.join(File.dirname(__FILE__), '..', 'log', 'pakjib.log'), 0, 1048576
-    )
+    @logger ||= Logger.new(logfile, 0, 1048576)
   end
 
 end

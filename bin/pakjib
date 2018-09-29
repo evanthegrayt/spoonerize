@@ -15,8 +15,16 @@ end.parse!(ARGV)
 
 abort(USAGE) if ARGV.empty?
 
-words = PakJib.new(ARGV, opts)
-words.pakjib
-puts words.results
-words.save if opts[:save]
+begin
+  words = PakJib.new(ARGV, opts)
+rescue PakJib::JakPibError
+  abort("Please pass more flip-able words")
+end
+
+if opts[:save]
+  puts "Saving [#{words.pakjib}] to #{words.logfile}"
+  words.save
+else
+  puts words.pakjib
+end
 
