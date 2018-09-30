@@ -1,3 +1,11 @@
+#==============================================================#
+#        File: pakjib.rb                                       #
+# Description: The main word-flipper                           #
+#                                                              #
+#      Author: Evan Gray                                       #
+#==============================================================#
+
+require 'yaml'
 require 'logger'
 require 'optparse'
 
@@ -5,12 +13,14 @@ class PakJib
 
   JakPibError = Class.new(StandardError)
 
-  LAZY_WORDS = %w(an and in of the my your his her).freeze
+  LAZY_WORDS = YAML::load_file(
+    File.join(File.dirname(__FILE__), 'config', 'lazy_words.yml')
+  ).freeze
 
   attr_reader :words
 
   def initialize(words, opts = {})
-    @words = words.map { |i| i.downcase }
+    @words = words.map(&:downcase)
     @opts  = opts
     @opts[:exclude] ||= []
 
@@ -73,8 +83,9 @@ class PakJib
   end
 
   def excluded_words
-    @excluded_words ||=
+    @excluded_words ||= (
       %w(a i) + @opts[:exclude] + (@opts[:lazy] ? LAZY_WORDS : [])
+    ).map(&:downcase)
   end
 
   def logger

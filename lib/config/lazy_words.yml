@@ -1,0 +1,17 @@
+#================================================================#
+#        File: lazy_words.yml                                    #
+# Description: Words to be excluded when "lazy" mode is enabled  #
+#                                                                #
+#      Author: Evan Gray                                         #
+#================================================================#
+
+- an
+- and
+- in
+- of
+- the
+- my
+- your
+- his
+- her
+

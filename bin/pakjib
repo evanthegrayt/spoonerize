@@ -1,4 +1,10 @@
 #!/usr/bin/env ruby
+#==============================================================#
+#        File: pakjib                                          #
+# Description: CLI executable for word-flipper                 #
+#                                                              #
+#      Author: Evan Gray                                       #
+#==============================================================#
 
 require 'optparse'
 require_relative '../lib/pakjib'
