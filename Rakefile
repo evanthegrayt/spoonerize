@@ -1,16 +1,17 @@
-EXECUTABLE = File.join('/', 'usr', 'local', 'bin', 'pakjib')
-INSTALL_PATH = File.expand_path(File.join(File.dirname(__FILE__)), '..')
+INSTALL_PATH = File.expand_path(File.join(File.dirname(__FILE__)), '..').freeze
+LINK_TO = File.join('/', 'usr', 'local', 'bin', 'pakjib').freeze
+LINK_FROM = File.join(INSTALL_PATH, 'bin', 'pakjib').freeze
 
 task :default => :install
 
 desc "Install to `/usr/local/bin`"
 task :install do
-  sh("ln -s #{File.join(INSTALL_PATH, 'bin', 'pakjib')} #{EXECUTABLE}")
+  File.symlink(LINK_FROM, LINK_TO)
 end
 
 desc "Uninstall..."
 task :uninstall do
-  File.delete(EXECUTABLE) if File.exist?(EXECUTABLE)
+  File.delete(LINK_TO) if File.symlink?(LINK_TO)
 end
 
 desc "Tagging and pulling from master"
