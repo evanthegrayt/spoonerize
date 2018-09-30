@@ -26,7 +26,7 @@ To uninstlal, run `rm /usr/local/bin/pakjib`
 
 ## Updating
 This is just a fun project I'm working on, and it's under active development. I
-recomment updating regularly to get the newest features. From the base
+recommend updating regularly to get the newest features. From the base
 directory, run:
 ```sh
 rake update
