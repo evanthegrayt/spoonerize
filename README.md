@@ -6,21 +6,25 @@ Well, when I was in high school, we took it further -- probably too far -- and
 made a rule set. This program follows those rules, which are listed below.
 
 ## Installation
-Clone the repository where you want it. If you have `rake` installed (`gem
+Clone the repository where you want it.
+#### Rake
+If you have `rake` installed (`gem
 install rake`), run:
 ```sh
 rake
 ```
 This will link the executable in your path (`/usr/local/bin`).
 
+To uninstall, run `rake uninstall`
+
+#### Manual
 If you aren't using `rake`, you can link the executable yourself. From inside
 the base repository directory, run:
 ```sh
 ln -s $PWD/bin/pakjib /usr/local/bin/pakjib
 ```
 
-To uninstall, run `rake uninstall`, or simply `rm /usr/local/bin/pakjib`
-
+To uninstlal, run `rm /usr/local/bin/pakjib`
 
 ## Usage
 Just pass the phrase as arguments:
