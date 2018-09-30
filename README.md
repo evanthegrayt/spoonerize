@@ -8,8 +8,7 @@ made a rule set. This program follows those rules, which are listed below.
 ## Installation
 Clone the repository where you want it.
 ### Rake
-If you have `rake` installed (`gem
-install rake`), run:
+If you have `rake` installed (`gem install rake`), run:
 ```sh
 rake
 ```
@@ -23,8 +22,19 @@ the base repository directory, run:
 ```sh
 ln -s $PWD/bin/pakjib /usr/local/bin/pakjib
 ```
-
 To uninstlal, run `rm /usr/local/bin/pakjib`
+
+## Updating
+This is just a fun project I'm working on, and it's under active development. I
+recomment updating regularly to get the newest features. From the base
+directory, run:
+```sh
+rake update
+```
+OR
+```sh
+git pull origin master
+```
 
 ## Usage
 Just pass the phrase as arguments:
