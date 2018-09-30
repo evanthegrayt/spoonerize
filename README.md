@@ -7,7 +7,7 @@ made a rule set. This program follows those rules, which are listed below.
 
 ## Installation
 Clone the repository where you want it.
-#### Rake
+### Rake
 If you have `rake` installed (`gem
 install rake`), run:
 ```sh
@@ -17,7 +17,7 @@ This will link the executable in your path (`/usr/local/bin`).
 
 To uninstall, run `rake uninstall`
 
-#### Manual
+### Manual
 If you aren't using `rake`, you can link the executable yourself. From inside
 the base repository directory, run:
 ```sh
@@ -33,11 +33,11 @@ pakjib this is a sentence # => is sis a thentence
 ```
 Options include:
 ```sh
--r # Reverse the order of the flipping
--l # Lazy -- ignore common small words, like "the", "an", "his", etc.
--s # Save the results in a log file to laugh at later
---exclude=list,of,words # Words you don't want altered.
--h # See all available options
+-r                  # Reverse the order of the flipping
+-l                  # Lazily ignore common small words, like "the", "an", etc.
+-s                  # Save the results in a log file to laugh at later
+--exclude=word,list # Words you don't want altered.
+-h                  # See all available options
 ```
 
 ## Rules of the Game

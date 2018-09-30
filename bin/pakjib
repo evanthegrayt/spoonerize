@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby
-#==============================================================#
-#        File: pakjib                                          #
-# Description: CLI executable for word-flipper                 #
-#                                                              #
-#      Author: Evan Gray                                       #
-#==============================================================#
+#===============================================================#
+#         File: pakjib                                          #
+#  Description: CLI executable for word-flipper                 #
+#                                                               #
+#       Author: Evan Gray                                       #
+#===============================================================#
 
 require 'optparse'
 require_relative '../lib/pakjib'
@@ -24,7 +24,7 @@ abort(USAGE) if ARGV.empty?
 begin
   words = PakJib.new(ARGV, opts)
 rescue PakJib::JakPibError
-  abort("Please pass more flip-able words")
+  abort("Please pass more flip-able words.")
 end
 
 if opts[:save]
