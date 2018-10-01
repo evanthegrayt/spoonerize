@@ -33,11 +33,8 @@ class Bumper
   # because when the array index is negative, it reads from the end of the
   # array, which is already what we want.
   def set_value(val)
-    if @reverse
-      val - 1
-    else
-      val + 1 == @max_length ? 0 : val + 1
-    end
+    return val - 1 if @reverse
+    val + 1 == @max_length ? 0 : val + 1
   end
 
 end
