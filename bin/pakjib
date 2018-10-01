@@ -7,9 +7,12 @@
 #===============================================================#
 
 require 'optparse'
+# Internals
 require_relative '../lib/pakjib'
 
 USAGE = "USAGE: #{File.basename(__FILE__)} [OPTIONS] [WORDS]..."
+
+# Read in args and set options
 opts = {}
 OptionParser.new do |o|
   o.banner = USAGE
@@ -21,16 +24,19 @@ end.parse!(ARGV)
 
 abort(USAGE) if ARGV.empty?
 
+# Create instance of PakJib. I rescue the custom error and replace it with
+# a more command-line friendly message.
 begin
   words = PakJib.new(ARGV, opts)
 rescue PakJib::JakPibError
   abort("Please pass more flip-able words.")
 end
 
+# If user passed `-s`, save to log file; otherwise, just print results as string
 if opts[:save]
-  puts "Saving [#{words.pakjib}] to #{words.logfile}"
+  puts "Saving [#{words.to_s}] to #{words.logfile}"
   words.save
 else
-  puts words.pakjib
+  puts words.to_s
 end
 
