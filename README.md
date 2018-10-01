@@ -9,9 +9,11 @@ made a rule set. This program follows those rules, which are listed below.
 From your terminal, clone the repository where you want it.
 ```sh
 git clone https://github.com/evanthegrayt/pakjib.git
+cd pakjib
 ```
 #### Rake
-If you have `rake` installed (`gem install rake`), run:
+If you have `rake` installed (`gem install rake`), from inside the base
+repository directory, run:
 ```sh
 rake
 ```
