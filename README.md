@@ -6,8 +6,11 @@ Well, when I was in high school, we took it further -- probably too far -- and
 made a rule set. This program follows those rules, which are listed below.
 
 ## Installation
-Clone the repository where you want it.
-### Rake
+From your terminal, clone the repository where you want it.
+```sh
+git clone https://github.com/evanthegrayt/pakjib.git
+```
+#### Rake
 If you have `rake` installed (`gem install rake`), run:
 ```sh
 rake
@@ -16,7 +19,7 @@ This will link the executable in your path (`/usr/local/bin`).
 
 To uninstall, run `rake uninstall`
 
-### Manual
+#### Manual
 If you aren't using `rake`, you can link the executable yourself. From inside
 the base repository directory, run:
 ```sh
