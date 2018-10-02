@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #===============================================================#
-#         File: pakjib                                          #
+#         File: spoonerise                                      #
 #  Description: CLI executable for word-flipper                 #
 #                                                               #
 #       Author: Evan Gray                                       #
@@ -8,7 +8,7 @@
 
 require 'optparse'
 # Internals
-require_relative '../lib/pakjib'
+require_relative '../lib/spoonerise'
 
 USAGE = "USAGE: #{File.basename(__FILE__)} [OPTIONS] [WORDS]..."
 
@@ -20,16 +20,27 @@ OptionParser.new do |o|
   o.on('-r', '--[no-]reverse', 'Reverse flipping') { |v| opts[:reverse] = v }
   o.on('-l', '--[no-]lazy', 'Skip small words') { |v| opts[:lazy] = v }
   o.on('-s', '--[no-]save', 'Save results in log') { |v| opts[:save] = v }
-  o.on('--exclude=WORDS', Array, 'Words to skip') { |v| opts[:exclude] = v }
+  o.on('-f', '--find [WORD]', 'Search log file for WORD.',
+       'If WORD is not supplied, print the whole log file.') do |v|
+    opts[:find] = true
+    opts[:word_to_find] = v || ''
+  end
+  o.on('-F', '--find-with-dates [WORD]', 'Same as "-f", but print dates') do |v|
+    opts[:find] = true
+    opts[:word_to_find] = v || ''
+    opts[:find_with_dates] = true
+  end
+  o.on('--exclude WORDS', Array, 'Words to skip') { |v| opts[:exclude] = v }
 end.parse!(ARGV)
 
 abort(USAGE) if ARGV.empty?
 
 ##
-# Create instance of PakJib. I rescue the custom error and replace it with
+# Create instance of Spoonerise. I rescue the custom error and replace it with
 # a more command-line friendly message.
 begin
   words = Flipper.new(ARGV, opts)
+  #puts words.logfile_reader.contents
 rescue Flipper::JakPibError
   abort("Please pass more flip-able words.")
 end

@@ -1,7 +1,7 @@
 require 'test/unit'
-require File.join(File.dirname(__FILE__), '..', 'lib', 'pakjib')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'spoonerise')
 
-class TestPakJib < Test::Unit::TestCase
+class TestSpoonerise < Test::Unit::TestCase
 
   def setup
   end

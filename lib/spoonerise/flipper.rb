@@ -21,7 +21,8 @@ class Flipper
   attr_reader :words
 
   ##
-  # Initialize instance of pakjib and raise if there aren't enough words to flip
+  # Initialize instance of spoonerise.
+  # raise if there aren't enough words to flip.
   def initialize(words, opts = {})
     @words = words.map(&:downcase)
     @opts  = opts
@@ -33,28 +34,47 @@ class Flipper
   ##
   # Iterates through words array, and maps its elements to the output of
   # flip_words. Returns results as an array.
-  def pakjib
-    @pakjib ||= words.map.with_index { |word, i| word = flip_words(word, i) }
+  def spoonerise
+    @spoonerise ||= words.map.with_index { |w, i| w = flip_words(w, i) }
   end
 
   ##
-  # Returns pakjib array as a joined string
+  # Returns spoonerized array as a joined string
   def to_s
-    @to_s ||= pakjib.join(' ')
+    @to_s ||= spoonerise.join(' ')
   end
 
   ##
   # Saves the flipped words to the log file
   def save
-    logger.info(to_s)
+    log.info(to_s)
   end
 
   ##
   # Creates and memoizes the path to the log file
   def logfile
     @logfile ||= File.expand_path(
-      File.join(File.dirname(__FILE__), '..', '..', 'log', 'pakjib.log')
+      File.join(File.dirname(__FILE__), '..', '..', 'log', 'spoonerise.log')
     )
+  end
+
+  ##
+  # Memoizses instance of LogfileReader
+  def logfile_reader
+    # TODO validate existence of logfile
+    @logfile_reader ||= LogfileReader.new(logfile)
+  end
+
+  ##
+  # Returns all contents of logfile
+  def saved
+    logfile_reader.contents
+  end
+
+  ##
+  # Returns search pattern if found in the logfile
+  def find_saved(string)
+    @logfile_reader.search(string)
   end
 
   private
@@ -109,8 +129,14 @@ class Flipper
 
   ##
   # Creates and memoizes instance of Logger
-  def logger
-    @logger ||= Logger.new(logfile, 0, 1048576)
+  def log
+    @log ||=
+      begin
+        logger = Logger.new(logfile, 0, 1048576)
+        logger.datetime_format = "%Y-%m-%d %H:%M:%S "
+        logger.level = Logger::Severity::INFO
+        logger
+      end
   end
 
 end
