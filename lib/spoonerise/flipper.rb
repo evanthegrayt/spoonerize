@@ -34,7 +34,7 @@ class Flipper
   # Iterates through words array, and maps its elements to the output of
   # flip_words. Returns results as an array.
   def spoonerise
-    @spoonerise ||= words.map.with_index { |word, i| word = flip_words(word, i) }
+    @spoonerise ||= words.map.with_index { |word, idx| flip_words(word, idx) }
   end
 
   ##
