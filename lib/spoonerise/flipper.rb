@@ -46,7 +46,7 @@ class Flipper
   ##
   # Saves the flipped words to the log file
   def save
-    logger.info(to_s)
+    log.info(to_s)
   end
 
   ##
@@ -109,8 +109,12 @@ class Flipper
 
   ##
   # Creates and memoizes instance of Logger
-  def logger
-    @logger ||= Logger.new(logfile, 0, 1048576)
+  def log
+    return @log if @log
+    logger = Logger.new(logfile, 0, 1048576)
+    logger.datetime_format = "%Y-%m-%d %H:%M:%S "
+    logger.level = Logger::Severity::INFO
+    @log = logger
   end
 
 end
