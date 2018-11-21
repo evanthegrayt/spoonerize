@@ -21,7 +21,7 @@ class Flipper
   attr_reader :words
 
   ##
-  # Initialize instance of pakjib and raise if there aren't enough words to flip
+  # Initialize instance and raise if there aren't enough words to flip
   def initialize(words, opts = {})
     @words = words.map(&:downcase)
     @opts  = opts
@@ -33,14 +33,14 @@ class Flipper
   ##
   # Iterates through words array, and maps its elements to the output of
   # flip_words. Returns results as an array.
-  def pakjib
-    @pakjib ||= words.map.with_index { |word, i| word = flip_words(word, i) }
+  def spoonerise
+    @spoonerise ||= words.map.with_index { |word, i| word = flip_words(word, i) }
   end
 
   ##
-  # Returns pakjib array as a joined string
+  # Returns spoonerise array as a joined string
   def to_s
-    @to_s ||= pakjib.join(' ')
+    @to_s ||= spoonerise.join(' ')
   end
 
   ##
@@ -53,7 +53,7 @@ class Flipper
   # Creates and memoizes the path to the log file
   def logfile
     @logfile ||= File.expand_path(
-      File.join(File.dirname(__FILE__), '..', '..', 'log', 'pakjib.log')
+      File.join(File.dirname(__FILE__), '..', '..', 'log', 'spoonerise.log')
     )
   end
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 #===============================================================#
-#         File: pakjib                                          #
+#         File: spoonerise                                      #
 #  Description: CLI executable for word-flipper                 #
 #                                                               #
 #       Author: Evan Gray                                       #
@@ -8,7 +8,7 @@
 
 require 'optparse'
 # Internals
-require_relative '../lib/pakjib'
+require_relative '../lib/spoonerise'
 
 USAGE = "USAGE: #{File.basename(__FILE__)} [OPTIONS] [WORDS]..."
 
@@ -26,7 +26,7 @@ end.parse!(ARGV)
 abort(USAGE) if ARGV.empty?
 
 ##
-# Create instance of PakJib. I rescue the custom error and replace it with
+# Create instance of Flipper. I rescue the custom error and replace it with
 # a more command-line friendly message.
 begin
   words = Flipper.new(ARGV, opts)
