@@ -12,15 +12,21 @@ require_relative '../lib/spoonerise'
 
 USAGE = "USAGE: #{File.basename(__FILE__)} [OPTIONS] [WORDS]..."
 
+def instantiate
+  yield
+rescue Flipper::JakPibError
+  abort("Please pass more flip-able words.")
+end
+
 ##
 # Read in args and set options
 opts = {}
 OptionParser.new do |o|
   o.banner = USAGE
   o.on('-r', '--[no-]reverse', 'Reverse flipping') { |v| opts[:reverse] = v }
-  o.on('-l', '--[no-]lazy', 'Skip small words') { |v| opts[:lazy] = v }
-  o.on('-s', '--[no-]save', 'Save results in log') { |v| opts[:save] = v }
-  o.on('--exclude=WORDS', Array, 'Words to skip') { |v| opts[:exclude] = v }
+  o.on('-l', '--[no-]lazy', 'Skip small words')    { |v| opts[:lazy]    = v }
+  o.on('-s', '--[no-]save', 'Save results in log') { |v| opts[:save]    = v }
+  o.on('--exclude=WORDS', Array, 'Words to skip')  { |v| opts[:exclude] = v }
 end.parse!(ARGV)
 
 abort(USAGE) if ARGV.empty?
@@ -28,11 +34,7 @@ abort(USAGE) if ARGV.empty?
 ##
 # Create instance of Flipper. I rescue the custom error and replace it with
 # a more command-line friendly message.
-begin
-  words = Flipper.new(ARGV, opts)
-rescue Flipper::JakPibError
-  abort("Please pass more flip-able words.")
-end
+words = instantiate { Flipper.new(ARGV, opts) }
 
 ##
 # If user passed `-s`, save to log file; otherwise, just print results as string
