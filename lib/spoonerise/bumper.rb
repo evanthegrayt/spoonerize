@@ -5,6 +5,7 @@
 #  Author::      Evan Gray                                      #
 #===============================================================#
 
+module Spoonerise
 class Bumper
 
   attr_reader :value
@@ -37,5 +38,6 @@ class Bumper
     val + 1 == @max_length ? 0 : val + 1
   end
 
+end
 end
 

@@ -5,18 +5,10 @@
 #  Author::      Evan Gray                                      #
 #===============================================================#
 
-require 'yaml'
 require 'logger'
 
+module Spoonerise
 class Flipper
-
-  JakPibError = Class.new(StandardError)
-
-  ##
-  # Load in excluded words from yaml file as frozen constant
-  LAZY_WORDS = YAML::load_file(
-    File.join(File.dirname(__FILE__), '..', 'config', 'lazy_words.yml')
-  ).freeze
 
   attr_reader :words
 
@@ -27,7 +19,7 @@ class Flipper
     @opts  = opts
     @opts[:exclude] ||= []
 
-    raise JakPibError, "Not enough words to flip" unless enough_flippable_words?
+    raise JakPibError, 'Not enough words to flip' unless enough_flippable_words?
   end
 
   ##
@@ -44,9 +36,14 @@ class Flipper
   end
 
   ##
-  # Saves the flipped words to the log file
+  # Saves the flipped words to the log file, along with the options
   def save
-    log.info(to_s)
+    o = []
+    o << "Lazy" if @opts[:lazy]
+    o << "Reverse" if @opts[:reverse]
+    o << "Exclude [#{@opts[:exclude].join(', ')}]" unless @opts[:exclude].empty?
+    o << "No Options" if o.empty?
+    log.info('[%s] => [%s] (%s)' % [words.join(' '), to_s, o.join(', ')])
   end
 
   ##
@@ -111,11 +108,18 @@ class Flipper
   # Creates and memoizes instance of Logger
   def log
     return @log if @log
-    logger = Logger.new(logfile, 0, 1048576)
-    logger.datetime_format = "%Y-%m-%d %H:%M:%S "
+    logger = Logger.new(*logger_args)
+    logger.datetime_format = '%Y-%m-%d'
     logger.level = Logger::Severity::INFO
     @log = logger
   end
 
+  ##
+  # Determines the correct arguments to pass to logger
+  def logger_args
+    $PROGRAM_NAME.end_with?('rspec') ? [$stdout] : [logfile, 0, 1048576]
+  end
+
+end
 end
 
