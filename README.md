@@ -11,9 +11,15 @@ From your terminal, clone the repository where you want it.
 git clone https://github.com/evanthegrayt/spoonerise.git
 cd spoonerise
 ```
-#### Rake
-If you have `rake` installed (`gem install rake`), from inside the base
+#### Automated
+If you have `bundler` installed (`gem install bundler`), from inside the base
 repository directory, run:
+```sh
+bundle install
+```
+This will install `rake` and `rspec` if not already installed.
+
+After that, run:
 ```sh
 rake
 ```
@@ -22,12 +28,17 @@ This will link the executable in your path (`/usr/local/bin`).
 To uninstall, run `rake uninstall`
 
 #### Manual
-If you aren't using `rake`, you can link the executable yourself. From inside
-the base repository directory, run:
+If you aren't using `bundler`/`rake`, you can link the executable yourself. From
+inside the base repository directory, run:
 ```sh
 ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
 ```
 To uninstlal, run `rm /usr/local/bin/spoonerise`
+
+If you want to run the tests, you'll need to install `rspec`.
+```sh
+gem install rspec
+```
 
 ## Updating
 This is just a fun project I'm working on, and it's under active development. I
@@ -67,7 +78,4 @@ consonants, but will still lose its own if it has any.
 - If the word to pull from is excluded, that word is skipped, and you pull the
 leading consonants from the next non-excluded word.
 - "Q" and "U" should stay together (like "queen").
-
-## Known issues
-- I haven't written the unit tests yet...
 
