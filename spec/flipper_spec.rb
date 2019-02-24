@@ -11,10 +11,10 @@ describe Spoonerise::Flipper do
     context 'with the words "the ultimate spoonerise test"' do
       let(:words) { %w(the ultimate spoonerise test) }
       context 'and excluding too many words' do
-        let(:rev_excl) do
+        let(:too_many_excl) do
           Spoonerise::Flipper.new(words, {reverse: true, exclude: %w(the ultimate test)})
         end
-        it { expect { rev_excl }.to raise_error(error) }
+        it { expect { too_many_excl }.to raise_error(error) }
       end
       context 'and no options' do
         let(:normal) { Spoonerise::Flipper.new(words) }
