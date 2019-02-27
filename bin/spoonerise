@@ -14,7 +14,7 @@ USAGE = 'USAGE: %s [OPTIONS] [WORDS]...' % [File.basename(__FILE__)]
 
 def instantiate
   yield
-rescue Flipper::JakPibError
+rescue Spoonerise::JakPibError
   abort('Please pass more flip-able words.')
 end
 

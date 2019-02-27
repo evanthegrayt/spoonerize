@@ -1,5 +1,5 @@
 INSTALL_PATH = File.expand_path(File.join(File.dirname(__FILE__)), '..').freeze
-LINK_TO = File.join('/', 'usr', 'local', 'bin', 'spoonerise').freeze
+LINK_TO = File.join(File::SEPARATOR, 'usr', 'local', 'bin', 'spoonerise').freeze
 LINK_FROM = File.join(INSTALL_PATH, 'bin', 'spoonerise').freeze
 
 task :default => :install

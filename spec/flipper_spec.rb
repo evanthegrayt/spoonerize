@@ -6,6 +6,7 @@ describe Spoonerise::Flipper do
     let(:error) { 'Not enough words to flip' }
     context 'with not enough flip-able words' do
       it { expect { Spoonerise::Flipper.new(%w(hello)) }.to raise_error(error) }
+      it { expect { Spoonerise::Flipper.new(%w(hello)) }.to raise_error(Spoonerise::JakPibError) }
       it { expect { Spoonerise::Flipper.new(%w(a thing)) }.to raise_error(error) }
     end
     context 'with the words "the ultimate spoonerise test"' do
