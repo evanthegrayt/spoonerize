@@ -10,12 +10,12 @@ require 'optparse'
 # Internals
 require_relative '../lib/spoonerise'
 
-USAGE = "USAGE: #{File.basename(__FILE__)} [OPTIONS] [WORDS]..."
+USAGE = 'USAGE: %s [OPTIONS] [WORDS]...' % [File.basename(__FILE__)]
 
 def instantiate
   yield
 rescue Flipper::JakPibError
-  abort("Please pass more flip-able words.")
+  abort('Please pass more flip-able words.')
 end
 
 ##

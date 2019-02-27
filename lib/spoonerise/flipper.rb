@@ -39,10 +39,11 @@ class Flipper
   # Saves the flipped words to the log file, along with the options
   def save
     o = []
-    o << "Lazy" if @opts[:lazy]
-    o << "Reverse" if @opts[:reverse]
-    o << "Exclude [#{@opts[:exclude].join(', ')}]" unless @opts[:exclude].empty?
-    o << "No Options" if o.empty?
+    o << 'Lazy' if @opts[:lazy]
+    o << 'Reverse' if @opts[:reverse]
+    o << 'Exclude [%s]' % [@opts[:exclude].join(', ')] if @opts[:exclude].any?
+    o << 'No Options' if o.empty?
+
     log.info('[%s] => [%s] (%s)' % [words.join(' '), to_s, o.join(', ')])
   end
 
