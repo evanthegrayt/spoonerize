@@ -25,6 +25,7 @@ OptionParser.new do |o|
   o.banner = USAGE
   o.on('-r', '--[no-]reverse', 'Reverse flipping') { |v| opts[:reverse] = v }
   o.on('-l', '--[no-]lazy', 'Skip small words')    { |v| opts[:lazy]    = v }
+  o.on('-m', '--[no-]map', 'Print words mapping')  { |v| opts[:map]     = v }
   o.on('-s', '--[no-]save', 'Save results in log') { |v| opts[:save]    = v }
   o.on('--exclude=WORDS', Array, 'Words to skip')  { |v| opts[:exclude] = v }
 end.parse!(ARGV)
@@ -43,5 +44,9 @@ if opts[:save]
   words.save
 else
   puts words.to_s
+  if opts[:map]
+    longest_key_size = words.to_h.max_by { |k,v| k }.first.size
+    words.to_h.each { |k, v| puts "%-#{longest_key_size}s => %s" % [k, v] }
+  end
 end
 
