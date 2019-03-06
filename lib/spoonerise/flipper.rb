@@ -13,7 +13,7 @@ class Flipper
   attr_reader :words
 
   ##
-  # Initialize instance and raise if there aren't enough words to flip
+  # Initialize instance and raise if there aren't enough words to flip.
   def initialize(words, opts = {})
     @words = words.map(&:downcase)
     @opts  = opts
@@ -30,9 +30,15 @@ class Flipper
   end
 
   ##
-  # Returns spoonerise array as a joined string
+  # Returns spoonerise array as a joined string.
   def to_s
     @to_s ||= spoonerise.join(' ')
+  end
+
+  ##
+  # Returns hash of the original words mapped to their flipped counterparts.
+  def to_h
+    @to_h ||= Hash[words.zip(spoonerise)]
   end
 
   ##
