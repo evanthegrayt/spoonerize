@@ -73,7 +73,6 @@ group of the next word.
 receives the next word's leading consonants if it has any.
 - If the next word has no leading consonants, the current word receives no
 consonants, but will still lose its own if it has any.
-- Single-letter words ("a", "I") remain unchanged.
 - When being "lazy", common words ("the", "his", etc.) remain unchanged.
 - If the word to pull from is excluded, that word is skipped, and you pull the
 leading consonants from the next non-excluded word.

@@ -105,7 +105,7 @@ class Flipper
   # * If lazy-mode, the LAZY_WORDS from yaml file are added
   def excluded_words
     @excluded_words ||= (
-       (words.select { |w| w.length == 1 }) +
+       #(words.select { |w| w.length == 1 }) +
        @opts[:exclude] +
        (@opts[:lazy] ? LAZY_WORDS : [])
     ).map(&:downcase)
