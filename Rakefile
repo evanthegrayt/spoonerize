@@ -6,7 +6,7 @@ task :default => :install
 
 desc "Install to `/usr/local/bin`"
 task :install do
-  File.symlink(LINK_FROM, LINK_TO)
+  File.symlink(LINK_FROM, LINK_TO) unless File.symlink?(LINK_TO)
 end
 
 desc "Uninstall..."
