@@ -15,15 +15,9 @@ cd spoonerise
 If you have `bundler` installed (`gem install bundler`), from inside the base
 repository directory, run:
 ```sh
-bundle install
+bundle install # Install `rake` and `rspec` if not already installed.
+rake           # Link the executable in your path (`/usr/local/bin`).
 ```
-This will install `rake` and `rspec` if not already installed.
-
-After that, run:
-```sh
-rake
-```
-This will link the executable in your path (`/usr/local/bin`).
 
 To uninstall, run `rake uninstall`
 
@@ -33,38 +27,43 @@ inside the base repository directory, run:
 ```sh
 ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
 ```
-To uninstlal, run `rm /usr/local/bin/spoonerise`
+To uninstall, run `rm /usr/local/bin/spoonerise`
 
-If you want to run the tests, you'll need to install `rspec`.
+## Testing
+To run the tests, you need `rspec`. This will be installed by `bundle install`,
+but if you installed manually, you'll need to run `gem install rspec`. To run
+the tests, run:
 ```sh
-gem install rspec
-```
-
-## Updating
-This is just a fun project I'm working on, and it's under active development. I
-recommend updating regularly to get the newest features. From the base
-directory, run:
-```sh
-rake update
-```
-OR
-```sh
-git pull origin master
+rspec spec/flipper_spec.rb
 ```
 
 ## Usage
 Just pass the phrase as arguments:
 ```sh
-spoonerise this is a sentence # => is sis a thentence
+$ spoonerise not too shabby # => tot shoo nabby
 ```
-Options include:
+If it didn't flip the way you wanted it to, you can reverse it:
 ```sh
--r                  # Reverse the order of the flipping
--l                  # Lazily ignore common small words, like "the", "an", etc.
--s                  # Save the results in a log file to laugh at later
---exclude=word,list # Words you don't want altered.
--h                  # See all available options
+$ spoonerise -r not too shabby # => shot noo tabby
 ```
+To get a list of all available options, run with `-h`.
+
+## Logging
+When saved, it will be logged to `log/spoonerise.log`. It will have the date,
+the original phrase, the new phrase, and the options used to achieve the new
+phrase.
+```
+I, [2019-03-22#57116]  INFO -- : [not too shabby] => [shot noo tabby] (Reverse)
+```
+I'm not totally happy with this. I think using `Logger` is probably overkill, as
+it includes superfluous information. In the near future, I will probably just
+change it to:
+```
+[2019-03-22]: [not too shabby] => [shot noo tabby] (Reverse)
+```
+Also, I when I have time, I intend on implementing a `LogFile` class, and give
+the executable an option to read and search the log file. This will prevent the
+user from having to manually open the log file.
 
 ## Rules of the Game
 - Each word drops its leading consonant group and takes the leading consonant
@@ -77,4 +76,8 @@ consonants, but will still lose its own if it has any.
 - If the word to pull from is excluded, that word is skipped, and you pull the
 leading consonants from the next non-excluded word.
 - "Q" and "U" should stay together (like "queen").
+- A lot of the time, the words won't look how they're supposed to sound, as you
+go by how the word *used* to sound, not how it's spelled. For instance,
+`$ spoonerise two new cuties` becomes "no cew twuties", but it would be
+pronounced "new coo tooties", as the words retain their original sounds.
 
