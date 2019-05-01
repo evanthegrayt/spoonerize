@@ -14,7 +14,7 @@ module Spoonerise
 
   ##
   # Load in excluded words from yaml file as frozen constant
-  LAZY_WORDS = YAML::load_file(
+  LAZY_WORDS = YAML.load_file(
     File.join(File.dirname(__FILE__), 'config', 'lazy_words.yml')
   ).freeze
 end
