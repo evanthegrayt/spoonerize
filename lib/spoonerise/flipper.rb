@@ -4,17 +4,20 @@
 #                                                               #
 #  Author::      Evan Gray                                      #
 #===============================================================#
-
-require 'logger'
+require 'forwardable'
 
 module Spoonerise
 class Flipper
 
+  extend Forwardable
+
   attr_reader :words
+  def_delegators :@logfile, :read, :write, :logfile
 
   ##
   # Initialize instance and raise if there aren't enough words to flip.
   def initialize(words, opts = {})
+    @logfile = LogFile.new
     @words = words.map(&:downcase)
     @opts  = opts
     @opts[:exclude] ||= []
@@ -42,23 +45,15 @@ class Flipper
   end
 
   ##
-  # Saves the flipped words to the log file, along with the options
+  # Saves the flipped words to the log file, along with the runtime options.
   def save
     o = []
-    o << 'Lazy' if @opts[:lazy]
-    o << 'Reverse' if @opts[:reverse]
-    o << 'Exclude [%s]' % [@opts[:exclude].join(', ')] if @opts[:exclude].any?
-    o << 'No Options' if o.empty?
+    o << 'Lazy'         if @opts[:lazy]
+    o << 'Reverse'      if @opts[:reverse]
+    o << 'Excluded(%s)' % [@opts[:exclude].join(' ')] if @opts[:exclude].any?
+    o << 'No Options'   if o.empty?
 
-    log.info('[%s] => [%s] (%s)' % [words.join(' '), to_s, o.join(', ')])
-  end
-
-  ##
-  # Creates and memoizes the path to the log file
-  def logfile
-    @logfile ||= File.expand_path(
-      File.join(File.dirname(__FILE__), '..', '..', 'log', 'spoonerise.log')
-    )
+    write(words.join(' '), to_s, o.join('|'))
   end
 
   private
@@ -105,26 +100,9 @@ class Flipper
   # * If lazy-mode, the LAZY_WORDS from yaml file are added
   def excluded_words
     @excluded_words ||= (
-       #(words.select { |w| w.length == 1 }) +
        @opts[:exclude] +
        (@opts[:lazy] ? LAZY_WORDS : [])
     ).map(&:downcase)
-  end
-
-  ##
-  # Creates and memoizes instance of Logger
-  def log
-    return @log if @log
-    logger = Logger.new(*logger_args)
-    logger.datetime_format = '%Y-%m-%d'
-    logger.level = Logger::Severity::INFO
-    @log = logger
-  end
-
-  ##
-  # Determines the correct arguments to pass to logger
-  def logger_args
-    $PROGRAM_NAME.end_with?('rspec') ? [$stdout] : [logfile, 0, 1048576]
   end
 
 end
