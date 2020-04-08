@@ -26,3 +26,9 @@ task :rollback do
   sh("git checkout #{tags.last}")
 end
 
+desc "Run rspec tests"
+task :test do
+  Dir.glob(File.join(__dir__, 'spec', '**', '*_spec.rb')).each do |file|
+    system("rspec #{file}")
+  end
+end
