@@ -13,8 +13,9 @@ cd spoonerise
 ```
 #### Automated
 Install as a gem via `rake`. This will be on RubyGems.org very soon.
+
 ```sh
-rake install   # Link the executable in your path (`/usr/local/bin`).
+rake install
 ```
 
 To uninstall, run `rake uninstall`
