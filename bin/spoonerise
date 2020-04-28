@@ -33,9 +33,9 @@ end.parse!(ARGV)
 abort(USAGE) if ARGV.empty?
 
 ##
-# Create instance of Flipper. I rescue the custom error and replace it with
+# Create instance of Spoonerism. I rescue the custom error and replace it with
 # a more command-line friendly message.
-words = instantiate { Spoonerise::Flipper.new(ARGV, opts) }
+words = instantiate { Spoonerise::Spoonerism.new(ARGV, opts) }
 
 ##
 # If user passed `-s`, save to log file; otherwise, just print results as string

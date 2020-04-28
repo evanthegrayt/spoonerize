@@ -12,11 +12,9 @@ git clone https://github.com/evanthegrayt/spoonerise.git
 cd spoonerise
 ```
 #### Automated
-If you have `bundler` installed (`gem install bundler`), from inside the base
-repository directory, run:
+Install as a gem via `rake`. This will be on RubyGems.org very soon.
 ```sh
-bundle install # Install `rake` and `rspec` if not already installed.
-rake           # Link the executable in your path (`/usr/local/bin`).
+rake install   # Link the executable in your path (`/usr/local/bin`).
 ```
 
 To uninstall, run `rake uninstall`
@@ -34,7 +32,7 @@ To run the tests, you need `rspec`. This will be installed by `bundle install`,
 but if you installed manually, you'll need to run `gem install rspec`. To run
 the tests, run:
 ```sh
-rspec spec/flipper_spec.rb
+rspec spec/spoonerism_spec.rb
 ```
 
 ## Usage

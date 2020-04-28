@@ -1,31 +1,34 @@
-INSTALL_PATH = File.expand_path(File.join(File.dirname(__FILE__)), '..').freeze
-LINK_TO = File.join(File::SEPARATOR, 'usr', 'local', 'bin', 'spoonerise').freeze
-LINK_FROM = File.join(INSTALL_PATH, 'bin', 'spoonerise').freeze
+require_relative 'lib/spoonerise'
+require 'rdoc/task'
 
-task :default => :install
-
-desc "Install to `/usr/local/bin`"
-task :install do
-  File.symlink(LINK_FROM, LINK_TO) unless File.symlink?(LINK_TO)
+RDoc::Task.new do |rdoc|
+  rdoc.main = "README.md"
+  rdoc.rdoc_dir = 'doc'
+  rdoc.rdoc_files.include("README.md", "**/*.rb")
 end
 
-desc "Uninstall..."
+task :default => :test
+
+desc "Build the gem"
+task :build do
+  system('gem build spoonerise.gemspec')
+end
+
+desc "Build and install the gem"
+task install: [:dependencies, :build] do
+  system("gem install spoonerise-#{Spoonerise::VERSION}.gem")
+end
+
+desc "Add dependencies"
+task :dependencies do
+  system("gem install bundler")
+  system("bundle install")
+end
+
+desc "Uninstall the gem"
 task :uninstall do
-  File.delete(LINK_TO) if File.symlink?(LINK_TO)
+  system('gem uninstall spoonerise')
 end
-
-desc "Tagging and pulling from master"
-task :update do
-  sh("git tag #{Time.now.strftime('%Y-%m-%d-%H%M')}")
-  sh("git pull origin master")
-end
-
-desc "Checking out last deployment tag"
-task :rollback do
-  tags = `git tag`.strip.split("\n")
-  sh("git checkout #{tags.last}")
-end
-
 desc "Run rspec tests"
 task :test do
   Dir.glob(File.join(__dir__, 'spec', '**', '*_spec.rb')).each do |file|

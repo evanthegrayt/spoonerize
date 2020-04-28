@@ -6,8 +6,9 @@
 #===============================================================#
 
 require 'yaml'
-require_relative 'spoonerise/flipper.rb'
-require_relative 'spoonerise/bumper.rb'
+require_relative 'spoonerise/spoonerism'
+require_relative 'spoonerise/bumper'
+require_relative 'spoonerise/version'
 
 module Spoonerise
   JakPibError = Class.new(StandardError)

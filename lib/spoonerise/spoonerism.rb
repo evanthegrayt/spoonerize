@@ -1,6 +1,6 @@
 #===============================================================#
-#  File::        flipper.rb                                     #
-#  Description:: The main word-flipper                          #
+#  File::        spoonerism.rb                                  #
+#  Description:: The main word-spoonerism                       #
 #                                                               #
 #  Author::      Evan Gray                                      #
 #===============================================================#
@@ -8,7 +8,7 @@
 require 'logger'
 
 module Spoonerise
-class Flipper
+class Spoonerism
 
   attr_reader :words
 
