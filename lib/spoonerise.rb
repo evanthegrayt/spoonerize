@@ -1,20 +1,16 @@
-#===============================================================#
-#  File::        spoonerise.rb                                  #
-#  Description:: Loads files necessary to run spoonerise        #
-#                                                               #
-#  Author::      Evan Gray                                      #
-#===============================================================#
-
 require 'yaml'
 require_relative 'spoonerise/spoonerism'
 require_relative 'spoonerise/bumper'
 require_relative 'spoonerise/version'
+require_relative 'spoonerise/log'
 
+##
+# The main namespace for the gem.
 module Spoonerise
   JakPibError = Class.new(StandardError)
 
   ##
-  # Load in excluded words from yaml file as frozen constant
+  # Excluded words from config files.
   LAZY_WORDS = YAML.load_file(
     File.join(File.dirname(__FILE__), 'config', 'lazy_words.yml')
   ).freeze

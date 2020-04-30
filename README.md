@@ -47,6 +47,9 @@ $ spoonerise -r not too shabby # => shot noo tabby
 ```
 To get a list of all available options, run with `-h`.
 
+You can also view the [API
+documentation](https://evanthegrayt.github.io/spoonerise/doc/index.html).
+
 ## Logging
 When saved, it will be logged to `log/spoonerise.log`. It will have the date,
 the original phrase, the new phrase, and the options used to achieve the new

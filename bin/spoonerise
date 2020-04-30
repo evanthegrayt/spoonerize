@@ -1,13 +1,6 @@
 #!/usr/bin/env ruby
-#===============================================================#
-#         File: spoonerise                                      #
-#  Description: CLI executable for word-flipper                 #
-#                                                               #
-#       Author: Evan Gray                                       #
-#===============================================================#
 
 require 'optparse'
-# Internals
 require_relative '../lib/spoonerise'
 
 USAGE = 'USAGE: %s [OPTIONS] [WORDS]...' % [File.basename(__FILE__)]
@@ -18,34 +11,69 @@ rescue Spoonerise::JakPibError
   abort('Please pass more flip-able words.')
 end
 
+def save?
+  @save
+end
+
+def map?
+  @map
+end
+
+def print?
+  @print
+end
+
 ##
 # Read in args and set options
 opts = {}
 OptionParser.new do |o|
   o.banner = USAGE
-  o.on('-r', '--[no-]reverse', 'Reverse flipping') { |v| opts[:reverse] = v }
-  o.on('-l', '--[no-]lazy', 'Skip small words')    { |v| opts[:lazy]    = v }
-  o.on('-m', '--[no-]map', 'Print words mapping')  { |v| opts[:map]     = v }
-  o.on('-s', '--[no-]save', 'Save results in log') { |v| opts[:save]    = v }
-  o.on('--exclude=WORDS', Array, 'Words to skip')  { |v| opts[:exclude] = v }
+  o.on('-r', '--[no-]reverse', 'Reverse flipping') do |v|
+    opts['reverse'] = v
+  end
+  o.on('-l', '--[no-]lazy', 'Skip small words') do |v|
+    opts['lazy'] = v
+  end
+  o.on('-m', '--[no-]map', 'Print words mapping') do |v|
+    @map = v
+  end
+  o.on('-p', '--[no-]print', 'Print all entries in the log') do |v|
+    @print = v
+  end
+  o.on('-s', '--[no-]save', 'Save results in log') do |v|
+    @save = v
+  end
+  o.on('--exclude=WORDS', Array, 'Words to skip') do |v|
+    opts['exclude'] = v
+  end
 end.parse!(ARGV)
+
+if print?
+  s = Spoonerise::Log.new(File.join(__dir__, '..', 'log', 'spoonerise.csv'))
+  s.each { |row| print row.join(' | ') + "\n" }
+  exit
+end
 
 abort(USAGE) if ARGV.empty?
 
 ##
 # Create instance of Spoonerism. I rescue the custom error and replace it with
 # a more command-line friendly message.
-words = instantiate { Spoonerise::Spoonerism.new(ARGV, opts) }
+words = instantiate do
+  Spoonerise::Spoonerism.new(ARGV) do |s|
+    opts.each { |k, v| s.send("#{k}=", v) }
+  end
+end
 
 ##
 # If user passed `-s`, save to log file; otherwise, just print results as string
-if opts[:save]
-  puts "Saving [#{words.to_s}] to #{words.logfile}"
+if save?
+  puts "Saving [#{words.to_s}] to #{words.logfile_name}"
   words.save
 else
   puts words.to_s
-  if opts[:map]
-    longest_key_size = words.to_h.max_by { |k,v| k }.first.size
+  if map?
+    longest_key_size = words.spoonerise.group_by(&:size).max.first.size
     words.to_h.each { |k, v| puts "%-#{longest_key_size}s => %s" % [k, v] }
   end
 end
