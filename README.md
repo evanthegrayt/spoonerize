@@ -35,6 +35,16 @@ rake install
 ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
 ```
 
+## Command Line Usage
+Call the executable and pass a phrase as arguments:
+```sh
+$ spoonerise not too shabby # => tot shoo nabby
+```
+If it didn't flip the way you wanted it to, you can reverse it:
+```sh
+$ spoonerise -r not too shabby # => shot noo tabby
+```
+
 If you find a phrase funny enough to save, you can pass the `-s` flag. This will
 write the results to the logfile. You can print your log file with the `-p`
 flag. It will show the original phrase, the end result, and the options used to
@@ -52,15 +62,6 @@ not too shabby | tot shoo nabby | No Options
 not too shabby | shot noo tabby | Reverse
 ```
 
-## Command Line Usage
-Call the executable and pass a phrase as arguments:
-```sh
-$ spoonerise not too shabby # => tot shoo nabby
-```
-If it didn't flip the way you wanted it to, you can reverse it:
-```sh
-$ spoonerise -r not too shabby # => shot noo tabby
-```
 To get a list of all available options, run with `-h`.
 
 ## API
