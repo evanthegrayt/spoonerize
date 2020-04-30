@@ -6,12 +6,7 @@ Well, when I was in high school, we took it further -- probably too far -- and
 made a rule set. This program follows those rules, which are listed below.
 
 ## Installation
-From your terminal, clone the repository where you want it.
-```sh
-git clone https://github.com/evanthegrayt/spoonerise.git
-cd spoonerise
-```
-#### Automated
+### Automated
 Just install the gem!
 
 ```sh
@@ -24,7 +19,7 @@ using
 or you can try the manual methods below.
 
 
-### Manual Installation
+### Manual
 From your terminal, clone the repository where you want it. From there, you have
 a couple of installation options.
 
@@ -44,6 +39,7 @@ If you find a phrase funny enough to save, you can pass the `-s` flag. This will
 write the results to the logfile. You can print your log file with the `-p`
 flag. It will show the original phrase, the end result, and the options used to
 get the results. For example:
+
 ```
 $ spoonerise -s not too shabby
 Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
