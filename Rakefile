@@ -4,7 +4,7 @@ require 'rdoc/task'
 RDoc::Task.new do |rdoc|
   rdoc.main = "README.md"
   rdoc.rdoc_dir = 'doc'
-  rdoc.rdoc_files.include("README.md", "**/*.rb")
+  rdoc.rdoc_files.include("README.md", "lib/**/*.rb")
 end
 
 task :default => :test
