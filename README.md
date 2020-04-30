@@ -1,4 +1,4 @@
-# Welcome to Spoonerise -- a word game.
+# Welcome to [Spoonerise](https://evanthegrayt.github.io/spoonerise) -- a word game
 We've all done it; someone says a phrase, and you flip the first few letters
 around, and sometimes, it makes an even funnier phrase. For example:
 "Tomb Raider" becomes "Romb Taider".
@@ -27,14 +27,6 @@ inside the base repository directory, run:
 ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
 ```
 To uninstall, run `rm /usr/local/bin/spoonerise`
-
-## Testing
-To run the tests, you need `rspec`. This will be installed by `bundle install`,
-but if you installed manually, you'll need to run `gem install rspec`. To run
-the tests, run:
-```sh
-rspec spec/spoonerism_spec.rb
-```
 
 ## Usage
 Just pass the phrase as arguments:

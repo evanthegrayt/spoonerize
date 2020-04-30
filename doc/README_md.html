@@ -118,6 +118,8 @@
 
 <p>Just pass the phrase as arguments: <code>sh $ spoonerise not too shabby # =&gt; tot shoo nabby </code> If it didn&#39;t flip the way you wanted it to, you can reverse it: <code>sh $ spoonerise -r not too shabby # =&gt; shot noo tabby </code> To get a list of all available options, run with <code>-h</code>.</p>
 
+<p>You can also view the <a href="https://evanthegrayt.github.io/spoonerise/doc/index.html">API documentation</a>.</p>
+
 <h2 id="label-Logging">Logging<span><a href="#label-Logging">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>When saved, it will be logged to <code>log/spoonerise.log</code>. It will have the date, the original phrase, the new phrase, and the options used to achieve the new phrase. <code> I, [2019-03-22#57116]  INFO -- : [not too shabby] =&gt; [shot noo tabby] (Reverse) </code> I&#39;m not totally happy with this. I think using <code>Logger</code> is probably overkill, as it includes superfluous information. In the near future, I will probably just change it to: <code> [2019-03-22]: [not too shabby] =&gt; [shot noo tabby] (Reverse) </code> Also, I when I have time, I intend on implementing a <code>LogFile</code> class, and give the executable an option to read and search the log file. This will prevent the user from having to manually open the log file.</p>
