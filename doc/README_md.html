@@ -60,13 +60,12 @@
   <h3>Table of Contents</h3>
 
   <ul class="link-list" role="directory">
-    <li><a href="#label-Welcome+to+Spoonerise+--+a+word+game.">Welcome to Spoonerise – a word game.</a>
+    <li><a href="#label-Welcome+to+Spoonerise+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerise">Spoonerise</a> – a word game</a>
     <li><a href="#label-Installation">Installation</a>
     <li><a href="#label-Automated">Automated</a>
-    <li><a href="#label-Manual">Manual</a>
-    <li><a href="#label-Testing">Testing</a>
-    <li><a href="#label-Usage">Usage</a>
-    <li><a href="#label-Logging">Logging</a>
+    <li><a href="#label-Manual+Installation">Manual Installation</a>
+    <li><a href="#label-Command+Line+Usage">Command Line Usage</a>
+    <li><a href="#label-API">API</a>
     <li><a href="#label-Rules+of+the+Game">Rules of the Game</a>
     <li><a href="#label-Self+Promotion">Self Promotion</a>
   </ul>
@@ -89,7 +88,7 @@
 
 <main role="main" aria-label="Page README.md">
 
-<h1 id="label-Welcome+to+Spoonerise+--+a+word+game.">Welcome to <a href="Spoonerise.html"><code>Spoonerise</code></a> – a word game.<span><a href="#label-Welcome+to+Spoonerise+--+a+word+game.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="label-Welcome+to+Spoonerise+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerise">Spoonerise</a> – a word game<span><a href="#label-Welcome+to+Spoonerise+--+a+word+game">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This program follows those rules, which are listed below.</p>
 
@@ -99,30 +98,40 @@
 
 <h4 id="label-Automated">Automated<span><a href="#label-Automated">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<p>Install as a gem via <code>rake</code>. This will be on RubyGems.org very soon.</p>
+<p>Just install the gem!</p>
 
-<pre class="ruby"><span class="ruby-identifier">rake</span> <span class="ruby-identifier">install</span>
+<pre class="ruby"><span class="ruby-identifier">gem</span> <span class="ruby-identifier">install</span> <span class="ruby-identifier">spoonerise</span>
 </pre>
 
-<p>To uninstall, run <code>rake uninstall</code></p>
+<p>If you don&#39;t have permission on your system to install ruby or gems, I recommend using <a href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html">rbenv</a>, or you can try the manual methods below.</p>
 
-<h4 id="label-Manual">Manual<span><a href="#label-Manual">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h3 id="label-Manual+Installation">Manual Installation<span><a href="#label-Manual+Installation">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>If you aren&#39;t using <code>bundler</code>/<code>rake</code>, you can link the executable yourself. From inside the base repository directory, run: <code>sh ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise </code> To uninstall, run <code>rm /usr/local/bin/spoonerise</code></p>
+<p>From your terminal, clone the repository where you want it. From there, you have a couple of installation options.</p>
 
-<h2 id="label-Testing">Testing<span><a href="#label-Testing">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<pre>git clone https://github.com/evanthegrayt/spoonerise.git
+cd spoonerise
 
-<p>To run the tests, you need <code>rspec</code>. This will be installed by <code>bundle install</code>, but if you installed manually, you&#39;ll need to run <code>gem install rspec</code>. To run the tests, run: <code>sh rspec spec/spoonerism_spec.rb </code></p>
+# Use rake to build and install the gem.
+rake install
 
-<h2 id="label-Usage">Usage<span><a href="#label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+# OR manually link the executable somewhere. If you use this method, you cannot
+# move the repository after you link it!
+ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise</pre>
 
-<p>Just pass the phrase as arguments: <code>sh $ spoonerise not too shabby # =&gt; tot shoo nabby </code> If it didn&#39;t flip the way you wanted it to, you can reverse it: <code>sh $ spoonerise -r not too shabby # =&gt; shot noo tabby </code> To get a list of all available options, run with <code>-h</code>.</p>
+<p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example: “` $ spoonerise -s not too shabby Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv</p>
 
-<p>You can also view the <a href="https://evanthegrayt.github.io/spoonerise/doc/index.html">API documentation</a>.</p>
+<p>$ spoonerise -rs not too shabby Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv</p>
 
-<h2 id="label-Logging">Logging<span><a href="#label-Logging">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<p>$ spoonerise -p not too shabby | tot shoo nabby | No Options not too shabby | shot noo tabby | Reverse “`</p>
 
-<p>When saved, it will be logged to <code>log/spoonerise.log</code>. It will have the date, the original phrase, the new phrase, and the options used to achieve the new phrase. <code> I, [2019-03-22#57116]  INFO -- : [not too shabby] =&gt; [shot noo tabby] (Reverse) </code> I&#39;m not totally happy with this. I think using <code>Logger</code> is probably overkill, as it includes superfluous information. In the near future, I will probably just change it to: <code> [2019-03-22]: [not too shabby] =&gt; [shot noo tabby] (Reverse) </code> Also, I when I have time, I intend on implementing a <code>LogFile</code> class, and give the executable an option to read and search the log file. This will prevent the user from having to manually open the log file.</p>
+<h2 id="label-Command+Line+Usage">Command Line Usage<span><a href="#label-Command+Line+Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Call the executable and pass a phrase as arguments: <code>sh $ spoonerise not too shabby # =&gt; tot shoo nabby </code> If it didn&#39;t flip the way you wanted it to, you can reverse it: <code>sh $ spoonerise -r not too shabby # =&gt; shot noo tabby </code> To get a list of all available options, run with <code>-h</code>.</p>
+
+<h2 id="label-API">API<span><a href="#label-API">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>This readme isn&#39;t finished, but you can view <a href="https://evanthegrayt.github.io/spoonerise/doc/index.html">API documentation</a>.</p>
 
 <h2 id="label-Rules+of+the+Game">Rules of the Game<span><a href="#label-Rules+of+the+Game">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>

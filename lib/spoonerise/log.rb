@@ -36,7 +36,7 @@ module Spoonerise
     #
     # @return [Array]
     def write(row)
-      ::CSV.open(file, 'wb') { |csv| csv << row }
+      ::CSV.open(file, 'a') { |csv| csv << row }
     end
 
     ##

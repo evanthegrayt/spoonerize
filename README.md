@@ -12,24 +12,52 @@ git clone https://github.com/evanthegrayt/spoonerise.git
 cd spoonerise
 ```
 #### Automated
-Install as a gem via `rake`. This will be on RubyGems.org very soon.
+Just install the gem!
 
 ```sh
-rake install
+gem install spoonerise
 ```
 
-To uninstall, run `rake uninstall`
+If you don't have permission on your system to install ruby or gems, I recommend
+using
+[rbenv](http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html),
+or you can try the manual methods below.
 
-#### Manual
-If you aren't using `bundler`/`rake`, you can link the executable yourself. From
-inside the base repository directory, run:
+
+### Manual Installation
+From your terminal, clone the repository where you want it. From there, you have
+a couple of installation options.
+
 ```sh
+git clone https://github.com/evanthegrayt/spoonerise.git
+cd spoonerise
+
+# Use rake to build and install the gem.
+rake install
+
+# OR manually link the executable somewhere. If you use this method, you cannot
+# move the repository after you link it!
 ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
 ```
-To uninstall, run `rm /usr/local/bin/spoonerise`
 
-## Usage
-Just pass the phrase as arguments:
+If you find a phrase funny enough to save, you can pass the `-s` flag. This will
+write the results to the logfile. You can print your log file with the `-p`
+flag. It will show the original phrase, the end result, and the options used to
+get the results. For example:
+```
+$ spoonerise -s not too shabby
+Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+
+$ spoonerise -rs not too shabby
+Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+
+$ spoonerise -p
+not too shabby | tot shoo nabby | No Options
+not too shabby | shot noo tabby | Reverse
+```
+
+## Command Line Usage
+Call the executable and pass a phrase as arguments:
 ```sh
 $ spoonerise not too shabby # => tot shoo nabby
 ```
@@ -39,25 +67,9 @@ $ spoonerise -r not too shabby # => shot noo tabby
 ```
 To get a list of all available options, run with `-h`.
 
-You can also view the [API
+## API
+This readme isn't finished, but you can view [API
 documentation](https://evanthegrayt.github.io/spoonerise/doc/index.html).
-
-## Logging
-When saved, it will be logged to `log/spoonerise.log`. It will have the date,
-the original phrase, the new phrase, and the options used to achieve the new
-phrase.
-```
-I, [2019-03-22#57116]  INFO -- : [not too shabby] => [shot noo tabby] (Reverse)
-```
-I'm not totally happy with this. I think using `Logger` is probably overkill, as
-it includes superfluous information. In the near future, I will probably just
-change it to:
-```
-[2019-03-22]: [not too shabby] => [shot noo tabby] (Reverse)
-```
-Also, I when I have time, I intend on implementing a `LogFile` class, and give
-the executable an option to read and search the log file. This will prevent the
-user from having to manually open the log file.
 
 ## Rules of the Game
 - Each word drops its leading consonant group and takes the leading consonant
