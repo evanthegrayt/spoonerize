@@ -1,8 +1,8 @@
-Thu, 30 Apr 2020 22:27:58 -0500
+Thu, 30 Apr 2020 23:04:16 -0500
 README.md	Wed, 29 Apr 2020 23:23:45 -0500
-lib/spoonerise.rb	Thu, 30 Apr 2020 22:24:12 -0500
+lib/spoonerise.rb	Thu, 30 Apr 2020 22:31:53 -0500
 lib/spoonerise/bumper.rb	Wed, 29 Apr 2020 22:16:14 -0500
-lib/spoonerise/cli.rb	Thu, 30 Apr 2020 22:24:12 -0500
-lib/spoonerise/log.rb	Thu, 30 Apr 2020 20:42:32 -0500
-lib/spoonerise/spoonerism.rb	Thu, 30 Apr 2020 21:05:51 -0500
-lib/spoonerise/version.rb	Thu, 30 Apr 2020 21:29:25 -0500
+lib/spoonerise/cli.rb	Thu, 30 Apr 2020 23:02:31 -0500
+lib/spoonerise/log.rb	Thu, 30 Apr 2020 22:31:53 -0500
+lib/spoonerise/spoonerism.rb	Thu, 30 Apr 2020 22:31:53 -0500
+lib/spoonerise/version.rb	Thu, 30 Apr 2020 22:31:53 -0500

@@ -68,14 +68,14 @@ module Spoonerise
       @print
     end
 
-    def print_log
-      s = Spoonerise::Log.new(spoonerism.logfile_name)
-      s.each { |row| print row.join(' | ') + "\n" }
-    end
-
     def longest_word_length
       @longest_word_length ||=
         spoonerism.spoonerise.group_by(&:size).max.first.size
+    end
+
+    def print_log
+      s = Spoonerise::Log.new(spoonerism.logfile_name)
+      s.each { |row| print row.join(' | ') + "\n" }
     end
 
     def print_mappings
@@ -110,11 +110,10 @@ module Spoonerise
         o.on('--exclude=WORDS', Array, 'Words to skip') do |v|
           prefs['exclude'] = v
         end
-      end.parse!(ARGV)
+      end.parse!(options)
 
       (File.file?(PREFERENCE_FILE) ? YAML.load_file(PREFERENCE_FILE) : {})
         .merge(prefs)
     end
-
   end
 end
