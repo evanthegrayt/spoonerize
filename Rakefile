@@ -29,9 +29,8 @@ desc "Uninstall the gem"
 task :uninstall do
   system('gem uninstall spoonerise')
 end
-desc "Run rspec tests"
+
+desc "Run test suite"
 task :test do
-  Dir.glob(File.join(__dir__, 'spec', '**', '*_spec.rb')).each do |file|
-    system("rspec #{file}")
-  end
+  Dir.glob(File.join(__dir__, 'test', '**', '*_test.rb')).each { |f| ruby f }
 end

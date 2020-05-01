@@ -8,7 +8,7 @@ module Spoonerise
 
     ##
     # The file name to use.
-    attr_reader :file
+    attr_reader :file, :directory
 
     ##
     # Constructor for Log.
@@ -18,6 +18,8 @@ module Spoonerise
     # @return [Spoonerise::Log]
     def initialize(file)
       @file = File.expand_path(file)
+      @directory = File.dirname(file)
+      FileUtils.mkdir_p(directory) unless File.directory?(directory)
       FileUtils.touch(file) unless File.file?(file)
     end
 
