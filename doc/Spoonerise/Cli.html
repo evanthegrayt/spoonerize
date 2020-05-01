@@ -287,7 +287,7 @@
 
           
           <div class="method-source-code" id="longest_word_length-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/cli.rb, line 76</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/cli.rb, line 71</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">longest_word_length</span>
   <span class="ruby-ivar">@longest_word_length</span> <span class="ruby-operator">||=</span>
     <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerise</span>.<span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:size</span>).<span class="ruby-identifier">max</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">size</span>
@@ -387,7 +387,7 @@
 
           
           <div class="method-source-code" id="print_log-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/cli.rb, line 71</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/cli.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_log</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">logfile_name</span>)
   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; | &#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> }

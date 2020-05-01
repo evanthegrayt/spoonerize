@@ -28,4 +28,14 @@ module TestHelper
   def test_log_file
     @tlf ||= File.join(test_log_directory, 'spoonerise.csv')
   end
+
+  ##
+  # Creates instance of +Cli+.
+  #
+  # @param [Array] options Parsed by +getopts+
+  #
+  # @return [Spoonerise::Cli]
+  def cli(options = [])
+    Spoonerise::Cli.new(fixtures['default_words'] + options)
+  end
 end

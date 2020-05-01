@@ -12,3 +12,9 @@ lazy_words:
   - her
   - him
   - hers
+
+default_words:
+  - the
+  - ultimate
+  - spoonerise
+  - test
