@@ -19,18 +19,16 @@ class Spoonerism
     @lazy = false
     @reverse = false
     @logfile_name = File.expand_path(
-      File.join(File.dirname(__FILE__), '..', '..', 'log', 'spoonerise.csv')
+      File.join(ENV['HOME'], '.cache', 'spoonerise', 'spoonerise.csv')
     )
-
     yield self if block_given?
-
-    raise JakPibError, 'Not enough words to flip' unless enough_flippable_words?
   end
 
   ##
   # Iterates through words array, and maps its elements to the output of
   # flip_words. Returns results as an array.
   def spoonerise
+    raise JakPibError, 'Not enough words to flip' unless enough_flippable_words?
     words.map.with_index { |word, idx| flip_words(word, idx) }
   end
 
@@ -118,7 +116,7 @@ class Spoonerism
 
   ##
   # Creates and memoizes instance of the log file.
-  def log
+  def log # :nodoc:
     @log ||= Spoonerise::Log.new(logfile_name)
   end
 

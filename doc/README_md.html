@@ -63,7 +63,7 @@
     <li><a href="#label-Welcome+to+Spoonerise+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerise">Spoonerise</a> – a word game</a>
     <li><a href="#label-Installation">Installation</a>
     <li><a href="#label-Automated">Automated</a>
-    <li><a href="#label-Manual+Installation">Manual Installation</a>
+    <li><a href="#label-Manual">Manual</a>
     <li><a href="#label-Command+Line+Usage">Command Line Usage</a>
     <li><a href="#label-API">API</a>
     <li><a href="#label-Rules+of+the+Game">Rules of the Game</a>
@@ -94,9 +94,7 @@
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>From your terminal, clone the repository where you want it. <code>sh git clone https://github.com/evanthegrayt/spoonerise.git cd spoonerise </code></p>
-
-<h4 id="label-Automated">Automated<span><a href="#label-Automated">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h3 id="label-Automated">Automated<span><a href="#label-Automated">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p>Just install the gem!</p>
 
@@ -105,7 +103,7 @@
 
 <p>If you don&#39;t have permission on your system to install ruby or gems, I recommend using <a href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html">rbenv</a>, or you can try the manual methods below.</p>
 
-<h3 id="label-Manual+Installation">Manual Installation<span><a href="#label-Manual+Installation">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="label-Manual">Manual<span><a href="#label-Manual">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p>From your terminal, clone the repository where you want it. From there, you have a couple of installation options.</p>
 
@@ -119,15 +117,23 @@ rake install
 # move the repository after you link it!
 ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise</pre>
 
-<p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example: “` $ spoonerise -s not too shabby Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv</p>
-
-<p>$ spoonerise -rs not too shabby Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv</p>
-
-<p>$ spoonerise -p not too shabby | tot shoo nabby | No Options not too shabby | shot noo tabby | Reverse “`</p>
-
 <h2 id="label-Command+Line+Usage">Command Line Usage<span><a href="#label-Command+Line+Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Call the executable and pass a phrase as arguments: <code>sh $ spoonerise not too shabby # =&gt; tot shoo nabby </code> If it didn&#39;t flip the way you wanted it to, you can reverse it: <code>sh $ spoonerise -r not too shabby # =&gt; shot noo tabby </code> To get a list of all available options, run with <code>-h</code>.</p>
+<p>Call the executable and pass a phrase as arguments: <code>sh $ spoonerise not too shabby # =&gt; tot shoo nabby </code> If it didn&#39;t flip the way you wanted it to, you can reverse it: <code>sh $ spoonerise -r not too shabby # =&gt; shot noo tabby </code></p>
+
+<p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example:</p>
+
+<pre>$ spoonerise -s not too shabby
+Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+
+$ spoonerise -rs not too shabby
+Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+
+$ spoonerise -p
+not too shabby | tot shoo nabby | No Options
+not too shabby | shot noo tabby | Reverse</pre>
+
+<p>To get a list of all available options, run with <code>-h</code>.</p>
 
 <h2 id="label-API">API<span><a href="#label-API">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
