@@ -1,36 +1,19 @@
 require_relative 'lib/spoonerise'
+require 'bundler/gem_tasks'
 require 'rdoc/task'
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs = ['lib']
+  t.warning = true
+  t.verbose = true
+  t.test_files = FileList['test/**/*_test.rb']
+end
 
 RDoc::Task.new do |rdoc|
-  rdoc.main = "README.md"
+  rdoc.main = 'README.md'
   rdoc.rdoc_dir = 'doc'
-  rdoc.rdoc_files.include("README.md", "lib/**/*.rb")
+  rdoc.rdoc_files.include('README.md', 'lib/**/*.rb')
 end
 
 task :default => :test
-
-desc "Build the gem"
-task :build do
-  system('gem build spoonerise.gemspec')
-end
-
-desc "Build and install the gem"
-task install: [:dependencies, :build] do
-  system("gem install spoonerise-#{Spoonerise::VERSION}.gem")
-end
-
-desc "Add dependencies"
-task :dependencies do
-  system("gem install bundler")
-  system("bundle install")
-end
-
-desc "Uninstall the gem"
-task :uninstall do
-  system('gem uninstall spoonerise')
-end
-
-desc "Run test suite"
-task :test do
-  Dir.glob(File.join(__dir__, 'test', '**', '*_test.rb')).each { |f| ruby f }
-end
