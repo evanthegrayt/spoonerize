@@ -1,4 +1,4 @@
-module Spoonerise
+module Spoonerize
 ##
 # The main word-flipper.
 class Spoonerism
@@ -51,7 +51,7 @@ class Spoonerism
     @lazy = false
     @reverse = false
     @logfile_name = File.expand_path(
-      File.join(ENV['HOME'], '.cache', 'spoonerise', 'spoonerise.csv')
+      File.join(ENV['HOME'], '.cache', 'spoonerize', 'spoonerize.csv')
     )
     yield self if block_given?
   end
@@ -59,21 +59,21 @@ class Spoonerism
   ##
   # Iterates through words array, and maps its elements to the output of
   # flip_words. Returns results as an array.
-  def spoonerise
+  def spoonerize
     raise JakPibError, 'Not enough words to flip' unless enough_flippable_words?
     words.map.with_index { |word, idx| flip_words(word, idx) }
   end
 
   ##
-  # Returns spoonerise array as a joined string.
+  # Returns spoonerize array as a joined string.
   def to_s
-    spoonerise.join(' ')
+    spoonerize.join(' ')
   end
 
   ##
   # Returns hash of the original words mapped to their flipped counterparts.
   def to_h
-    Hash[words.zip(spoonerise)]
+    Hash[words.zip(spoonerize)]
   end
 
   ##
@@ -149,7 +149,7 @@ class Spoonerism
   ##
   # Creates and memoizes instance of the log file.
   def log # :nodoc:
-    @log ||= Spoonerise::Log.new(logfile_name)
+    @log ||= Spoonerize::Log.new(logfile_name)
   end
 
   ##

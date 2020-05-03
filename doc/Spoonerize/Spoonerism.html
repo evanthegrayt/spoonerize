@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Spoonerise::Spoonerism - RDoc Documentation</title>
+<title>class Spoonerize::Spoonerism - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -87,7 +87,7 @@
     
     <li ><a href="#method-i-save">#save</a>
     
-    <li ><a href="#method-i-spoonerise">#spoonerise</a>
+    <li ><a href="#method-i-spoonerize">#spoonerize</a>
     
     <li ><a href="#method-i-to_h">#to_h</a>
     
@@ -101,9 +101,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Spoonerise::Spoonerism">
-  <h1 id="class-Spoonerise::Spoonerism" class="class">
-    class Spoonerise::Spoonerism
+<main role="main" aria-labelledby="class-Spoonerize::Spoonerism">
+  <h1 id="class-Spoonerize::Spoonerism" class="class">
+    class Spoonerize::Spoonerism
   </h1>
 
   <section class="description">
@@ -241,14 +241,14 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 48</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">words</span>)
   <span class="ruby-ivar">@excluded_words</span> = []
   <span class="ruby-ivar">@words</span> = <span class="ruby-identifier">words</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:downcase</span>)
   <span class="ruby-ivar">@lazy</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-ivar">@reverse</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-ivar">@logfile_name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;HOME&#39;</span>], <span class="ruby-string">&#39;.cache&#39;</span>, <span class="ruby-string">&#39;spoonerise&#39;</span>, <span class="ruby-string">&#39;spoonerise.csv&#39;</span>)
+    <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;HOME&#39;</span>], <span class="ruby-string">&#39;.cache&#39;</span>, <span class="ruby-string">&#39;spoonerize&#39;</span>, <span class="ruby-string">&#39;spoonerize.csv&#39;</span>)
   )
   <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
 <span class="ruby-keyword">end</span></pre>
@@ -296,7 +296,7 @@
 
           
           <div class="method-source-code" id="all_excluded_words-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 114</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_excluded_words</span>
   (<span class="ruby-identifier">excluded_words</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">lazy?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">LAZY_WORDS</span> <span class="ruby-operator">:</span> [])).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:downcase</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -329,7 +329,7 @@
 
           
           <div class="method-source-code" id="enough_flippable_words-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 87</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enough_flippable_words?</span>
   (<span class="ruby-identifier">words</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">all_excluded_words</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
@@ -362,7 +362,7 @@
 
           
           <div class="method-source-code" id="lazy-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 93</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lazy?</span>
   <span class="ruby-ivar">@lazy</span>
 <span class="ruby-keyword">end</span></pre>
@@ -395,7 +395,7 @@
 
           
           <div class="method-source-code" id="reverse-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 99</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse?</span>
   <span class="ruby-ivar">@reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -428,7 +428,7 @@
 
           
           <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 105</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">write</span>([<span class="ruby-identifier">words</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>), <span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)])
 <span class="ruby-keyword">end</span></pre>
@@ -442,10 +442,10 @@
       </div>
 
     
-      <div id="method-i-spoonerise" class="method-detail ">
+      <div id="method-i-spoonerize" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">spoonerise</span><span
+          <span class="method-name">spoonerize</span><span
             class="method-args">()</span>
           
           <span class="method-click-advice">click to toggle source</span>
@@ -460,9 +460,9 @@
           
 
           
-          <div class="method-source-code" id="spoonerise-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spoonerise</span>
+          <div class="method-source-code" id="spoonerize-source">
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spoonerize</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">JakPibError</span>, <span class="ruby-string">&#39;Not enough words to flip&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">enough_flippable_words?</span>
   <span class="ruby-identifier">words</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">word</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span> <span class="ruby-identifier">flip_words</span>(<span class="ruby-identifier">word</span>, <span class="ruby-identifier">idx</span>) }
 <span class="ruby-keyword">end</span></pre>
@@ -495,9 +495,9 @@
 
           
           <div class="method-source-code" id="to_h-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 75</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
-  <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">words</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">spoonerise</span>)]
+  <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">words</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">spoonerize</span>)]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -528,7 +528,7 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 81</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_json</span>
   <span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
@@ -555,15 +555,15 @@
 
         <div class="method-description">
           
-          <p>Returns spoonerise array as a joined string.</p>
+          <p>Returns spoonerize array as a joined string.</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 69</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-identifier">spoonerise</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">spoonerize</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           

@@ -60,7 +60,8 @@
   <h3>Table of Contents</h3>
 
   <ul class="link-list" role="directory">
-    <li><a href="#label-Welcome+to+Spoonerise+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerise">Spoonerise</a> – a word game</a>
+    <li><a href="#label-Welcome+to+Spoonerize+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerize">Spoonerize</a> – a word game</a>
+    <li><a href="#label-Table+of+Contents">Table of Contents</a>
     <li><a href="#label-Installation">Installation</a>
     <li><a href="#label-Automated">Automated</a>
     <li><a href="#label-Manual">Manual</a>
@@ -88,9 +89,30 @@
 
 <main role="main" aria-label="Page README.md">
 
-<h1 id="label-Welcome+to+Spoonerise+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerise">Spoonerise</a> – a word game<span><a href="#label-Welcome+to+Spoonerise+--+a+word+game">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="label-Welcome+to+Spoonerize+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerize">Spoonerize</a> – a word game<span><a href="#label-Welcome+to+Spoonerize+--+a+word+game">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<blockquote>
+<p>Sponerism <em>noun</em> a verbal error in which a speaker accidentally transposes the initial sounds or letters of two or more words, often to humorous effect.</p>
+</blockquote>
 
 <p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This program follows those rules, which are listed below.</p>
+
+<h2 id="label-Table+of+Contents">Table of Contents<span><a href="#label-Table+of+Contents">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="#installation">Installation</a></p>
+</li><li>
+<p><a href="#automated">Automated</a></p>
+</li><li>
+<p><a href="#manual">Manual</a></p>
+</li><li>
+<p><a href="#command-line-usage">Command Line Usage</a></p>
+</li><li>
+<p><a href="#api">API</a></p>
+</li><li>
+<p><a href="#rules-of-the-game">Rules of the Game</a></p>
+</li><li>
+<p><a href="#self-promotion">Self-Promotion</a></p>
+</li></ul>
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -98,7 +120,7 @@
 
 <p>Just install the gem!</p>
 
-<pre class="ruby"><span class="ruby-identifier">gem</span> <span class="ruby-identifier">install</span> <span class="ruby-identifier">spoonerise</span>
+<pre class="ruby"><span class="ruby-identifier">gem</span> <span class="ruby-identifier">install</span> <span class="ruby-identifier">spoonerize</span>
 </pre>
 
 <p>If you don&#39;t have permission on your system to install ruby or gems, I recommend using <a href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html">rbenv</a>, or you can try the manual methods below.</p>
@@ -107,35 +129,35 @@
 
 <p>From your terminal, clone the repository where you want it. From there, you have a couple of installation options.</p>
 
-<pre>git clone https://github.com/evanthegrayt/spoonerise.git
-cd spoonerise
+<pre>git clone https://github.com/evanthegrayt/spoonerize.git
+cd spoonerize
 
 # Use rake to build and install the gem.
 rake install
 
 # OR manually link the executable somewhere. If you use this method, you cannot
 # move the repository after you link it!
-ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise</pre>
+ln -s $PWD/bin/spoonerize /usr/local/bin/spoonerize</pre>
 
 <h2 id="label-Command+Line+Usage">Command Line Usage<span><a href="#label-Command+Line+Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>Call the executable and pass a phrase as arguments:</p>
 
-<pre>$ spoonerise not too shabby # =&gt; tot shoo nabby</pre>
+<pre>$ spoonerize not too shabby # =&gt; tot shoo nabby</pre>
 
 <p>If it didn&#39;t flip the way you wanted it to, you can reverse it:</p>
 
-<pre>$ spoonerise -r not too shabby # =&gt; shot noo tabby</pre>
+<pre>$ spoonerize -r not too shabby # =&gt; shot noo tabby</pre>
 
 <p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example:</p>
 
-<pre>$ spoonerise -s not too shabby
-Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+<pre>$ spoonerize -s not too shabby
+Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
 
-$ spoonerise -rs not too shabby
-Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+$ spoonerize -rs not too shabby
+Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
 
-$ spoonerise -p
+$ spoonerize -p
 not too shabby | tot shoo nabby | No Options
 not too shabby | shot noo tabby | Reverse</pre>
 
@@ -143,7 +165,7 @@ not too shabby | shot noo tabby | Reverse</pre>
 
 <h2 id="label-API">API<span><a href="#label-API">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>This readme isn&#39;t finished, but you can view <a href="https://evanthegrayt.github.io/spoonerise/doc/index.html">API documentation</a>.</p>
+<p>This readme isn&#39;t finished, but you can view <a href="https://evanthegrayt.github.io/spoonerize/doc/index.html">API documentation</a>.</p>
 
 <h2 id="label-Rules+of+the+Game">Rules of the Game<span><a href="#label-Rules+of+the+Game">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
@@ -159,12 +181,12 @@ not too shabby | shot noo tabby | Reverse</pre>
 </li><li>
 <p>“Q” and “U” should stay together (like “queen”).</p>
 </li><li>
-<p>A lot of the time, the words won&#39;t look how they&#39;re supposed to sound, as you go by how the word <em>used</em> to sound, not how it&#39;s spelled. For instance, <code>$ spoonerise two new cuties</code> becomes “no cew twuties”, but it would be pronounced “new coo tooties”, as the words retain their original sounds.</p>
+<p>A lot of the time, the words won&#39;t look how they&#39;re supposed to sound, as you go by how the word <em>used</em> to sound, not how it&#39;s spelled. For instance, <code>$ spoonerize two new cuties</code> becomes “no cew twuties”, but it would be pronounced “new coo tooties”, as the words retain their original sounds.</p>
 </li></ul>
 
 <h2 id="label-Self+Promotion">Self Promotion<span><a href="#label-Self+Promotion">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>I do these projects for fun, and I enjoy knowing that they&#39;re helpful to people. Consider starring <a href="https://github.com/evanthegrayt/spoonerise">the repository</a> if you like it! If you love it, follow me <a href="https://github.com/evanthegrayt">on github</a>!</p>
+<p>I do these projects for fun, and I enjoy knowing that they&#39;re helpful to people. Consider starring <a href="https://github.com/evanthegrayt/spoonerize">the repository</a> if you like it! If you love it, follow me <a href="https://github.com/evanthegrayt">on github</a>!</p>
 
 </main>
 

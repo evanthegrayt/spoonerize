@@ -1,7 +1,7 @@
 require 'csv'
 require 'fileutils'
 
-module Spoonerise
+module Spoonerize
   ##
   # Class that handles reading/writing logs.
   class Log
@@ -23,7 +23,7 @@ module Spoonerise
     #
     # @param [String] file
     #
-    # @return [Spoonerise::Log]
+    # @return [Spoonerize::Log]
     def initialize(file)
       @file = File.expand_path(file)
       @directory = File.dirname(file)

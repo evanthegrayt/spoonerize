@@ -16,8 +16,8 @@ lazy_words:
 default_words:
   - the
   - ultimate
-  - spoonerise
+  - spoonerize
   - test
 
 log_output:
-  - the ultimate spoonerise test,e spultimate toonerise thest,No Options
+  - the ultimate spoonerize test,e spultimate toonerise thest,No Options
