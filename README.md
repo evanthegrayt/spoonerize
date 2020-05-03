@@ -1,6 +1,6 @@
 # Welcome to [Spoonerize](https://evanthegrayt.github.io/spoonerize) -- a word game
-> Sponerism *noun* a verbal error in which a speaker accidentally transposes the
-> initial sounds or letters of two or more words, often to humorous effect.
+> Sponerism *[noun]* a verbal error in which a speaker accidentally transposes
+> the initial sounds or letters of two or more words, often to humorous effect.
 
 We've all done it; someone says a phrase, and you flip the first few letters
 around, and sometimes, it makes an even funnier phrase. For example:
@@ -13,7 +13,9 @@ made a rule set. This program follows those rules, which are listed below.
   - [Automated](#automated)
   - [Manual](#manual)
 - [Command Line Usage](#command-line-usage)
+  - [Config file](#config-file)
 - [API](#api)
+  - [Documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html)
 - [Rules of the Game](#rules-of-the-game)
 - [Self-Promotion](#self-promotion)
 
@@ -67,17 +69,41 @@ get the results. For example:
 
 ```
 $ spoonerize -s not too shabby
-Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
+Saving [tot shoo nabby] to ~/.cache/spoonerize/spoonerize.csv
 
 $ spoonerize -rs not too shabby
-Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
+Saving [shot noo tabby] to ~/.cache/spoonerize/spoonerize.csv
 
 $ spoonerize -p
 not too shabby | tot shoo nabby | No Options
 not too shabby | shot noo tabby | Reverse
 ```
 
-To get a list of all available options, run with `-h`.
+Here is a list of all available options:
+
+```
+-r, --[no-]reverse               Reverse flipping
+-l, --[no-]lazy                  Skip small words
+-m, --[no-]map                   Print words mapping
+-p, --[no-]print                 Print all entries in the log
+-s, --[no-]save                  Save results in log
+    --exclude=WORDS              Words to skip
+```
+
+### Config File
+You can create a config file called `~/.spoonerize.yml`. In this file, you can
+change default options at runtime. Available settings are:
+
+```yaml
+# Setting       Default
+excluded_words: []
+lazy:           false
+reverse:        false
+logfile_name:   '~/.cache/spoonerize/spoonerize.csv'
+```
+
+Options set by this file can be overridden at runtime by the use of the
+executable's flags.
 
 ## API
 This readme isn't finished, but you can view [API
