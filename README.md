@@ -15,7 +15,6 @@ View on [Github](https://github.com/evanthegrayt/spoonerize) |
   - [Config file](#config-file)
 - [API](#api)
   - [Documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html)
-- [Rules of the Game](#rules-of-the-game)
 - [Self-Promotion](#self-promotion)
 
 ## About
@@ -23,7 +22,24 @@ We've all done it; someone says a phrase, and you flip the first few letters
 around, and sometimes, it makes an even funnier phrase. For example:
 "Tomb Raider" becomes "Romb Taider".
 Well, when I was in high school, we took it further -- probably too far -- and
-made a rule set. This program follows those rules, which are listed below.
+made a rule set. This gem, which includes a command-line executable, follows
+those rules, which are:
+
+- Each word drops its leading consonant group and takes the leading consonant
+group of the next word.
+- If the word has no leading consonants, nothing is dropped, but it still
+receives the next word's leading consonants if it has any.
+- If the next word has no leading consonants, the current word receives no
+consonants, but will still lose its own if it has any.
+- When being "lazy", common words ("the", "his", etc.) remain unchanged.
+- If the word to pull from is excluded, that word is skipped, and you pull the
+leading consonants from the next non-excluded word.
+- "Q" and "U" should stay together (like "queen").
+- A lot of the time, the words won't look how they're supposed to sound, as you
+go by how the word *used* to sound, not how it's spelled. For instance,
+`$ spoonerize two new cuties` becomes "no cew twuties", but it would be
+pronounced "new coo tooties", as the words retain their original sounds.
+
 
 ## Installation
 ### Automated
@@ -113,7 +129,7 @@ executable's flags.
 
 ## API
 The API is [fully
-documented](https://evanthegrayt.github.io/spoonerize/doc/index.html), but below 
+documented](https://evanthegrayt.github.io/spoonerize/doc/index.html), but below
 are some quick examples of how you could use this in your ruby code.
 
 ```ruby
@@ -133,22 +149,6 @@ spoonerism.spoonerize
 spoonerism.logfile_name = '~/.cache/spoonerize/spoonerize.csv'
 spoonerism.save
 ```
-
-## Rules of the Game
-- Each word drops its leading consonant group and takes the leading consonant
-group of the next word.
-- If the word has no leading consonants, nothing is dropped, but it still
-receives the next word's leading consonants if it has any.
-- If the next word has no leading consonants, the current word receives no
-consonants, but will still lose its own if it has any.
-- When being "lazy", common words ("the", "his", etc.) remain unchanged.
-- If the word to pull from is excluded, that word is skipped, and you pull the
-leading consonants from the next non-excluded word.
-- "Q" and "U" should stay together (like "queen").
-- A lot of the time, the words won't look how they're supposed to sound, as you
-go by how the word *used* to sound, not how it's spelled. For instance,
-`$ spoonerize two new cuties` becomes "no cew twuties", but it would be
-pronounced "new coo tooties", as the words retain their original sounds.
 
 ## Self Promotion
 I do these projects for fun, and I enjoy knowing that they're helpful to people.

@@ -117,14 +117,27 @@
 </li><li>
 <p><a href="https://evanthegrayt.github.io/spoonerize/doc/index.html">Documentation</a></p>
 </li><li>
-<p><a href="#rules-of-the-game">Rules of the Game</a></p>
-</li><li>
 <p><a href="#self-promotion">Self-Promotion</a></p>
 </li></ul>
 
 <h2 id="label-About">About<span><a href="#label-About">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This program follows those rules, which are listed below.</p>
+<p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This gem, which includes a command-line executable, follows those rules, which are:</p>
+<ul><li>
+<p>Each word drops its leading consonant group and takes the leading consonant group of the next word.</p>
+</li><li>
+<p>If the word has no leading consonants, nothing is dropped, but it still receives the next word&#39;s leading consonants if it has any.</p>
+</li><li>
+<p>If the next word has no leading consonants, the current word receives no consonants, but will still lose its own if it has any.</p>
+</li><li>
+<p>When being “lazy”, common words (“the”, “his”, etc.) remain unchanged.</p>
+</li><li>
+<p>If the word to pull from is excluded, that word is skipped, and you pull the leading consonants from the next non-excluded word.</p>
+</li><li>
+<p>“Q” and “U” should stay together (like “queen”).</p>
+</li><li>
+<p>A lot of the time, the words won&#39;t look how they&#39;re supposed to sound, as you go by how the word <em>used</em> to sound, not how it&#39;s spelled. For instance, <code>$ spoonerize two new cuties</code> becomes “no cew twuties”, but it would be pronounced “new coo tooties”, as the words retain their original sounds.</p>
+</li></ul>
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -214,23 +227,6 @@ logfile_name:   &#39;~/.cache/spoonerize/spoonerize.csv&#39;</pre>
 <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">logfile_name</span> = <span class="ruby-string">&#39;~/.cache/spoonerize/spoonerize.csv&#39;</span>
 <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">save</span>
 </pre>
-
-<h2 id="label-Rules+of+the+Game">Rules of the Game<span><a href="#label-Rules+of+the+Game">&para;</a> <a href="#top">&uarr;</a></span></h2>
-<ul><li>
-<p>Each word drops its leading consonant group and takes the leading consonant group of the next word.</p>
-</li><li>
-<p>If the word has no leading consonants, nothing is dropped, but it still receives the next word&#39;s leading consonants if it has any.</p>
-</li><li>
-<p>If the next word has no leading consonants, the current word receives no consonants, but will still lose its own if it has any.</p>
-</li><li>
-<p>When being “lazy”, common words (“the”, “his”, etc.) remain unchanged.</p>
-</li><li>
-<p>If the word to pull from is excluded, that word is skipped, and you pull the leading consonants from the next non-excluded word.</p>
-</li><li>
-<p>“Q” and “U” should stay together (like “queen”).</p>
-</li><li>
-<p>A lot of the time, the words won&#39;t look how they&#39;re supposed to sound, as you go by how the word <em>used</em> to sound, not how it&#39;s spelled. For instance, <code>$ spoonerize two new cuties</code> becomes “no cew twuties”, but it would be pronounced “new coo tooties”, as the words retain their original sounds.</p>
-</li></ul>
 
 <h2 id="label-Self+Promotion">Self Promotion<span><a href="#label-Self+Promotion">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
