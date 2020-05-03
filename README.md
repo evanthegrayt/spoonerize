@@ -135,7 +135,7 @@ are some quick examples of how you could use this in your ruby code.
 ```ruby
 require 'spoonerize'
 
-spoonerism = Spoonerise::Spoonerism.new(%w[not too shabby]) do |s|
+spoonerism = Spoonerize::Spoonerism.new(%w[not too shabby]) do |s|
   s.reverse = true
 end
 
