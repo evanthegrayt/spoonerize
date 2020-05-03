@@ -91,16 +91,18 @@
 <main role="main">
 
 
-<h1 id="label-Welcome+to+Spoonerize+--+a+word+game">Welcome to <a href="https://evanthegrayt.github.io/spoonerize">Spoonerize</a> – a word game<span><a href="#label-Welcome+to+Spoonerize+--+a+word+game">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="label-Welcome+to+Spoonerize+--+a+word+game.">Welcome to <a href="Spoonerize.html"><code>Spoonerize</code></a> – a word game.<span><a href="#label-Welcome+to+Spoonerize+--+a+word+game.">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <blockquote>
-<p>Sponerism <em>noun</em> a verbal error in which a speaker accidentally transposes the initial sounds or letters of two or more words, often to humorous effect.</p>
+<p>Sponerism <em>[noun]</em> a verbal error in which a speaker accidentally transposes the initial sounds or letters of two or more words, often to humorous effect.</p>
 </blockquote>
 
-<p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This program follows those rules, which are listed below.</p>
+<p>View on <a href="https://github.com/evanthegrayt/spoonerize">Github</a> | <a href="https://evanthegrayt.github.io/spoonerize/">Github Pages</a> | <a href="https://rubygems.org/gems/spoonerize">RubyGems</a></p>
 
 <h2 id="label-Table+of+Contents">Table of Contents<span><a href="#label-Table+of+Contents">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
+<p><a href="#about">About</a></p>
+</li><li>
 <p><a href="#installation">Installation</a></p>
 </li><li>
 <p><a href="#automated">Automated</a></p>
@@ -109,12 +111,20 @@
 </li><li>
 <p><a href="#command-line-usage">Command Line Usage</a></p>
 </li><li>
+<p><a href="#config-file">Config file</a></p>
+</li><li>
 <p><a href="#api">API</a></p>
+</li><li>
+<p><a href="https://evanthegrayt.github.io/spoonerize/doc/index.html">Documentation</a></p>
 </li><li>
 <p><a href="#rules-of-the-game">Rules of the Game</a></p>
 </li><li>
 <p><a href="#self-promotion">Self-Promotion</a></p>
 </li></ul>
+
+<h2 id="label-About">About<span><a href="#label-About">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This program follows those rules, which are listed below.</p>
 
 <h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -154,16 +164,35 @@ ln -s $PWD/bin/spoonerize /usr/local/bin/spoonerize</pre>
 <p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example:</p>
 
 <pre>$ spoonerize -s not too shabby
-Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
+Saving [tot shoo nabby] to ~/.cache/spoonerize/spoonerize.csv
 
 $ spoonerize -rs not too shabby
-Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
+Saving [shot noo tabby] to ~/.cache/spoonerize/spoonerize.csv
 
 $ spoonerize -p
 not too shabby | tot shoo nabby | No Options
 not too shabby | shot noo tabby | Reverse</pre>
 
-<p>To get a list of all available options, run with <code>-h</code>.</p>
+<p>Here is a list of all available options:</p>
+
+<pre>-r, --[no-]reverse               Reverse flipping
+-l, --[no-]lazy                  Skip small words
+-m, --[no-]map                   Print words mapping
+-p, --[no-]print                 Print all entries in the log
+-s, --[no-]save                  Save results in log
+    --exclude=WORDS              Words to skip</pre>
+
+<h3 id="label-Config+File">Config File<span><a href="#label-Config+File">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can create a config file called <code>~/.spoonerize.yml</code>. In this file, you can change default options at runtime. Available settings are:</p>
+
+<pre># Setting       Default
+excluded_words: []
+lazy:           false
+reverse:        false
+logfile_name:   &#39;~/.cache/spoonerize/spoonerize.csv&#39;</pre>
+
+<p>Options set by this file can be overridden at runtime by the use of the executable&#39;s flags.</p>
 
 <h2 id="label-API">API<span><a href="#label-API">&para;</a> <a href="#top">&uarr;</a></span></h2>
 

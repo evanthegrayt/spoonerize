@@ -1,14 +1,13 @@
-# Welcome to [Spoonerize](https://evanthegrayt.github.io/spoonerize) -- a word game
+# Welcome to Spoonerize -- a word game.
 > Sponerism *[noun]* a verbal error in which a speaker accidentally transposes
 > the initial sounds or letters of two or more words, often to humorous effect.
 
-We've all done it; someone says a phrase, and you flip the first few letters
-around, and sometimes, it makes an even funnier phrase. For example:
-"Tomb Raider" becomes "Romb Taider".
-Well, when I was in high school, we took it further -- probably too far -- and
-made a rule set. This program follows those rules, which are listed below.
+View on [Github](https://github.com/evanthegrayt/spoonerize) |
+[Github Pages](https://evanthegrayt.github.io/spoonerize/) |
+[RubyGems](https://rubygems.org/gems/spoonerize)
 
 ## Table of Contents
+- [About](#about)
 - [Installation](#installation)
   - [Automated](#automated)
   - [Manual](#manual)
@@ -18,6 +17,13 @@ made a rule set. This program follows those rules, which are listed below.
   - [Documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html)
 - [Rules of the Game](#rules-of-the-game)
 - [Self-Promotion](#self-promotion)
+
+## About
+We've all done it; someone says a phrase, and you flip the first few letters
+around, and sometimes, it makes an even funnier phrase. For example:
+"Tomb Raider" becomes "Romb Taider".
+Well, when I was in high school, we took it further -- probably too far -- and
+made a rule set. This program follows those rules, which are listed below.
 
 ## Installation
 ### Automated
