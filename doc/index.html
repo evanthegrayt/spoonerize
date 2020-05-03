@@ -196,7 +196,24 @@ logfile_name:   &#39;~/.cache/spoonerize/spoonerize.csv&#39;</pre>
 
 <h2 id="label-API">API<span><a href="#label-API">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>This readme isn&#39;t finished, but you can view <a href="https://evanthegrayt.github.io/spoonerize/doc/index.html">API documentation</a>.</p>
+<p>The API is <a href="https://evanthegrayt.github.io/spoonerize/doc/index.html">fully documented</a>, but below are some quick examples of how you could use this in your ruby code.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;spoonerize&#39;</span>
+
+<span class="ruby-identifier">spoonerism</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerize</span>
+<span class="ruby-comment"># =&gt; shot noo tabby</span>
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerize</span>
+<span class="ruby-comment"># =&gt; tot shoo nabby</span>
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">logfile_name</span> = <span class="ruby-string">&#39;~/.cache/spoonerize/spoonerize.csv&#39;</span>
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">save</span>
+</pre>
 
 <h2 id="label-Rules+of+the+Game">Rules of the Game<span><a href="#label-Rules+of+the+Game">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>

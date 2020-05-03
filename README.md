@@ -112,8 +112,27 @@ Options set by this file can be overridden at runtime by the use of the
 executable's flags.
 
 ## API
-This readme isn't finished, but you can view [API
-documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html).
+The API is [fully
+documented](https://evanthegrayt.github.io/spoonerize/doc/index.html), but below 
+are some quick examples of how you could use this in your ruby code.
+
+```ruby
+require 'spoonerize'
+
+spoonerism = Spoonerise::Spoonerism.new(%w[not too shabby]) do |s|
+  s.reverse = true
+end
+
+spoonerism.spoonerize
+# => shot noo tabby
+
+spoonerism.reverse = false
+spoonerism.spoonerize
+# => tot shoo nabby
+
+spoonerism.logfile_name = '~/.cache/spoonerize/spoonerize.csv'
+spoonerism.save
+```
 
 ## Rules of the Game
 - Each word drops its leading consonant group and takes the leading consonant
