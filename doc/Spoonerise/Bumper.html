@@ -113,6 +113,21 @@
       </header>
 
       
+      <div id="attribute-i-max_value" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">max_value</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>The maximum before index wraps back to zero.</p>
+
+<p>@return [Integer]</p>
+        
+        </div>
+      </div>
+      
       <div id="attribute-i-value" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">value</span><span
@@ -121,7 +136,9 @@
 
         <div class="method-description">
         
-        
+        <p>The number after being bumped.</p>
+
+<p>@return [Integer]</p>
         
         </div>
       </div>
@@ -140,7 +157,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(initial_value, max_length, reverse = false)</span>
+            class="method-args">(initial_value, max_value, reverse = false)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -149,17 +166,23 @@
 
         <div class="method-description">
           
-          <p>Sets the bumper relative to the current index of words array. If on the last element of the words array, sets the bumper to 0</p>
+          <p>Sets the bumper relative to the current index of words array. The value is automatically bumped once when instantiated. If on the last element of the words array, sets the bumper to 0.</p>
+
+<p>@param [Integer] initial_value</p>
+
+<p>@param [Integer] <a href="Bumper.html#attribute-i-max_value"><code>max_value</code></a></p>
+
+<p>@param [Boolean] reverse Flip the order</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">initial_value</span>, <span class="ruby-identifier">max_length</span>, <span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">false</span>)
-  <span class="ruby-ivar">@max_length</span> = <span class="ruby-identifier">max_length</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">initial_value</span>, <span class="ruby-identifier">max_value</span>, <span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@max_value</span> = <span class="ruby-identifier">max_value</span>
   <span class="ruby-ivar">@reverse</span> = <span class="ruby-identifier">reverse</span>
-  <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">set_value</span>(<span class="ruby-identifier">initial_value</span>)
+  <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bump_value</span>(<span class="ruby-identifier">initial_value</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -192,15 +215,17 @@
 
         <div class="method-description">
           
-          <p>Bumps current value</p>
+          <p>Increments/Decrements the bumper. If on the last element of the words array, sets the bumper to 0. We don&#39;t need to worry about resetting the value to 0 when going in reverse, because when the array index is negative, it reads from the end of the array, which is already what we want.</p>
+
+<p>@return [Integer]</p>
           
           
 
           
           <div class="method-source-code" id="bump-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 19</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bump</span>
-  <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">set_value</span>(<span class="ruby-ivar">@value</span>)
+  <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bump_value</span>(<span class="ruby-identifier">value</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -226,12 +251,14 @@
         <div class="method-description">
           
           <p>Should we decrement instead of increment?</p>
+
+<p>@return [Boolean]</p>
           
           
 
           
           <div class="method-source-code" id="reverse-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 25</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse?</span>
   <span class="ruby-ivar">@reverse</span>
 <span class="ruby-keyword">end</span></pre>

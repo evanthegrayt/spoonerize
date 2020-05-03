@@ -125,7 +125,9 @@
 
         <div class="method-description">
         
-        <p>The file name to use.</p>
+        <p>The directory the file is located.</p>
+
+<p>@return [String]</p>
         
         </div>
       </div>
@@ -139,6 +141,8 @@
         <div class="method-description">
         
         <p>The file name to use.</p>
+
+<p>@return [String]</p>
         
         </div>
       </div>
@@ -176,7 +180,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 19</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-ivar">@file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-ivar">@directory</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file</span>)
@@ -222,7 +226,7 @@
 
           
           <div class="method-source-code" id="contents-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 30</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">contents</span>
   <span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">file</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -250,12 +254,14 @@
         <div class="method-description">
           
           <p>Iterate through each line of the file.</p>
+
+<p>@return [Array]</p>
           
           
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 46</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
   <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">row</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -290,7 +296,7 @@
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 54</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
   <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -327,7 +333,7 @@
 
           
           <div class="method-source-code" id="write-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 40</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-string">&#39;a&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span> }
 <span class="ruby-keyword">end</span></pre>

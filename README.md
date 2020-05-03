@@ -37,10 +37,13 @@ ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
 
 ## Command Line Usage
 Call the executable and pass a phrase as arguments:
+
 ```sh
 $ spoonerise not too shabby # => tot shoo nabby
 ```
+
 If it didn't flip the way you wanted it to, you can reverse it:
+
 ```sh
 $ spoonerise -r not too shabby # => shot noo tabby
 ```
