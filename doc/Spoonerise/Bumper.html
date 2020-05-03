@@ -79,6 +79,8 @@
     
     <li ><a href="#method-i-bump">#bump</a>
     
+    <li ><a href="#method-i-reverse-3F">#reverse?</a>
+    
   </ul>
 </div>
 
@@ -190,7 +192,7 @@
 
         <div class="method-description">
           
-          <p>bumps current value</p>
+          <p>Bumps current value</p>
           
           
 
@@ -199,6 +201,39 @@
             <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 19</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bump</span>
   <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">set_value</span>(<span class="ruby-ivar">@value</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-reverse-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">reverse?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Should we decrement instead of increment?</p>
+          
+          
+
+          
+          <div class="method-source-code" id="reverse-3F-source">
+            <pre><span class="ruby-comment"># File lib/spoonerise/bumper.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse?</span>
+  <span class="ruby-ivar">@reverse</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           

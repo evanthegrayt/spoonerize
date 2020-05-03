@@ -18,3 +18,6 @@ default_words:
   - ultimate
   - spoonerise
   - test
+
+log_output:
+  - the ultimate spoonerise test,e spultimate toonerise thest,No Options
