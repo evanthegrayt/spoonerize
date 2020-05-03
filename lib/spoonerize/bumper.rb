@@ -1,4 +1,4 @@
-module Spoonerise
+module Spoonerize
   ##
   # Class that handles bumping an index.
   class Bumper

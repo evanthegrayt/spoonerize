@@ -1,7 +1,7 @@
 require 'optparse'
 require 'yaml'
 
-module Spoonerise
+module Spoonerize
   ##
   # The class for handling the command-line interface.
   class Cli
@@ -11,7 +11,7 @@ module Spoonerise
     #
     # @return [String]
     PREFERENCE_FILE =
-      File.expand_path(File.join(ENV['HOME'], '.spoonerise.yml')).freeze
+      File.expand_path(File.join(ENV['HOME'], '.spoonerize.yml')).freeze
 
     ##
     # Creates an instance of +StandupMD+ and runs what the user requested.
@@ -61,12 +61,12 @@ module Spoonerise
     end
 
     ##
-    # Sets up an instance of +Spoonerise::Spoonerism+ and passes all user
+    # Sets up an instance of +Spoonerize::Spoonerism+ and passes all user
     # preferences.
     #
-    # @return [Spoonerise::Spoonerism]
+    # @return [Spoonerize::Spoonerism]
     def spoonerism
-      @spoonerism ||= ::Spoonerise::Spoonerism.new(options) do |s|
+      @spoonerism ||= ::Spoonerize::Spoonerism.new(options) do |s|
         preferences.each { |k, v| s.send("#{k}=", v) }
       end
     end
@@ -101,7 +101,7 @@ module Spoonerise
     # @return [Integer]
     def longest_word_length
       @longest_word_length ||=
-        spoonerism.spoonerise.group_by(&:size).max.first.size
+        spoonerism.spoonerize.group_by(&:size).max.first.size
     end
 
     ##
@@ -109,7 +109,7 @@ module Spoonerise
     #
     # @return [nil]
     def print_log
-      s = Spoonerise::Log.new(spoonerism.logfile_name)
+      s = Spoonerize::Log.new(spoonerism.logfile_name)
       s.each { |row| print row.join(' | ') + "\n" }
     end
 
@@ -130,7 +130,7 @@ module Spoonerise
     def get_preferences # :nodoc:
       prefs = {}
       OptionParser.new do |o|
-        o.version = ::Spoonerise::VERSION
+        o.version = ::Spoonerize::VERSION
         o.on('-r', '--[no-]reverse', 'Reverse flipping') do |v|
           prefs['reverse'] = v
         end

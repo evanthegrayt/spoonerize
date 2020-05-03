@@ -1,4 +1,4 @@
-require_relative 'lib/spoonerise'
+require_relative 'lib/spoonerize'
 require 'bundler/gem_tasks'
 require 'rdoc/task'
 require 'rake/testtask'

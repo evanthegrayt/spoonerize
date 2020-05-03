@@ -1,13 +1,13 @@
 require 'yaml'
-require_relative 'spoonerise/spoonerism'
-require_relative 'spoonerise/bumper'
-require_relative 'spoonerise/version'
-require_relative 'spoonerise/log'
-require_relative 'spoonerise/cli'
+require_relative 'spoonerize/spoonerism'
+require_relative 'spoonerize/bumper'
+require_relative 'spoonerize/version'
+require_relative 'spoonerize/log'
+require_relative 'spoonerize/cli'
 
 ##
 # The main namespace for the gem.
-module Spoonerise
+module Spoonerize
   ##
   # The error exception raised when there are not enough flippable words.
   JakPibError = Class.new(StandardError)

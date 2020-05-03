@@ -1,16 +1,28 @@
-# Welcome to [Spoonerise](https://evanthegrayt.github.io/spoonerise) -- a word game
+# Welcome to [Spoonerize](https://evanthegrayt.github.io/spoonerize) -- a word game
+> Sponerism *noun* a verbal error in which a speaker accidentally transposes the
+> initial sounds or letters of two or more words, often to humorous effect.
+
 We've all done it; someone says a phrase, and you flip the first few letters
 around, and sometimes, it makes an even funnier phrase. For example:
 "Tomb Raider" becomes "Romb Taider".
 Well, when I was in high school, we took it further -- probably too far -- and
 made a rule set. This program follows those rules, which are listed below.
 
+## Table of Contents
+- [Installation](#installation)
+  - [Automated](#automated)
+  - [Manual](#manual)
+- [Command Line Usage](#command-line-usage)
+- [API](#api)
+- [Rules of the Game](#rules-of-the-game)
+- [Self-Promotion](#self-promotion)
+
 ## Installation
 ### Automated
 Just install the gem!
 
 ```sh
-gem install spoonerise
+gem install spoonerize
 ```
 
 If you don't have permission on your system to install ruby or gems, I recommend
@@ -24,28 +36,28 @@ From your terminal, clone the repository where you want it. From there, you have
 a couple of installation options.
 
 ```sh
-git clone https://github.com/evanthegrayt/spoonerise.git
-cd spoonerise
+git clone https://github.com/evanthegrayt/spoonerize.git
+cd spoonerize
 
 # Use rake to build and install the gem.
 rake install
 
 # OR manually link the executable somewhere. If you use this method, you cannot
 # move the repository after you link it!
-ln -s $PWD/bin/spoonerise /usr/local/bin/spoonerise
+ln -s $PWD/bin/spoonerize /usr/local/bin/spoonerize
 ```
 
 ## Command Line Usage
 Call the executable and pass a phrase as arguments:
 
 ```sh
-$ spoonerise not too shabby # => tot shoo nabby
+$ spoonerize not too shabby # => tot shoo nabby
 ```
 
 If it didn't flip the way you wanted it to, you can reverse it:
 
 ```sh
-$ spoonerise -r not too shabby # => shot noo tabby
+$ spoonerize -r not too shabby # => shot noo tabby
 ```
 
 If you find a phrase funny enough to save, you can pass the `-s` flag. This will
@@ -54,13 +66,13 @@ flag. It will show the original phrase, the end result, and the options used to
 get the results. For example:
 
 ```
-$ spoonerise -s not too shabby
-Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+$ spoonerize -s not too shabby
+Saving [tot shoo nabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
 
-$ spoonerise -rs not too shabby
-Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerise/log/spoonerise.csv
+$ spoonerize -rs not too shabby
+Saving [shot noo tabby] to /Users/evan.gray/workflow/spoonerize/log/spoonerize.csv
 
-$ spoonerise -p
+$ spoonerize -p
 not too shabby | tot shoo nabby | No Options
 not too shabby | shot noo tabby | Reverse
 ```
@@ -69,7 +81,7 @@ To get a list of all available options, run with `-h`.
 
 ## API
 This readme isn't finished, but you can view [API
-documentation](https://evanthegrayt.github.io/spoonerise/doc/index.html).
+documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html).
 
 ## Rules of the Game
 - Each word drops its leading consonant group and takes the leading consonant
@@ -84,11 +96,11 @@ leading consonants from the next non-excluded word.
 - "Q" and "U" should stay together (like "queen").
 - A lot of the time, the words won't look how they're supposed to sound, as you
 go by how the word *used* to sound, not how it's spelled. For instance,
-`$ spoonerise two new cuties` becomes "no cew twuties", but it would be
+`$ spoonerize two new cuties` becomes "no cew twuties", but it would be
 pronounced "new coo tooties", as the words retain their original sounds.
 
 ## Self Promotion
 I do these projects for fun, and I enjoy knowing that they're helpful to people.
-Consider starring [the repository](https://github.com/evanthegrayt/spoonerise)
+Consider starring [the repository](https://github.com/evanthegrayt/spoonerize)
 if you like it! If you love it, follow me [on
 github](https://github.com/evanthegrayt)!

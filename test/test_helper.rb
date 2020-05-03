@@ -16,7 +16,7 @@ module TestHelper
   end
 
   def spoonerism(words, opts = {})
-    Spoonerise::Spoonerism.new(words) do |s|
+    Spoonerize::Spoonerism.new(words) do |s|
       opts.each { |k, v| s.send("#{k}=", v) }
     end
   end
@@ -26,7 +26,7 @@ module TestHelper
   end
 
   def test_log_file
-    @tlf ||= File.join(test_log_directory, 'spoonerise.csv')
+    @tlf ||= File.join(test_log_directory, 'spoonerize.csv')
   end
 
   ##
@@ -34,9 +34,9 @@ module TestHelper
   #
   # @param [Array] options Parsed by +getopts+
   #
-  # @return [Spoonerise::Cli]
+  # @return [Spoonerize::Cli]
   def cli(options = [])
-    Spoonerise::Cli.new(fixtures['default_words'] + options)
+    Spoonerize::Cli.new(fixtures['default_words'] + options)
   end
 
   def create_log_file

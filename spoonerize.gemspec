@@ -1,16 +1,16 @@
-require_relative 'lib/spoonerise/version'
+require_relative 'lib/spoonerize/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'spoonerise'
-  spec.version       = Spoonerise::VERSION
+  spec.name          = 'spoonerize'
+  spec.version       = Spoonerize::VERSION
   spec.authors       = ['Evan Gray']
   spec.email         = 'evanthegrayt@vivaldi.net'
   spec.license       = 'MIT'
   spec.date          = Time.now.strftime('%Y-%m-%d')
 
-  spec.summary       = %q{Spoonerise phrases from the command line.}
-  spec.description   = %q{Spoonerise phrases from the command line. Comes with an API}
-  spec.homepage      = 'https://evanthegrayt.github.io/spoonerise/'
+  spec.summary       = %q{Spoonerize phrases from the command line.}
+  spec.description   = %q{Spoonerize phrases from the command line. Comes with an API}
+  spec.homepage      = 'https://evanthegrayt.github.io/spoonerize/'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -18,8 +18,8 @@ Gem::Specification.new do |spec|
     spec.metadata['allowed_push_host'] = 'https://rubygems.org'
 
     spec.metadata['homepage_uri'] = spec.homepage
-    spec.metadata['source_code_uri'] = 'https://github.com/evanthegrayt/spoonerise'
-    spec.metadata['documentation_uri'] = 'https://evanthegrayt.github.io/spoonerise/doc/index.html'
+    spec.metadata['source_code_uri'] = 'https://github.com/evanthegrayt/spoonerize'
+    spec.metadata['documentation_uri'] = 'https://evanthegrayt.github.io/spoonerize/doc/index.html'
   else
     raise 'RubyGems 2.0 or newer is required to protect against public gem pushes.'
   end

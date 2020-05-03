@@ -1,4 +1,4 @@
-require_relative '../../lib/spoonerise'
+require_relative '../../lib/spoonerize'
 require_relative '../test_helper'
 
 ##
@@ -16,8 +16,8 @@ class TestCli < Test::Unit::TestCase
   # The user's preference file is a string.
   def test_PREFERENCE_FILE
     assert_equal(
-      File.expand_path(File.join(ENV['HOME'], '.spoonerise.yml')),
-      Spoonerise::Cli::PREFERENCE_FILE
+      File.expand_path(File.join(ENV['HOME'], '.spoonerize.yml')),
+      Spoonerize::Cli::PREFERENCE_FILE
     )
   end
 
@@ -25,7 +25,7 @@ class TestCli < Test::Unit::TestCase
   # The +execute+ method is the entry point for the Cli. It's parameter is an
   # array of command-line flags
   def test_self_execute
-    assert_nothing_raised { Spoonerise::Cli.execute(fixtures['default_words']) }
+    assert_nothing_raised { Spoonerize::Cli.execute(fixtures['default_words']) }
   end
 
   ##
@@ -47,14 +47,14 @@ class TestCli < Test::Unit::TestCase
   ##
   # The +initialize+ method should accept the same parameters as +exectute+.
   def test_initialize
-    assert_nothing_raised { Spoonerise::Cli.new(fixtures['default_words']) }
+    assert_nothing_raised { Spoonerize::Cli.new(fixtures['default_words']) }
   end
 
   ##
   # Creates the instance of +Spoonerism+.
   def test_spoonerism
     c = cli
-    assert_instance_of(Spoonerise::Spoonerism, c.spoonerism)
+    assert_instance_of(Spoonerize::Spoonerism, c.spoonerism)
   end
 
   ##

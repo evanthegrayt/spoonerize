@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>class Spoonerise::Log - RDoc Documentation</title>
+<title>class Spoonerize::Log - RDoc Documentation</title>
 
 <script type="text/javascript">
   var rdoc_rel_prefix = "../";
@@ -91,9 +91,9 @@
   </div>
 </nav>
 
-<main role="main" aria-labelledby="class-Spoonerise::Log">
-  <h1 id="class-Spoonerise::Log" class="class">
-    class Spoonerise::Log
+<main role="main" aria-labelledby="class-Spoonerize::Log">
+  <h1 id="class-Spoonerize::Log" class="class">
+    class Spoonerize::Log
   </h1>
 
   <section class="description">
@@ -174,13 +174,13 @@
 
 <p>@param [String] file</p>
 
-<p>@return [Spoonerise::Log]</p>
+<p>@return [Spoonerize::Log]</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 27</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/log.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-ivar">@file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">file</span>)
   <span class="ruby-ivar">@directory</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file</span>)
@@ -226,7 +226,7 @@
 
           
           <div class="method-source-code" id="contents-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 38</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/log.rb, line 38</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">contents</span>
   <span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">file</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -261,7 +261,7 @@
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 56</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/log.rb, line 56</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
   <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">row</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -296,7 +296,7 @@
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 64</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/log.rb, line 64</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
   <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -333,7 +333,7 @@
 
           
           <div class="method-source-code" id="write-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/log.rb, line 48</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/log.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write</span>(<span class="ruby-identifier">row</span>)
   <span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file</span>, <span class="ruby-string">&#39;a&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">csv</span><span class="ruby-operator">|</span> <span class="ruby-identifier">csv</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">row</span> }
 <span class="ruby-keyword">end</span></pre>
