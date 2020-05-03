@@ -89,6 +89,6 @@ class TestCli < Test::Unit::TestCase
 
   def test_longest_word_length
     c = cli
-    assert_equal(8, cli.longest_word_length)
+    assert_equal(8, c.longest_word_length)
   end
 end

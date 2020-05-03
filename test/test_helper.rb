@@ -38,4 +38,11 @@ module TestHelper
   def cli(options = [])
     Spoonerise::Cli.new(fixtures['default_words'] + options)
   end
+
+  def create_log_file
+    FileUtils.mkdir(test_log_directory) unless File.directory?(test_log_directory)
+    File.open(test_log_file, 'w+') do |line|
+      fixtures['log_output'].each { |o| line.puts o }
+    end
+  end
 end
