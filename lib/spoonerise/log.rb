@@ -8,7 +8,15 @@ module Spoonerise
 
     ##
     # The file name to use.
-    attr_reader :file, :directory
+    #
+    # @return [String]
+    attr_reader :file
+
+    ##
+    # The directory the file is located.
+    #
+    # @return [String]
+    attr_reader :directory
 
     ##
     # Constructor for Log.
@@ -43,6 +51,8 @@ module Spoonerise
 
     ##
     # Iterate through each line of the file.
+    #
+    # @return [Array]
     def each
       contents.each { |row| yield row }
     end

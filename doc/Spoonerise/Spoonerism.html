@@ -135,7 +135,11 @@
 
         <div class="method-description">
         
-        
+        <p>The words that are to be excluded.</p>
+
+<p>@param [Array] words</p>
+
+<p>@return [Array]</p>
         
         </div>
       </div>
@@ -148,7 +152,11 @@
 
         <div class="method-description">
         
-        
+        <p>This boolean determines if flipping should be performed lazily.</p>
+
+<p>@param [Boolean] true if should be lazy.</p>
+
+<p>@return [Boolean]</p>
         
         </div>
       </div>
@@ -161,7 +169,11 @@
 
         <div class="method-description">
         
-        
+        <p>The full path to the log file.</p>
+
+<p>@param [String] file</p>
+
+<p>@return [String]</p>
         
         </div>
       </div>
@@ -174,7 +186,11 @@
 
         <div class="method-description">
         
-        
+        <p>This boolean determines if flipping should be reversed.</p>
+
+<p>@param [Boolean] true if should be reversed.</p>
+
+<p>@return [Boolean]</p>
         
         </div>
       </div>
@@ -187,7 +203,9 @@
 
         <div class="method-description">
         
-        
+        <p>The words originally passed at initialization.</p>
+
+<p>@return [Array]</p>
         
         </div>
       </div>
@@ -223,7 +241,7 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 16</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">words</span>)
   <span class="ruby-ivar">@excluded_words</span> = []
   <span class="ruby-ivar">@words</span> = <span class="ruby-identifier">words</span>.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:downcase</span>)
@@ -278,7 +296,7 @@
 
           
           <div class="method-source-code" id="all_excluded_words-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 82</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_excluded_words</span>
   (<span class="ruby-identifier">excluded_words</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">lazy?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">LAZY_WORDS</span> <span class="ruby-operator">:</span> [])).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:downcase</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -311,7 +329,7 @@
 
           
           <div class="method-source-code" id="enough_flippable_words-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 55</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enough_flippable_words?</span>
   (<span class="ruby-identifier">words</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">all_excluded_words</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
@@ -344,7 +362,7 @@
 
           
           <div class="method-source-code" id="lazy-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 61</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lazy?</span>
   <span class="ruby-ivar">@lazy</span>
 <span class="ruby-keyword">end</span></pre>
@@ -377,7 +395,7 @@
 
           
           <div class="method-source-code" id="reverse-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 67</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse?</span>
   <span class="ruby-ivar">@reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -410,7 +428,7 @@
 
           
           <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 73</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">write</span>([<span class="ruby-identifier">words</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>), <span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)])
 <span class="ruby-keyword">end</span></pre>
@@ -443,7 +461,7 @@
 
           
           <div class="method-source-code" id="spoonerise-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 30</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spoonerise</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">JakPibError</span>, <span class="ruby-string">&#39;Not enough words to flip&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">enough_flippable_words?</span>
   <span class="ruby-identifier">words</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">word</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span> <span class="ruby-identifier">flip_words</span>(<span class="ruby-identifier">word</span>, <span class="ruby-identifier">idx</span>) }
@@ -477,7 +495,7 @@
 
           
           <div class="method-source-code" id="to_h-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 43</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
   <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">words</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">spoonerise</span>)]
 <span class="ruby-keyword">end</span></pre>
@@ -510,7 +528,7 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 49</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_json</span>
   <span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
@@ -543,7 +561,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 37</span>
+            <pre><span class="ruby-comment"># File lib/spoonerise/spoonerism.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-identifier">spoonerise</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
 <span class="ruby-keyword">end</span></pre>

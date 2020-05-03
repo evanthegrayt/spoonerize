@@ -2,12 +2,21 @@ require 'optparse'
 require 'yaml'
 
 module Spoonerise
+  ##
+  # The class for handling the command-line interface.
   class Cli
+
+    ##
+    # The preferences file the user can create to change runtime options.
+    #
+    # @return [String]
     PREFERENCE_FILE =
       File.expand_path(File.join(ENV['HOME'], '.spoonerise.yml')).freeze
 
     ##
     # Creates an instance of +StandupMD+ and runs what the user requested.
+    #
+    # @param [Array] options
     def self.execute(options = [])
       exe = new(options)
 
@@ -37,6 +46,12 @@ module Spoonerise
     # @return [Array]
     attr_reader :preferences
 
+    ##
+    # Create instance of +Cli+
+    #
+    # @param [Array] options
+    #
+    # @return [self]
     def initialize(options)
       @map         = false
       @save        = false
@@ -56,28 +71,52 @@ module Spoonerise
       end
     end
 
+    ##
+    # Should we save to the log file?
+    #
+    # @return [Boolean]
     def save?
       @save
     end
 
+    ##
+    # Should we print the mappings to the command line?
+    #
+    # @return [Boolean]
     def map?
       @map
     end
 
+    ##
+    # Should we print to the command line?
+    #
+    # @return [Boolean]
     def print?
       @print
     end
 
+    ##
+    # The length of the longest word in the phrase.
+    #
+    # @return [Integer]
     def longest_word_length
       @longest_word_length ||=
         spoonerism.spoonerise.group_by(&:size).max.first.size
     end
 
+    ##
+    # Print the log file contents to the command line.
+    #
+    # @return [nil]
     def print_log
       s = Spoonerise::Log.new(spoonerism.logfile_name)
       s.each { |row| print row.join(' | ') + "\n" }
     end
 
+    ##
+    # Print the hash of mappings to the command line.
+    #
+    # @return [nil]
     def print_mappings
       spoonerism.to_h.each do |k, v|
         puts "%-#{longest_word_length}s => %s" % [k, v]
@@ -88,7 +127,7 @@ module Spoonerise
 
     ##
     # Read in args and set options
-    def get_preferences
+    def get_preferences # :nodoc:
       prefs = {}
       OptionParser.new do |o|
         o.version = ::Spoonerise::VERSION

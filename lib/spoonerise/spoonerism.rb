@@ -3,11 +3,43 @@ module Spoonerise
 # The main word-flipper.
 class Spoonerism
 
+  ##
+  # The words originally passed at initialization.
+  #
+  # @return [Array]
   attr_reader :words
 
-  attr_writer :lazy, :reverse
+  ##
+  # This boolean determines if flipping should be performed lazily.
+  #
+  # @param [Boolean] true if should be lazy.
+  #
+  # @return [Boolean]
+  attr_writer :lazy
 
-  attr_accessor :logfile_name, :excluded_words
+  ##
+  # This boolean determines if flipping should be reversed.
+  #
+  # @param [Boolean] true if should be reversed.
+  #
+  # @return [Boolean]
+  attr_writer :reverse
+
+  ##
+  # The full path to the log file.
+  #
+  # @param [String] file
+  #
+  # @return [String]
+  attr_accessor :logfile_name
+
+  ##
+  # The words that are to be excluded.
+  #
+  # @param [Array] words
+  #
+  # @return [Array]
+  attr_accessor :excluded_words
 
   ##
   # Initialize instance and raise if there aren't enough words to flip.
