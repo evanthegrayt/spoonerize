@@ -194,7 +194,7 @@
 
         <div class="method-description">
           
-          <p>Creates an instance of <code>StandupMD</code> and runs what the user requested.</p>
+          <p>Creates an instance of <code>Spoonerism</code> and runs what the user requested.</p>
 
 <p>@param [Array] options</p>
           
@@ -299,7 +299,7 @@
 
           
           <div class="method-source-code" id="longest_word_length-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 102</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">longest_word_length</span>
   <span class="ruby-ivar">@longest_word_length</span> <span class="ruby-operator">||=</span>
     <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerize</span>.<span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:size</span>).<span class="ruby-identifier">max</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">size</span>
@@ -335,7 +335,7 @@
 
           
           <div class="method-source-code" id="map-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 86</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">map?</span>
   <span class="ruby-ivar">@map</span>
 <span class="ruby-keyword">end</span></pre>
@@ -370,7 +370,7 @@
 
           
           <div class="method-source-code" id="print-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 94</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print?</span>
   <span class="ruby-ivar">@print</span>
 <span class="ruby-keyword">end</span></pre>
@@ -405,7 +405,7 @@
 
           
           <div class="method-source-code" id="print_log-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 111</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_log</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">logfile_name</span>)
   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; | &#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> }
@@ -441,7 +441,7 @@
 
           
           <div class="method-source-code" id="print_mappings-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 120</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_mappings</span>
   <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;%-#{longest_word_length}s =&gt; %s&quot;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>]
@@ -478,7 +478,7 @@
 
           
           <div class="method-source-code" id="save-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 78</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save?</span>
   <span class="ruby-ivar">@save</span>
 <span class="ruby-keyword">end</span></pre>
@@ -515,7 +515,8 @@
           <div class="method-source-code" id="spoonerism-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spoonerism</span>
-  <span class="ruby-ivar">@spoonerism</span> <span class="ruby-operator">||=</span> <span class="ruby-operator">::</span><span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">pf</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-constant">PREFERENCE_FILE</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">PREFERENCE_FILE</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@spoonerism</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">pf</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{k}=&quot;</span>, <span class="ruby-identifier">v</span>) }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
