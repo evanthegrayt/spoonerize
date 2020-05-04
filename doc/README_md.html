@@ -229,6 +229,21 @@ logfile_name:   &#39;~/.cache/spoonerize/spoonerize.csv&#39;</pre>
 <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">save</span>
 </pre>
 
+<p>You can also use the <a href="#config-file">config file</a>, either by passing it at initialization, or via the setter. The config file will be automatically loaded if passed at initialization, before the instance is yielded so you can still change the values via the block. If set via the setter, you must call <code>#load_config_file</code>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Config file would be automatically loaded before block is executed.</span>
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>, <span class="ruby-string">&#39;~/.spoonerize.yml&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Config file would need to be manually loaded.</span>
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">config_file</span> = <span class="ruby-string">&#39;~/.spoonerize.yml&#39;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">s</span>.<span class="ruby-identifier">load_config_file</span>
+</pre>
+
 <h2 id="label-Self+Promotion">Self Promotion<span><a href="#label-Self+Promotion">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>I do these projects for fun, and I enjoy knowing that they&#39;re helpful to people. Consider starring <a href="https://github.com/evanthegrayt/spoonerize">the repository</a> if you like it! If you love it, follow me <a href="https://github.com/evanthegrayt">on github</a>!</p>

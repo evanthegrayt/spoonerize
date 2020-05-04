@@ -154,6 +154,26 @@ spoonerism.logfile_name = '~/.cache/spoonerize/spoonerize.csv'
 spoonerism.save
 ```
 
+You can also use the [config file](#config-file), either by passing it at
+initialization, or via the setter. The config file will be automatically loaded
+if passed at initialization, before the instance is yielded so you can still
+change the values via the block. If set via the setter, you must call
+`#load_config_file`.
+
+```ruby
+# Config file would be automatically loaded before block is executed.
+s = Spoonerise::Spoonerism.new(%w[not too shabby], '~/.spoonerize.yml') do |sp|
+  sp.reverse = true
+end
+
+# Config file would need to be manually loaded.
+s = Spoonerise::Spoonerism.new(%w[not too shabby]) do |sp|
+  sp.config_file = '~/.spoonerize.yml'
+end
+
+s.load_config_file
+```
+
 ## Self Promotion
 I do these projects for fun, and I enjoy knowing that they're helpful to people.
 Consider starring [the repository](https://github.com/evanthegrayt/spoonerize)

@@ -55,12 +55,28 @@ module Spoonerize
     attr_reader :config
 
     ##
-    # Initialize instance and raise if there aren't enough words to flip. Can
-    # pass a config file to be loaded.
+    # Initialize instance. You can also use the +config_file+ either by passing
+    # it at initialization, or via the setter. The config file will be
+    # automatically loaded if passed at initialization, before the instance is
+    # yielded so you can still change the values via the block. If set via the
+    # setter, you must call `#load_config_file`.
     #
     # @param [Array] words
     #
     # @param [String] config_file
+    #
+    # @example
+    #  # Config file would be automatically loaded before block is executed.
+    #  s = Spoonerise::Spoonerism.new(%w[not too shabby], '~/.spoonerize.yml') do |sp|
+    #    sp.reverse = true # Would override setting from config file
+    #  end
+    #  # Config file would need to be manually loaded.
+    #  s = Spoonerise::Spoonerism.new(%w[not too shabby]) do |sp|
+    #    sp.config_file = '~/.spoonerize.yml'
+    #    sp.reverse = true
+    #  end
+    #  s.load_config_file # Would override setting from initialization
+
     def initialize(words, config_file = nil)
       @config = {}
       @excluded_words = []

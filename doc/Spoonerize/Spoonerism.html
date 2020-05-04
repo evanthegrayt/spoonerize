@@ -269,17 +269,31 @@
 
         <div class="method-description">
           
-          <p>Initialize instance and raise if there aren&#39;t enough words to flip. Can pass a config file to be loaded.</p>
+          <p>Initialize instance. You can also use the <code>config_file</code> either by passing it at initialization, or via the setter. The config file will be automatically loaded if passed at initialization, before the instance is yielded so you can still change the values via the block. If set via the setter, you must call `#load_config_file`.</p>
 
 <p>@param [Array] words</p>
 
 <p>@param [String] <a href="Spoonerism.html#attribute-i-config_file"><code>config_file</code></a></p>
+
+<p>@example</p>
+
+<pre class="ruby"><span class="ruby-comment"># Config file would be automatically loaded before block is executed.</span>
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>, <span class="ruby-string">&#39;~/.spoonerize.yml&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment"># Would override setting from config file</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># Config file would need to be manually loaded.</span>
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">config_file</span> = <span class="ruby-string">&#39;~/.spoonerize.yml&#39;</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">s</span>.<span class="ruby-identifier">load_config_file</span> <span class="ruby-comment"># Would override setting from initialization</span>
+</pre>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 64</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 80</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">words</span>, <span class="ruby-identifier">config_file</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@config</span> = {}
   <span class="ruby-ivar">@excluded_words</span> = []
@@ -340,7 +354,7 @@
 
           
           <div class="method-source-code" id="all_excluded_words-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 144</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">all_excluded_words</span>
   (<span class="ruby-identifier">excluded_words</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">lazy?</span> <span class="ruby-operator">?</span> <span class="ruby-constant">LAZY_WORDS</span> <span class="ruby-operator">:</span> [])).<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:downcase</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -377,7 +391,7 @@
 
           
           <div class="method-source-code" id="config_file-3D-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 155</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config_file=</span>(<span class="ruby-identifier">config_file</span>)
   <span class="ruby-ivar">@config_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">config_file</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -412,7 +426,7 @@
 
           
           <div class="method-source-code" id="config_file_loaded-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 111</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 127</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config_file_loaded?</span>
   <span class="ruby-ivar">@config_file_loaded</span>
 <span class="ruby-keyword">end</span></pre>
@@ -445,7 +459,7 @@
 
           
           <div class="method-source-code" id="enough_flippable_words-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 117</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enough_flippable_words?</span>
   (<span class="ruby-identifier">words</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">all_excluded_words</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
 <span class="ruby-keyword">end</span></pre>
@@ -478,7 +492,7 @@
 
           
           <div class="method-source-code" id="lazy-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 123</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lazy?</span>
   <span class="ruby-ivar">@lazy</span>
 <span class="ruby-keyword">end</span></pre>
@@ -513,7 +527,7 @@
 
           
           <div class="method-source-code" id="load_config_file-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 163</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 179</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_config_file</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;No config file set&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config_file</span>.<span class="ruby-identifier">nil?</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;File #{config_file} does not exist&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">config_file</span>)
@@ -550,7 +564,7 @@
 
           
           <div class="method-source-code" id="reverse-3F-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 145</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse?</span>
   <span class="ruby-ivar">@reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -583,7 +597,7 @@
 
           
           <div class="method-source-code" id="save-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 135</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 151</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save</span>
   <span class="ruby-identifier">log</span>.<span class="ruby-identifier">write</span>([<span class="ruby-identifier">words</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>), <span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)])
 <span class="ruby-keyword">end</span></pre>
@@ -616,7 +630,7 @@
 
           
           <div class="method-source-code" id="spoonerize-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 84</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spoonerize</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">JakPibError</span>, <span class="ruby-string">&#39;Not enough words to flip&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">enough_flippable_words?</span>
   <span class="ruby-identifier">words</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">word</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span> <span class="ruby-identifier">flip_words</span>(<span class="ruby-identifier">word</span>, <span class="ruby-identifier">idx</span>) }
@@ -650,7 +664,7 @@
 
           
           <div class="method-source-code" id="to_h-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 97</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 113</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_h</span>
   <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">words</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">spoonerize</span>)]
 <span class="ruby-keyword">end</span></pre>
@@ -683,7 +697,7 @@
 
           
           <div class="method-source-code" id="to_json-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_json</span>
   <span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">to_json</span>
 <span class="ruby-keyword">end</span></pre>
@@ -716,7 +730,7 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 91</span>
+            <pre><span class="ruby-comment"># File lib/spoonerize/spoonerism.rb, line 107</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-identifier">spoonerize</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
 <span class="ruby-keyword">end</span></pre>
