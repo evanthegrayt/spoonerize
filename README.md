@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/spoonerize.svg)](https://badge.fury.io/rb/spoonerize)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> Sponerism *[noun]* a verbal error in which a speaker accidentally transposes
+> Spoonerism *[noun]* a verbal error in which a speaker accidentally transposes
 > the initial sounds or letters of two or more words, often to humorous effect.
 
 View on [Github](https://github.com/evanthegrayt/spoonerize) |
