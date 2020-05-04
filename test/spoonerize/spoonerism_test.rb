@@ -5,6 +5,12 @@ require_relative '../../lib/spoonerize'
 # The test suite for +Spoonerism+.
 class TestSpoonerism < Test::Unit::TestCase
   include TestHelper
+
+  def setup
+    @workdir = File.join(__dir__, 'files')
+    @test_config = File.join(@workdir, 'spoonerize.yml')
+  end
+
   def teardown
     FileUtils.rm_r(test_log_directory) if File.directory?(test_log_directory)
   end
@@ -120,5 +126,48 @@ class TestSpoonerism < Test::Unit::TestCase
     )
     assert_nothing_raised { s.logfile_name = test_log_file }
     assert_equal(test_log_file, s.logfile_name)
+  end
+
+  ##
+  # Should be false until config file is loaded.
+  def test_config_file_loaded?
+    s = spoonerism(%w[the ultimate spoonerize test])
+    refute(s.config_file_loaded?)
+
+    create_config_file(@test_config)
+    s = ::Spoonerize::Spoonerism.new(%w[the ultimate spoonerize test], @test_config)
+    assert_nothing_raised { s.load_config_file }
+    assert(s.config_file_loaded?)
+  end
+
+  ##
+  # Config should be a hash, and populated if +config_file+ is loaded.
+  def test_config
+    s = spoonerism(%w[the ultimate spoonerize test])
+    create_config_file(@test_config)
+    assert_empty(s.config)
+    assert_nothing_raised { s.config_file = @test_config }
+    assert_nothing_raised { s.load_config_file }
+    assert_equal({'reverse' => true}, s.config)
+    assert(s.reverse?)
+  end
+
+  ##
+  # Config file should be settable and gettable.
+  def test_config_file
+    s = spoonerism(%w[the ultimate spoonerize test])
+    assert_nil(s.config_file)
+    assert_nothing_raised { s.config_file = @test_config }
+    assert_equal(@test_config, s.config_file)
+  end
+
+  ##
+  # Should raise if +config_file+ wasn't set or if file doesn't exist.
+  def test_load_config_file
+    s = spoonerism(%w[the ultimate spoonerize test])
+    assert_raise { s.load_config_file }
+    assert_nothing_raised { s.config_file = @test_config }
+    create_config_file(@test_config)
+    assert_nothing_raised { s.load_config_file }
   end
 end

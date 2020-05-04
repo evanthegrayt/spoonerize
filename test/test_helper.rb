@@ -45,4 +45,14 @@ module TestHelper
       fixtures['log_output'].each { |o| line.puts o }
     end
   end
+
+  ##
+  # Creates a config file.
+  #
+  # @param [String] file The file to create
+  def create_config_file(file)
+    dir = File.dirname(file)
+    FileUtils.mkdir(dir) unless File.directory?(dir)
+    File.open(file, 'w+') { |f| f.puts 'reverse: true' }
+  end
 end

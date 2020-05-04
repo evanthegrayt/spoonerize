@@ -14,7 +14,7 @@ module Spoonerize
       File.expand_path(File.join(ENV['HOME'], '.spoonerize.yml')).freeze
 
     ##
-    # Creates an instance of +StandupMD+ and runs what the user requested.
+    # Creates an instance of +Spoonerism+ and runs what the user requested.
     #
     # @param [Array] options
     def self.execute(options = [])
@@ -66,7 +66,8 @@ module Spoonerize
     #
     # @return [Spoonerize::Spoonerism]
     def spoonerism
-      @spoonerism ||= ::Spoonerize::Spoonerism.new(options) do |s|
+      pf = File.file?(PREFERENCE_FILE) ? PREFERENCE_FILE : nil
+      @spoonerism ||= Spoonerism.new(options, pf) do |s|
         preferences.each { |k, v| s.send("#{k}=", v) }
       end
     end
@@ -151,8 +152,7 @@ module Spoonerize
         end
       end.parse!(options)
 
-      (File.file?(PREFERENCE_FILE) ? YAML.load_file(PREFERENCE_FILE) : {})
-        .merge(prefs)
+      prefs
     end
   end
 end
