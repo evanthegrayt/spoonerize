@@ -1,17 +1,19 @@
 lazy_words:
-  - i
-  - a
-  - an
-  - and
-  - in
-  - of
-  - the
-  - my
-  - your
-  - his
-  - her
-  - him
-  - hers
+ - i
+ - a
+ - an
+ - and
+ - in
+ - of
+ - the
+ - my
+ - your
+ - his
+ - her
+ - him
+ - hers
+ - to
+ - is
 
 default_words:
   - the
