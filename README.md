@@ -13,12 +13,12 @@ View on [Github](https://github.com/evanthegrayt/spoonerize) |
 ## Table of Contents
 - [About](#about)
 - [Installation](#installation)
-  - [Automated](#automated)
-  - [Manual](#manual)
+    - [Automated](#automated)
+    - [Manual](#manual)
 - [Command Line Usage](#command-line-usage)
-  - [Config file](#config-file)
+    - [Config file](#config-file)
 - [API](#api)
-  - [Documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html)
+    - [Documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html)
 - [Self-Promotion](#self-promotion)
 
 ## About
