@@ -15,7 +15,7 @@ module TestHelper
     @fixtures ||= YAML.load_file(File.join(__dir__, 'fixtures.yml'))
   end
 
-  def spoonerism(words, opts = {})
+  def spoonerism(words, **opts)
     Spoonerize::Spoonerism.new(words) do |s|
       opts.each { |k, v| s.send("#{k}=", v) }
     end
