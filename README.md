@@ -10,17 +10,6 @@ View on [Github](https://github.com/evanthegrayt/spoonerize) |
 [Github Pages](https://evanthegrayt.github.io/spoonerize/) |
 [RubyGems](https://rubygems.org/gems/spoonerize)
 
-## Table of Contents
-- [About](#about)
-- [Installation](#installation)
-    - [Automated](#automated)
-    - [Manual](#manual)
-- [Command Line Usage](#command-line-usage)
-    - [Config file](#config-file)
-- [API](#api)
-    - [Documentation](https://evanthegrayt.github.io/spoonerize/doc/index.html)
-- [Self-Promotion](#self-promotion)
-
 ## About
 We've all done it; someone says a phrase, and you flip the first few letters
 around, and sometimes, it makes an even funnier phrase. For example:
