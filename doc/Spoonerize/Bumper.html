@@ -21,8 +21,6 @@
 <link href="../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
@@ -59,28 +57,24 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-bump">#bump</a>
-    
     <li ><a href="#method-i-reverse-3F">#reverse?</a>
-    
   </ul>
 </div>
 
@@ -98,21 +92,15 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
     <section class="attribute-method-details" class="method-section">
       <header>
         <h3>Attributes</h3>
       </header>
 
-      
       <div id="attribute-i-max_value" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">max_value</span><span
@@ -120,14 +108,11 @@
         </div>
 
         <div class="method-description">
-        
         <p>The maximum before index wraps back to zero.</p>
 
 <p>@return [Integer]</p>
-        
         </div>
       </div>
-      
       <div id="attribute-i-value" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">value</span><span
@@ -135,37 +120,27 @@
         </div>
 
         <div class="method-description">
-        
         <p>The number after being bumped.</p>
 
 <p>@return [Integer]</p>
-        
         </div>
       </div>
-      
     </section>
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-new" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(initial_value, max_value, reverse = false)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Sets the bumper relative to the current index of words array. The value is automatically bumped once when instantiated. If on the last element of the words array, sets the bumper to 0.</p>
 
 <p>@param [Integer] initial_value</p>
@@ -173,10 +148,7 @@
 <p>@param [Integer] <a href="Bumper.html#attribute-i-max_value"><code>max_value</code></a></p>
 
 <p>@param [Boolean] reverse Flip the order</p>
-          
-          
 
-          
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/bumper.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">initial_value</span>, <span class="ruby-identifier">max_value</span>, <span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">false</span>)
@@ -185,103 +157,73 @@
   <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bump_value</span>(<span class="ruby-identifier">initial_value</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-bump" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">bump</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Increments/Decrements the bumper. If on the last element of the words array, sets the bumper to 0. We don&#39;t need to worry about resetting the value to 0 when going in reverse, because when the array index is negative, it reads from the end of the array, which is already what we want.</p>
 
 <p>@return [Integer]</p>
-          
-          
 
-          
           <div class="method-source-code" id="bump-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/bumper.rb, line 42</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bump</span>
   <span class="ruby-ivar">@value</span> = <span class="ruby-identifier">bump_value</span>(<span class="ruby-identifier">value</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-reverse-3F" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">reverse?</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Should we decrement instead of increment?</p>
 
 <p>@return [Boolean]</p>
-          
-          
 
-          
           <div class="method-source-code" id="reverse-3F-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/bumper.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse?</span>
   <span class="ruby-ivar">@reverse</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

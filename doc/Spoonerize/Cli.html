@@ -21,8 +21,6 @@
 <link href="../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="class">
 <nav role="navigation">
   <div id="project-navigation">
@@ -59,40 +57,30 @@
 
   <div id="class-metadata">
     
-    <div id="parent-class-section" class="nav-section">
+    
+<div id="parent-class-section" class="nav-section">
   <h3>Parent</h3>
 
-  
   <p class="link">Object
-  
 </div>
 
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-c-execute">::execute</a>
-    
     <li ><a href="#method-c-new">::new</a>
-    
     <li ><a href="#method-i-longest_word_length">#longest_word_length</a>
-    
     <li ><a href="#method-i-map-3F">#map?</a>
-    
     <li ><a href="#method-i-print-3F">#print?</a>
-    
     <li ><a href="#method-i-print_log">#print_log</a>
-    
     <li ><a href="#method-i-print_mappings">#print_mappings</a>
-    
     <li ><a href="#method-i-save-3F">#save?</a>
-    
     <li ><a href="#method-i-spoonerism">#spoonerism</a>
-    
   </ul>
 </div>
 
@@ -110,37 +98,26 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
     <section class="constants-list">
       <header>
         <h3>Constants</h3>
       </header>
       <dl>
-      
         <dt id="PREFERENCE_FILE">PREFERENCE_FILE
-        
         <dd><p>The preferences file the user can create to change runtime options.</p>
 
 <p>@return [String]</p>
-        
-      
       </dl>
     </section>
-    
 
-    
     <section class="attribute-method-details" class="method-section">
       <header>
         <h3>Attributes</h3>
       </header>
 
-      
       <div id="attribute-i-options" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">options</span><span
@@ -148,14 +125,11 @@
         </div>
 
         <div class="method-description">
-        
         <p>Arguments passed at runtime.</p>
 
 <p>@return [Array] ARGV</p>
-        
         </div>
       </div>
-      
       <div id="attribute-i-preferences" class="method-detail">
         <div class="method-heading attribute-method-heading">
           <span class="method-name">preferences</span><span
@@ -163,44 +137,31 @@
         </div>
 
         <div class="method-description">
-        
         <p>Preferences after reading config file and parsing ARGV.</p>
 
 <p>@return [Array]</p>
-        
         </div>
       </div>
-      
     </section>
-    
 
-    
+
      <section id="public-class-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Class Methods</h3>
        </header>
 
-    
       <div id="method-c-execute" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">execute</span><span
             class="method-args">(options = [])</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Creates an instance of <code>Spoonerism</code> and runs what the user requested.</p>
 
 <p>@param [Array] options</p>
-          
-          
 
-          
           <div class="method-source-code" id="execute-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 20</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">execute</span>(<span class="ruby-identifier">options</span> = [])
@@ -220,37 +181,25 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-c-new" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">new</span><span
             class="method-args">(options)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Create instance of <code>Cli</code></p>
 
 <p>@param [Array] options</p>
 
 <p>@return [self]</p>
-          
-          
 
-          
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">options</span>)
@@ -261,43 +210,30 @@
   <span class="ruby-ivar">@preferences</span> = <span class="ruby-identifier">get_preferences</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-longest_word_length" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">longest_word_length</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>The length of the longest word in the phrase.</p>
 
 <p>@return [Integer]</p>
-          
-          
 
-          
           <div class="method-source-code" id="longest_word_length-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">longest_word_length</span>
@@ -305,105 +241,69 @@
     <span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerize</span>.<span class="ruby-identifier">group_by</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:size</span>).<span class="ruby-identifier">max</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-map-3F" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">map?</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Should we print the mappings to the command line?</p>
 
 <p>@return [Boolean]</p>
-          
-          
 
-          
           <div class="method-source-code" id="map-3F-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 87</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">map?</span>
   <span class="ruby-ivar">@map</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-print-3F" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">print?</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Should we print to the command line?</p>
 
 <p>@return [Boolean]</p>
-          
-          
 
-          
           <div class="method-source-code" id="print-3F-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 95</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print?</span>
   <span class="ruby-ivar">@print</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-print_log" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">print_log</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Print the log file contents to the command line.</p>
 
 <p>@return [nil]</p>
-          
-          
 
-          
           <div class="method-source-code" id="print_log-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 112</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_log</span>
@@ -411,35 +311,23 @@
   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; | &#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-print_mappings" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">print_mappings</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Print the hash of mappings to the command line.</p>
 
 <p>@return [nil]</p>
-          
-          
 
-          
           <div class="method-source-code" id="print_mappings-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 121</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">print_mappings</span>
@@ -448,70 +336,46 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-save-3F" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">save?</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Should we save to the log file?</p>
 
 <p>@return [Boolean]</p>
-          
-          
 
-          
           <div class="method-source-code" id="save-3F-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 79</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save?</span>
   <span class="ruby-ivar">@save</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-spoonerism" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">spoonerism</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Sets up an instance of <code>Spoonerize::Spoonerism</code> and passes all user preferences.</p>
 
 <p>@return [Spoonerize::Spoonerism]</p>
-          
-          
 
-          
           <div class="method-source-code" id="spoonerism-source">
             <pre><span class="ruby-comment"># File lib/spoonerize/cli.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">spoonerism</span>
@@ -521,25 +385,20 @@
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
