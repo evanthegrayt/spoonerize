@@ -1,5 +1,27 @@
+# frozen_string_literal: true
+
 module Spoonerize
   ##
-  # The version of the gem.
-  VERSION = '0.0.7'
+  # Module that contains all gem version information. Follows semantic
+  # versioning. Read: https://semver.org/
+  module Version
+
+    ##
+    # Major version.
+    MAJOR = 0
+
+    ##
+    # Minor version.
+    MINOR = 1
+
+    ##
+    # Patch version.
+    PATCH = 0
+
+    ##
+    # Version as +MAJOR.MINOR.PATCH+
+    def self.to_s
+      "#{MAJOR}.#{MINOR}.#{PATCH}"
+    end
+  end
 end

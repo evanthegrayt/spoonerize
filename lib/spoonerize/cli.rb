@@ -129,30 +129,29 @@ module Spoonerize
     ##
     # Read in args and set options
     def get_preferences # :nodoc:
-      prefs = {}
-      OptionParser.new do |o|
-        o.version = ::Spoonerize::VERSION
-        o.on('-r', '--[no-]reverse', 'Reverse flipping') do |v|
-          prefs['reverse'] = v
-        end
-        o.on('-l', '--[no-]lazy', 'Skip small words') do |v|
-          prefs['lazy'] = v
-        end
-        o.on('-m', '--[no-]map', 'Print words mapping') do |v|
-          @map = v
-        end
-        o.on('-p', '--[no-]print', 'Print all entries in the log') do |v|
-          @print = v
-        end
-        o.on('-s', '--[no-]save', 'Save results in log') do |v|
-          @save = v
-        end
-        o.on('--exclude=WORDS', Array, 'Words to skip') do |v|
-          prefs['exclude'] = v
-        end
-      end.parse!(options)
-
-      prefs
+      {}.tap do |prefs|
+        OptionParser.new do |o|
+          o.version = ::Spoonerize::Version.to_s
+          o.on('-r', '--[no-]reverse', 'Reverse flipping') do |v|
+            prefs['reverse'] = v
+          end
+          o.on('-l', '--[no-]lazy', 'Skip small words') do |v|
+            prefs['lazy'] = v
+          end
+          o.on('-m', '--[no-]map', 'Print words mapping') do |v|
+            @map = v
+          end
+          o.on('-p', '--[no-]print', 'Print all entries in the log') do |v|
+            @print = v
+          end
+          o.on('-s', '--[no-]save', 'Save results in log') do |v|
+            @save = v
+          end
+          o.on('--exclude=WORDS', Array, 'Words to skip') do |v|
+            prefs['exclude'] = v
+          end
+        end.parse!(options)
+      end
     end
   end
 end

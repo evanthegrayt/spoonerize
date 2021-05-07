@@ -2,7 +2,7 @@ require_relative 'lib/spoonerize/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'spoonerize'
-  spec.version       = Spoonerize::VERSION
+  spec.version       = Spoonerize::Version.to_s
   spec.authors       = ['Evan Gray']
   spec.email         = 'evanthegrayt@vivaldi.net'
   spec.license       = 'MIT'

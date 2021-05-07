@@ -76,7 +76,6 @@ module Spoonerize
     #    sp.reverse = true
     #  end
     #  s.load_config_file # Would override setting from initialization
-
     def initialize(words, config_file = nil)
       @config = {}
       @excluded_words = []
@@ -99,6 +98,7 @@ module Spoonerize
     # flip_words. Returns results as an array.
     def spoonerize
       raise JakPibError, 'Not enough words to flip' unless enough_flippable_words?
+
       words.map.with_index { |word, idx| flip_words(word, idx) }
     end
 
@@ -224,12 +224,12 @@ module Spoonerize
     ##
     # the options as a string
     def options # :nodoc:
-      o = []
-      o << 'Lazy' if lazy?
-      o << 'Reverse' if reverse?
-      o << "Exclude [#{all_excluded_words.join(', ')}]" if excluded_words.any?
-      o << 'No Options' if o.empty?
-      o
+      [].tap do |o|
+        o << 'Lazy' if lazy?
+        o << 'Reverse' if reverse?
+        o << "Exclude [#{all_excluded_words.join(', ')}]" if excluded_words.any?
+        o << 'No Options' if o.empty?
+      end
     end
   end
 end

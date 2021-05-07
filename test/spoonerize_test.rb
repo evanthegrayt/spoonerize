@@ -11,8 +11,8 @@ class TestSpoonerize < Test::Unit::TestCase
   end
 
   ##
-  # +Spoonerize::VERSION+ should consist of three integers separated by dots.
-  def test_VERSION
-    assert_match(/\d+\.\d+.\d+/, ::Spoonerize::VERSION)
+  # +Spoonerize::Version+ should consist of three integers separated by dots.
+  def test_version
+    assert_match(/\d+\.\d+.\d+/, ::Spoonerize::Version.to_s)
   end
 end
