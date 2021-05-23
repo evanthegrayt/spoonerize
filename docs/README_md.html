@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>README - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-Welcome+to+Spoonerize+--+a+word+game.">Welcome to Spoonerize – a word game.</a>
+    <li><a href="#label-About">About</a>
+    <li><a href="#label-Installation">Installation</a>
+    <li><a href="#label-Automated">Automated</a>
+    <li><a href="#label-Manual">Manual</a>
+    <li><a href="#label-Command+Line+Usage">Command Line Usage</a>
+    <li><a href="#label-Config+File">Config File</a>
+    <li><a href="#label-API">API</a>
+    <li><a href="#label-Self+Promotion">Self Promotion</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    
+<div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+    <li><a href="./README_md.html">README</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page README.md">
+
+<h1 id="label-Welcome+to+Spoonerize+--+a+word+game.">Welcome to <a href="Spoonerize.html"><code>Spoonerize</code></a> – a word game.<span><a href="#label-Welcome+to+Spoonerize+--+a+word+game.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="https://actions-badge.atrox.dev/evanthegrayt/spoonerize/goto?ref=master"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fevanthegrayt%2Fspoonerize%2Fbadge%3Fref%3Dmaster&style=flat"></a> <a href="https://badge.fury.io/rb/spoonerize"><img src="https://badge.fury.io/rb/spoonerize.svg"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a></p>
+
+<blockquote>
+<p>Spoonerism <em>[noun]</em> a verbal error in which a speaker accidentally transposes the initial sounds or letters of two or more words, often to humorous effect.</p>
+</blockquote>
+
+<p>You can view the documentation <a href="https://evanthegrayt.github.io/spoonerize/">here</a></p>
+
+<h2 id="label-About">About<span><a href="#label-About">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>We&#39;ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This gem, which includes a command-line executable, follows those rules, which are:</p>
+<ul><li>
+<p>Each word drops its leading consonant group and takes the leading consonant group of the next word.</p>
+</li><li>
+<p>If the word has no leading consonants, nothing is dropped, but it still receives the next word&#39;s leading consonants if it has any.</p>
+</li><li>
+<p>If the next word has no leading consonants, the current word receives no consonants, but will still lose its own if it has any.</p>
+</li><li>
+<p>When being “lazy”, common words (“the”, “his”, etc.) remain unchanged.</p>
+</li><li>
+<p>If the word to pull from is excluded, that word is skipped, and you pull the leading consonants from the next non-excluded word.</p>
+</li><li>
+<p>“Q” and “U” should stay together (like “queen”).</p>
+</li><li>
+<p>A lot of the time, the words won&#39;t look how they&#39;re supposed to sound, as you go by how the word <em>used</em> to sound, not how it&#39;s spelled. For instance, <code>$ spoonerize two new cuties</code> becomes “no cew twuties”, but it would be pronounced “new coo tooties”, as the words retain their original sounds.</p>
+</li></ul>
+
+<h2 id="label-Installation">Installation<span><a href="#label-Installation">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Automated">Automated<span><a href="#label-Automated">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Just install the gem!</p>
+
+<pre class="ruby"><span class="ruby-identifier">gem</span> <span class="ruby-identifier">install</span> <span class="ruby-identifier">spoonerize</span>
+</pre>
+
+<p>If you don&#39;t have permission on your system to install ruby or gems, I recommend using <a href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html">rbenv</a>, or you can try the manual methods below.</p>
+
+<h3 id="label-Manual">Manual<span><a href="#label-Manual">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>From your terminal, clone the repository where you want it. From there, you have a couple of installation options.</p>
+
+<pre>git clone https://github.com/evanthegrayt/spoonerize.git
+cd spoonerize
+
+# Use rake to build and install the gem.
+rake install
+
+# OR manually link the executable somewhere. If you use this method, you cannot
+# move the repository after you link it!
+ln -s $PWD/bin/spoonerize /usr/local/bin/spoonerize</pre>
+
+<h2 id="label-Command+Line+Usage">Command Line Usage<span><a href="#label-Command+Line+Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Call the executable and pass a phrase as arguments:</p>
+
+<pre>$ spoonerize not too shabby # =&gt; tot shoo nabby</pre>
+
+<p>If it didn&#39;t flip the way you wanted it to, you can reverse it:</p>
+
+<pre>$ spoonerize -r not too shabby # =&gt; shot noo tabby</pre>
+
+<p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example:</p>
+
+<pre>$ spoonerize -s not too shabby
+Saving [tot shoo nabby] to ~/.cache/spoonerize/spoonerize.csv
+
+$ spoonerize -rs not too shabby
+Saving [shot noo tabby] to ~/.cache/spoonerize/spoonerize.csv
+
+$ spoonerize -p
+not too shabby | tot shoo nabby | No Options
+not too shabby | shot noo tabby | Reverse</pre>
+
+<p>Here is a list of all available options:</p>
+
+<pre>-r, --[no-]reverse               Reverse flipping
+-l, --[no-]lazy                  Skip small words
+-m, --[no-]map                   Print words mapping
+-p, --[no-]print                 Print all entries in the log
+-s, --[no-]save                  Save results in log
+    --exclude=WORDS              Words to skip</pre>
+
+<h3 id="label-Config+File">Config File<span><a href="#label-Config+File">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>You can create a config file called <code>~/.spoonerize.yml</code>. In this file, you can change default options at runtime. Available settings are:</p>
+
+<pre># Setting       Default
+excluded_words: []
+lazy:           false
+reverse:        false
+logfile_name:   &#39;~/.cache/spoonerize/spoonerize.csv&#39;</pre>
+
+<p>Options set by this file can be overridden at runtime by the use of the executable&#39;s flags.</p>
+
+<h2 id="label-API">API<span><a href="#label-API">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The API is <a href="https://evanthegrayt.github.io/spoonerize/">fully documented</a>, but below are some quick examples of how you could use this in your ruby code.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;spoonerize&#39;</span>
+
+<span class="ruby-identifier">spoonerism</span> = <span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerize</span>
+<span class="ruby-comment"># =&gt; shot noo tabby</span>
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">spoonerize</span>
+<span class="ruby-comment"># =&gt; tot shoo nabby</span>
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">logfile_name</span> = <span class="ruby-string">&#39;~/.cache/spoonerize/spoonerize.csv&#39;</span>
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">save</span>
+</pre>
+
+<p>You can also use the <a href="#config-file">config file</a>, either by passing it at initialization, or via the setter. The config file will be automatically loaded if passed at initialization, before the instance is yielded so you can still change the values via the block. If set via the setter, you must call <code>#load_config_file</code>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Config file would be automatically loaded before block is executed.</span>
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>, <span class="ruby-string">&#39;~/.spoonerize.yml&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Config file would need to be manually loaded.</span>
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerise</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">config_file</span> = <span class="ruby-string">&#39;~/.spoonerize.yml&#39;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">s</span>.<span class="ruby-identifier">load_config_file</span>
+</pre>
+
+<h2 id="label-Self+Promotion">Self Promotion<span><a href="#label-Self+Promotion">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>I do these projects for fun, and I enjoy knowing that they&#39;re helpful to people. Consider starring <a href="https://github.com/evanthegrayt/spoonerize">the repository</a> if you like it! If you love it, follow me <a href="https://github.com/evanthegrayt">on github</a>!</p>
+
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

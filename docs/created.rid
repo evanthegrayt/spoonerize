@@ -1,0 +1,8 @@
+Sat, 22 May 2021 23:20:39 -0500
+README.md	Sat, 22 May 2021 23:17:44 -0500
+lib/spoonerize.rb	Sat, 02 May 2020 22:24:00 -0500
+lib/spoonerize/bumper.rb	Sat, 02 May 2020 22:24:00 -0500
+lib/spoonerize/cli.rb	Thu, 06 May 2021 21:40:15 -0500
+lib/spoonerize/log.rb	Sat, 02 May 2020 22:24:00 -0500
+lib/spoonerize/spoonerism.rb	Thu, 06 May 2021 21:35:59 -0500
+lib/spoonerize/version.rb	Sat, 22 May 2021 23:19:05 -0500
