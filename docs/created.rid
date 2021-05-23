@@ -1,0 +1,11 @@
+Wed, 01 Jul 2026 16:41:49 -0500
+README.md	Wed, 01 Jul 2026 16:41:19 -0500
+lib/spoonerize.rb	Wed, 24 Jun 2026 10:55:17 -0500
+lib/spoonerize/bumper.rb	Tue, 23 Jun 2026 09:36:04 -0500
+lib/spoonerize/cli.rb	Wed, 24 Jun 2026 10:55:17 -0500
+lib/spoonerize/config.rb	Tue, 23 Jun 2026 18:33:16 -0500
+lib/spoonerize/log.rb	Tue, 23 Jun 2026 09:36:04 -0500
+lib/spoonerize/spoonerism.rb	Tue, 23 Jun 2026 18:33:16 -0500
+lib/spoonerize/version.rb	Wed, 24 Jun 2026 12:22:41 -0500
+lib/spoonerize/web.rb	Wed, 24 Jun 2026 12:22:41 -0500
+lib/spoonerize/web/cli.rb	Wed, 24 Jun 2026 10:55:17 -0500

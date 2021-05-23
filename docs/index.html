@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>RDoc Documentation</title>
+
+
+  <meta name="keywords" content="ruby,documentation,RDoc Documentation">
+
+    <meta
+      name="description"
+      content="RDoc Documentation: Welcome to Spoonerize -- a word game. img."
+    >
+
+
+
+
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="RDoc Documentation">
+
+
+  <meta
+    property="og:description"
+    content="API documentation for RDoc Documentation - Browse classes, modules, and methods"
+  >
+
+
+
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RDoc Documentation">
+
+
+  <meta
+    name="twitter:description"
+    content="API documentation for RDoc Documentation - Browse classes, modules, and methods"
+  >
+
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script
+  src="./js/theme-toggle.js?v=7.2.0"
+></script>
+
+<script
+  src="./js/search_navigation.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_data.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_ranker.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/search_controller.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/c_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/bash_highlighter.js?v=7.2.0"
+  defer
+></script>
+
+<script
+  src="./js/aliki.js?v=7.2.0"
+  defer
+></script>
+
+<link
+  href="./css/rdoc.css?v=7.2.0"
+  rel="stylesheet"
+>
+
+
+
+
+<body role="document" class="file has-toc">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <!-- Chevron (right arrow) - used for expand/collapse -->
+  <symbol
+    id="icon-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="9 18 15 12 9 6"></polyline>
+  </symbol>
+
+  <!-- File/Document - Pages section -->
+  <symbol
+    id="icon-file"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+    ></path>
+
+    <polyline points="14 2 14 8 20 8"></polyline>
+  </symbol>
+
+  <!-- Layers/Stack - Classes and Modules section -->
+  <symbol
+    id="icon-layers"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+    <polyline points="2 17 12 22 22 17"></polyline>
+    <polyline points="2 12 12 17 22 12"></polyline>
+  </symbol>
+
+  <!-- Curly braces with C - Class Methods section -->
+  <symbol
+    id="icon-class-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      C
+    </text>
+  </symbol>
+
+  <!-- Curly braces with I - Instance Methods section -->
+  <symbol
+    id="icon-instance-methods"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M6 3C3.5 3 2 4.5 2 7v3c0 1.5-1 2-1 2s1 .5 1 2v5c0 2.5 1.5 4 4 4"></path>
+    <path d="M18 3c2.5 0 4 1.5 4 4v3c0 1.5 1 2 1 2s-1 .5-1 2v5c0 2.5-1.5 4-4 4"></path>
+
+    <text
+      x="12"
+      y="17"
+      text-anchor="middle"
+      font-size="13"
+      font-weight="bold"
+      fill="currentColor"
+      stroke="none"
+    >
+      I
+    </text>
+  </symbol>
+
+  <!-- Double chevrons up - Ancestors section -->
+  <symbol
+    id="icon-ancestors"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <polyline points="17 11 12 6 7 11"></polyline>
+    <polyline points="17 18 12 13 7 18"></polyline>
+  </symbol>
+
+  <!-- User with plus - Included Modules section -->
+  <symbol
+    id="icon-includes"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+
+    <line
+      x1="20"
+      y1="8"
+      x2="20"
+      y2="14"
+    ></line>
+
+    <line
+      x1="23"
+      y1="11"
+      x2="17"
+      y2="11"
+    ></line>
+  </symbol>
+
+  <!-- User with check - Extended Modules section -->
+  <symbol
+    id="icon-extends"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="8.5" cy="7" r="4"></circle>
+    <polyline points="17 11 19 13 23 9"></polyline>
+  </symbol>
+
+  <!-- List - Sections section -->
+  <symbol
+    id="icon-list"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line
+      x1="8"
+      y1="6"
+      x2="21"
+      y2="6"
+    ></line>
+
+    <line
+      x1="8"
+      y1="12"
+      x2="21"
+      y2="12"
+    ></line>
+
+    <line
+      x1="8"
+      y1="18"
+      x2="21"
+      y2="18"
+    ></line>
+
+    <line
+      x1="3"
+      y1="6"
+      x2="3.01"
+      y2="6"
+    ></line>
+
+    <line
+      x1="3"
+      y1="12"
+      x2="3.01"
+      y2="12"
+    ></line>
+
+    <line
+      x1="3"
+      y1="18"
+      x2="3.01"
+      y2="18"
+    ></line>
+  </symbol>
+</svg>
+
+<header class="top-navbar">
+  <a href="./index.html" class="navbar-brand">
+    RDoc Documentation
+  </a>
+
+  <!-- Desktop search bar -->
+  <div class="navbar-search navbar-search-desktop" role="search">
+    <form action="#" method="get" accept-charset="utf-8">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results-desktop"
+             type="text" name="search" placeholder="Search (/) for a class, method..."
+             spellcheck="false" autocomplete="off"
+             title="Type to search, Up and Down to navigate, Enter to load">
+      <ul id="search-results-desktop" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="initially-hidden search-results"></ul>
+    </form>
+  </div>
+
+  <!-- Mobile search icon button -->
+  <button id="search-toggle" class="navbar-search-mobile" aria-label="Open search" type="button">
+    <span aria-hidden="true">🔍</span>
+  </button>
+
+  <!-- Theme toggle button -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Switch to dark mode" type="button">
+    <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+  </button>
+</header>
+
+<!-- Search Modal (Mobile) -->
+<div id="search-modal" class="search-modal" hidden aria-modal="true" role="dialog" aria-label="Search">
+  <div class="search-modal-backdrop"></div>
+  <div class="search-modal-content">
+    <div class="search-modal-header">
+      <form class="search-modal-form" action="#" method="get" accept-charset="utf-8">
+        <span class="search-modal-icon" aria-hidden="true">🔍</span>
+        <input id="search-field-mobile" role="combobox" aria-label="Search"
+               aria-autocomplete="list" aria-controls="search-results-mobile"
+               type="text" name="search" placeholder="Search documentation"
+               spellcheck="false" autocomplete="off">
+        <button type="button" class="search-modal-close" aria-label="Close search" id="search-modal-close">
+          <span aria-hidden="true">esc</span>
+        </button>
+      </form>
+    </div>
+    <div class="search-modal-body">
+      <ul id="search-results-mobile" aria-label="Search Results"
+          aria-busy="false" aria-expanded="false"
+          aria-atomic="false" class="search-results search-modal-results initially-hidden"></ul>
+      <div class="search-modal-empty">
+        <p>No recent searches</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="navigation-toggle" role="button" tabindex="0" aria-label="Toggle sidebar" aria-expanded="true" aria-controls="navigation">
+  <span aria-hidden="true">&#9776;</span>
+</div>
+
+
+<nav id="navigation" role="navigation" hidden>
+  
+
+
+
+
+
+
+  <div id="fileindex-section" class="nav-section">
+    <details class="nav-section-collapsible" open>
+      <summary class="nav-section-header">
+        <span class="nav-section-icon">
+          <svg>
+            <use href="#icon-file"></use>
+          </svg>
+        </span>
+
+        <span class="nav-section-title">Pages</span>
+
+        <span class="nav-section-chevron">
+          <svg>
+            <use href="#icon-chevron"></use>
+          </svg>
+        </span>
+      </summary>
+
+      <ul class="nav-list">
+
+
+
+
+
+
+            <li>
+              <a href="./README_md.html">
+                README
+              </a>
+            </li>
+
+      </ul>
+    </details>
+  </div>
+
+
+  <div id="classindex-section" class="nav-section">
+  <details class="nav-section-collapsible" open>
+    <summary class="nav-section-header">
+      <span class="nav-section-icon">
+        <svg><use href="#icon-layers"></use></svg>
+      </span>
+      <span class="nav-section-title">Classes and Modules</span>
+      <span class="nav-section-chevron">
+        <svg><use href="#icon-chevron"></use></svg>
+      </span>
+    </summary>
+
+    <ul class="link-list nav-list"><li><details open><summary><code><a href="./Spoonerize.html">Spoonerize</a></code></summary><ul class="link-list nav-list"><li><code><a href="./Spoonerize/Bumper.html">Bumper</a></code></li><li><code><a href="./Spoonerize/Cli.html">Cli</a></code></li><li><code><a href="./Spoonerize/Config.html">Config</a></code></li><li><code><a href="./Spoonerize/Log.html">Log</a></code></li><li><code><a href="./Spoonerize/Spoonerism.html">Spoonerism</a></code></li><li><code><a href="./Spoonerize/Version.html">Version</a></code></li><li><details><summary><code><a href="./Spoonerize/Web.html">Web</a></code></summary><ul class="link-list nav-list"><li><code><a href="./Spoonerize/Web/Cli.html">Cli</a></code></li></ul></details></li></ul></details></li></ul>
+  </details>
+</div>
+
+</nav>
+
+<main role="main">
+
+  
+<span id="label-Welcome+to+Spoonerize+--+a+word+game." class="legacy-anchor"></span>
+<h1 id="welcome-to-spoonerize----a-word-game"><a href="#welcome-to-spoonerize----a-word-game">Welcome to <a href="Spoonerize.html"><code>Spoonerize</code></a> – a word game.</a></h1>
+
+<p><a href="https://actions-badge.atrox.dev/evanthegrayt/spoonerize/goto?ref=master"><img src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fevanthegrayt%2Fspoonerize%2Fbadge%3Fref%3Dmaster&amp;style=flat" alt="Build Status"></a> <a href="https://www.ruby-lang.org/"><img src="https://img.shields.io/static/v1?label=language&amp;message=Ruby&amp;color=CC342D&amp;style=flat&amp;logo=ruby&amp;logoColor=CC342D" alt="Language: Ruby"></a> <a href="https://rubygems.org/gems/spoonerize"><img src="https://img.shields.io/gem/v/spoonerize.svg" alt="Gem Version"></a> <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a></p>
+
+<blockquote>
+<p>Spoonerism <em>[noun]</em> a verbal error in which a speaker accidentally transposes the initial sounds or letters of two or more words, often to humorous effect.</p>
+</blockquote>
+
+<p>You can view the documentation <a href="https://evanthegrayt.github.io/spoonerize/">here</a>.</p>
+
+<span id="label-About" class="legacy-anchor"></span>
+<h2 id="about"><a href="#about">About</a></h2>
+
+<p>We’ve all done it; someone says a phrase, and you flip the first few letters around, and sometimes, it makes an even funnier phrase. For example: “Tomb Raider” becomes “Romb Taider”. Well, when I was in high school, we took it further – probably too far – and made a rule set. This gem, which includes a command-line executable, follows those rules, which are:</p>
+<ul><li>
+<p>Each word drops its leading consonant group and takes the leading consonant group of the next word.</p>
+</li><li>
+<p>If the word has no leading consonants, nothing is dropped, but it still receives the next word’s leading consonants if it has any.</p>
+</li><li>
+<p>If the next word has no leading consonants, the current word receives no consonants, but will still lose its own if it has any.</p>
+</li><li>
+<p>When being “lazy”, common words (“the”, “his”, etc.) remain unchanged.</p>
+</li><li>
+<p>If the word to pull from is excluded, that word is skipped, and you pull the leading consonants from the next non-excluded word.</p>
+</li><li>
+<p>“Q” and “U” should stay together (like “queen”).</p>
+</li><li>
+<p>“Y” is treated like a leading consonant by itself or before a vowel sound (like “yellow”), but like a leading vowel before a consonant (like “yttrium”).</p>
+</li><li>
+<p>A lot of the time, the words won’t look how they’re supposed to sound, as you go by how the word <em>used</em> to sound, not how it’s spelled. For instance, <code>$ spoonerize two new cuties</code> becomes “no cew twuties”, but it would be pronounced “new coo tooties”, as the words retain their original sounds.</p>
+</li></ul>
+
+<span id="label-Installation" class="legacy-anchor"></span>
+<h2 id="installation"><a href="#installation">Installation</a></h2>
+
+<span id="label-Automated" class="legacy-anchor"></span>
+<h3 id="automated"><a href="#automated">Automated</a></h3>
+
+<p>Just install the gem!</p>
+
+<pre class="sh">gem install spoonerize</pre>
+
+<p>If you don’t have permission on your system to install Ruby or gems, I recommend using <a href="http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html">rbenv</a>, or you can try the manual methods below.</p>
+
+<span id="label-Manual" class="legacy-anchor"></span>
+<h3 id="manual"><a href="#manual">Manual</a></h3>
+
+<p>From your terminal, clone the repository where you want it. From there, you have a couple of installation options.</p>
+
+<pre class="sh">git clone https://github.com/evanthegrayt/spoonerize.git
+cd spoonerize
+
+# Use rake to build and install the gem.
+rake install
+
+# OR manually link the executable somewhere. If you use this method, you cannot
+# move the repository after you link it!
+ln -s $PWD/bin/spoonerize /usr/local/bin/spoonerize</pre>
+
+<span id="label-Command+Line+Usage" class="legacy-anchor"></span>
+<h2 id="command-line-usage"><a href="#command-line-usage">Command Line Usage</a></h2>
+
+<p>Call the executable and pass a phrase as arguments:</p>
+
+<pre class="sh">$ spoonerize not too shabby # =&gt; tot shoo nabby</pre>
+
+<p>If it didn’t flip the way you wanted it to, you can reverse it:</p>
+
+<pre class="sh">$ spoonerize -r not too shabby # =&gt; shot noo tabby</pre>
+
+<p>If you find a phrase funny enough to save, you can pass the <code>-s</code> flag. This will write the results to the logfile. You can print your log file with the <code>-p</code> flag. It will show the original phrase, the end result, and the options used to get the results. For example:</p>
+
+<pre>$ spoonerize -s not too shabby
+tot shoo nabby
+Saving...
+
+$ spoonerize -rs not too shabby
+shot noo tabby
+Saving...
+
+$ spoonerize -p
+not too shabby | tot shoo nabby | No Options
+not too shabby | shot noo tabby | Reverse</pre>
+
+<p>Here is a list of all available options:</p>
+
+<pre>-r, --[no-]reverse               Reverse flipping
+-l, --[no-]lazy                  Skip common words
+-c, --[no-]consonants-only       Only flip consonant-starting words
+-m, --[no-]map                   Print words mapping
+-p, --[no-]print-log             Print all entries in the log
+-s, --[no-]save                  Save results in log
+    --exclude=WORD               Words to skip</pre>
+
+<span id="label-Web+Usage" class="legacy-anchor"></span>
+<h2 id="web-usage"><a href="#web-usage">Web Usage</a></h2>
+
+<p>The gem also installs a small Sinatra app:</p>
+
+<pre class="sh">spoonerize-web</pre>
+
+<p>By default, Sinatra starts on its normal local development address. You can choose a host or port when you need to:</p>
+
+<pre class="sh">spoonerize-web --host 127.0.0.1 --port 9292</pre>
+
+<p>Open the printed local URL in your browser, enter a phrase, choose any options, and submit the form. The page reloads with the spoonerized result and keeps your phrase and options in the form. Check “Save result” to write a successful result to the configured log file.</p>
+
+<p>The web app ships with the main gem for now, so <code>gem install spoonerize</code> installs both <code>spoonerize</code> and <code>spoonerize-web</code>.</p>
+
+<span id="label-Config+File" class="legacy-anchor"></span>
+<h3 id="config-file"><a href="#config-file">Config File</a></h3>
+
+<p>You can create a Ruby config file called <code>~/.spoonerizerc</code>. The CLI loads this file automatically before it parses command-line options, so options set in the file can still be overridden at runtime by executable flags. The web app loads the same file when it starts, and uses those values for the initial form defaults.</p>
+
+<pre class="ruby"><span class="ruby-constant">Spoonerize</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">excluded_words</span> = []
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">lazy</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">consonants_only</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">logfile_name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;~/.cache/spoonerize/spoonerize.csv&quot;</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Because the file is Ruby, you can set only the values you want to change.</p>
+
+<span id="label-API" class="legacy-anchor"></span>
+<h2 id="api"><a href="#api">API</a></h2>
+
+<p>The API is <a href="https://evanthegrayt.github.io/spoonerize/">fully documented</a>, but below are some quick examples of how you could use this in your Ruby code.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;spoonerize&#39;</span>
+
+<span class="ruby-identifier">spoonerism</span> = <span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;not&quot;</span>, <span class="ruby-string">&quot;too&quot;</span>, <span class="ruby-string">&quot;shabby&quot;</span>)
+
+<span class="ruby-identifier">spoonerism</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-comment"># =&gt; tot shoo nabby</span>
+
+<span class="ruby-identifier">reversed</span> = <span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;not&quot;</span>, <span class="ruby-string">&quot;too&quot;</span>, <span class="ruby-string">&quot;shabby&quot;</span>, <span class="ruby-value">reverse:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-identifier">reversed</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-comment"># =&gt; shot noo tabby</span>
+
+<span class="ruby-constant">Spoonerize</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">logfile_name</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-string">&quot;~/.cache/spoonerize/spoonerize.csv&quot;</span>)
+<span class="ruby-keyword">end</span>
+<span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;not&quot;</span>, <span class="ruby-string">&quot;too&quot;</span>, <span class="ruby-string">&quot;shabby&quot;</span>).<span class="ruby-identifier">save</span>
+</pre>
+
+<p>To leave vowel-starting words alone, enable consonants-only mode:</p>
+
+<pre class="ruby"><span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;turn&quot;</span>, <span class="ruby-string">&quot;up&quot;</span>, <span class="ruby-string">&quot;son&quot;</span>, <span class="ruby-value">consonants_only:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">to_s</span>
+<span class="ruby-comment"># =&gt; surn up ton</span>
+</pre>
+
+<p>You can also configure global defaults before creating a spoonerism:</p>
+
+<pre class="ruby"><span class="ruby-constant">Spoonerize</span>.<span class="ruby-identifier">configure</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">config</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">reverse</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;not&quot;</span>, <span class="ruby-string">&quot;too&quot;</span>, <span class="ruby-string">&quot;shabby&quot;</span>)
+<span class="ruby-identifier">s</span>.<span class="ruby-identifier">spoonerize</span>
+<span class="ruby-comment"># =&gt; shot noo tabby</span>
+</pre>
+
+<p>Options passed directly to <a href="Spoonerize/Spoonerism.html#method-c-new"><code>Spoonerize::Spoonerism.new</code></a> only apply to that instance.</p>
+
+<p>Passing words as an array is deprecated and will be removed in <a href="Spoonerize.html"><code>Spoonerize</code></a> 1.0:</p>
+
+<pre class="ruby"><span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">%w[not too shabby]</span>)
+</pre>
+
+<p>Or load a config file manually:</p>
+
+<pre class="ruby"><span class="ruby-constant">Spoonerize</span>.<span class="ruby-identifier">load_config_file</span>(<span class="ruby-string">&quot;~/.spoonerizerc&quot;</span>)
+<span class="ruby-identifier">s</span> = <span class="ruby-constant">Spoonerize</span><span class="ruby-operator">::</span><span class="ruby-constant">Spoonerism</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;not&quot;</span>, <span class="ruby-string">&quot;too&quot;</span>, <span class="ruby-string">&quot;shabby&quot;</span>)
+</pre>
+
+<span id="label-Support+this+project" class="legacy-anchor"></span>
+<h2 id="support-this-project"><a href="#support-this-project">Support this project</a></h2>
+
+<p>I love knowing when people find my work useful. Any kind of support is very much appreciated!</p>
+<ul><li>
+<p>⭐️ Like the project? Star <a href="https://github.com/evanthegrayt/spoonerize">the repository</a>!</p>
+</li><li>
+<p>❤️ Love the project? Follow me <a href="https://github.com/evanthegrayt">on GitHub</a>!</p>
+</li><li>
+<p>💸 <em>Really</em> love it? Consider <a href="https://paypal.me/evanrgray">buying me a tea</a>!</p>
+</li></ul>
+
+
+</main>
+
+<aside class="table-of-contents" role="complementary" aria-label="Table of Contents">
+  <div class="toc-sticky">
+    <h3 class="toc-heading">On This Page</h3>
+    <nav class="toc-nav" id="toc-nav" aria-label="Page sections">
+      <!-- Generated by JavaScript based on page headings -->
+    </nav>
+  </div>
+</aside>
+
+
+<footer class="site-footer">
+  
+
+  <div class="footer-bottom">
+    <p>
+      Generated by <a href="https://ruby.github.io/rdoc/">RDoc 7.2.0</a>
+      using the Aliki theme by <a href="http://st0012.dev">Stan Lo</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+
