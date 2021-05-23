@@ -6,9 +6,7 @@
 > Spoonerism *[noun]* a verbal error in which a speaker accidentally transposes
 > the initial sounds or letters of two or more words, often to humorous effect.
 
-View on [Github](https://github.com/evanthegrayt/spoonerize) |
-[Github Pages](https://evanthegrayt.github.io/spoonerize/) |
-[RubyGems](https://rubygems.org/gems/spoonerize)
+You can view the documentation [here](https://evanthegrayt.github.io/spoonerize/)
 
 ## About
 We've all done it; someone says a phrase, and you flip the first few letters
@@ -122,7 +120,7 @@ executable's flags.
 
 ## API
 The API is [fully
-documented](https://evanthegrayt.github.io/spoonerize/doc/index.html), but below
+documented](https://evanthegrayt.github.io/spoonerize/), but below
 are some quick examples of how you could use this in your ruby code.
 
 ```ruby
