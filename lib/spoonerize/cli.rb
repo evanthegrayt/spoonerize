@@ -1,17 +1,16 @@
-require 'optparse'
-require 'yaml'
+require "optparse"
+require "yaml"
 
 module Spoonerize
   ##
   # The class for handling the command-line interface.
   class Cli
-
     ##
     # The preferences file the user can create to change runtime options.
     #
     # @return [String]
     PREFERENCE_FILE =
-      File.expand_path(File.join(ENV['HOME'], '.spoonerize.yml')).freeze
+      File.expand_path(File.join(ENV["HOME"], ".spoonerize.yml")).freeze
 
     ##
     # Creates an instance of +Spoonerism+ and runs what the user requested.
@@ -25,7 +24,7 @@ module Spoonerize
         return
       end
 
-      puts exe.spoonerism.to_s
+      puts exe.spoonerism
       exe.print_mappings if exe.map?
 
       if exe.save?
@@ -53,10 +52,10 @@ module Spoonerize
     #
     # @return [self]
     def initialize(options)
-      @map         = false
-      @save        = false
-      @print       = false
-      @options     = options
+      @map = false
+      @save = false
+      @print = false
+      @options = options
       @preferences = get_preferences
     end
 
@@ -111,7 +110,7 @@ module Spoonerize
     # @return [nil]
     def print_log
       s = Spoonerize::Log.new(spoonerism.logfile_name)
-      s.each { |row| print row.join(' | ') + "\n" }
+      s.each { |row| print row.join(" | ") + "\n" }
     end
 
     ##
@@ -120,7 +119,7 @@ module Spoonerize
     # @return [nil]
     def print_mappings
       spoonerism.to_h.each do |k, v|
-        puts "%-#{longest_word_length}s => %s" % [k, v]
+        printf("%-#{longest_word_length}s => %s\n", k, v)
       end
     end
 
@@ -132,23 +131,23 @@ module Spoonerize
       {}.tap do |prefs|
         OptionParser.new do |o|
           o.version = ::Spoonerize::Version.to_s
-          o.on('-r', '--[no-]reverse', 'Reverse flipping') do |v|
-            prefs['reverse'] = v
+          o.on("-r", "--[no-]reverse", "Reverse flipping") do |v|
+            prefs["reverse"] = v
           end
-          o.on('-l', '--[no-]lazy', 'Skip small words') do |v|
-            prefs['lazy'] = v
+          o.on("-l", "--[no-]lazy", "Skip small words") do |v|
+            prefs["lazy"] = v
           end
-          o.on('-m', '--[no-]map', 'Print words mapping') do |v|
+          o.on("-m", "--[no-]map", "Print words mapping") do |v|
             @map = v
           end
-          o.on('-p', '--[no-]print', 'Print all entries in the log') do |v|
+          o.on("-p", "--[no-]print", "Print all entries in the log") do |v|
             @print = v
           end
-          o.on('-s', '--[no-]save', 'Save results in log') do |v|
+          o.on("-s", "--[no-]save", "Save results in log") do |v|
             @save = v
           end
-          o.on('--exclude=WORDS', Array, 'Words to skip') do |v|
-            prefs['exclude'] = v
+          o.on("--exclude=WORD", Array, "Words to skip") do |v|
+            prefs["exclude"] = v
           end
         end.parse!(options)
       end
