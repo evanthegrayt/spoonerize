@@ -1,11 +1,10 @@
-require 'csv'
-require 'fileutils'
+require "csv"
+require "fileutils"
 
 module Spoonerize
   ##
   # Class that handles reading/writing logs.
   class Log
-
     ##
     # The file name to use.
     #
@@ -46,7 +45,7 @@ module Spoonerize
     #
     # @return [Array]
     def write(row)
-      ::CSV.open(file, 'a') { |csv| csv << row }
+      ::CSV.open(file, "a") { |csv| csv << row }
     end
 
     ##

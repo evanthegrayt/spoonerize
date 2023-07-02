@@ -2,7 +2,6 @@ module Spoonerize
   ##
   # The main word-flipper.
   class Spoonerism
-
     ##
     # The words originally passed at initialization.
     #
@@ -85,7 +84,7 @@ module Spoonerize
       @config_file = config_file && File.expand_path(config_file)
       @config_file_loaded = false
       @logfile_name = File.expand_path(
-        File.join(ENV['HOME'], '.cache', 'spoonerize', 'spoonerize.csv')
+        File.join(ENV["HOME"], ".cache", "spoonerize", "spoonerize.csv")
       )
 
       load_config_file if config_file
@@ -97,7 +96,7 @@ module Spoonerize
     # Iterates through words array, and maps its elements to the output of
     # flip_words. Returns results as an array.
     def spoonerize
-      raise JakPibError, 'Not enough words to flip' unless enough_flippable_words?
+      raise JakPibError, "Not enough words to flip" unless enough_flippable_words?
 
       words.map.with_index { |word, idx| flip_words(word, idx) }
     end
@@ -105,13 +104,13 @@ module Spoonerize
     ##
     # Returns spoonerize array as a joined string.
     def to_s
-      spoonerize.join(' ')
+      spoonerize.join(" ")
     end
 
     ##
     # Returns hash of the original words mapped to their flipped counterparts.
     def to_h
-      Hash[words.zip(spoonerize)]
+      words.zip(spoonerize).to_h
     end
 
     ##
@@ -149,7 +148,7 @@ module Spoonerize
     ##
     # Saves the flipped words to the log file, along with the options
     def save
-      log.write([words.join(' '), to_s, options.join(', ')])
+      log.write([words.join(" "), to_s, options.join(", ")])
     end
 
     ##
@@ -177,9 +176,9 @@ module Spoonerize
     #
     # @return [Hash] The config options
     def load_config_file
-      raise 'No config file set' if config_file.nil?
+      raise "No config file set" if config_file.nil?
       raise "File #{config_file} does not exist" unless File.file?(config_file)
-      @config = YAML::load_file(config_file)
+      @config = YAML.load_file(config_file)
       @config_file_loaded = true
       @config.each { |k, v| send("#{k}=", v) }
     end
@@ -193,7 +192,7 @@ module Spoonerize
     def flip_words(word, idx) # :nodoc:
       return word if excluded?(idx)
       bumper = Bumper.new(idx, words.size, reverse?)
-      bumper.bump until !excluded?(bumper.value)
+      bumper.bump while excluded?(bumper.value)
       words[bumper.value].match(consonants).to_s + word.match(vowels).to_s
     end
 
@@ -225,10 +224,10 @@ module Spoonerize
     # the options as a string
     def options # :nodoc:
       [].tap do |o|
-        o << 'Lazy' if lazy?
-        o << 'Reverse' if reverse?
-        o << "Exclude [#{all_excluded_words.join(', ')}]" if excluded_words.any?
-        o << 'No Options' if o.empty?
+        o << "Lazy" if lazy?
+        o << "Reverse" if reverse?
+        o << "Exclude [#{all_excluded_words.join(", ")}]" if excluded_words.any?
+        o << "No Options" if o.empty?
       end
     end
   end

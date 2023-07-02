@@ -5,7 +5,6 @@ module Spoonerize
   # Module that contains all gem version information. Follows semantic
   # versioning. Read: https://semver.org/
   module Version
-
     ##
     # Major version.
     MAJOR = 0

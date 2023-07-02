@@ -2,7 +2,6 @@ module Spoonerize
   ##
   # Class that handles bumping an index.
   class Bumper
-
     ##
     # The number after being bumped.
     #
@@ -55,7 +54,7 @@ module Spoonerize
 
     def bump_value(val) # :nodoc:
       return val - 1 if @reverse
-      val + 1 == @max_value ? 0 : val + 1
+      (val + 1 == @max_value) ? 0 : val + 1
     end
   end
 end
