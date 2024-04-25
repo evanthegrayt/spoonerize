@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 require "csv"
 require "fileutils"
 
 module Spoonerize
   ##
-  # Class that handles reading/writing logs.
+  # Class that handles reading/writing logs. Log file is stored as a simple CSV.
   class Log
     ##
     # The file name to use.
@@ -51,7 +53,7 @@ module Spoonerize
     ##
     # Iterate through each line of the file.
     #
-    # @return [Array]
+    # @return [Enumerable]
     def each
       contents.each { |row| yield row }
     end
