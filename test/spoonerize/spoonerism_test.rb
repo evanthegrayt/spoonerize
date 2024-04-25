@@ -1,5 +1,5 @@
-require_relative '../test_helper'
-require_relative '../../lib/spoonerize'
+require_relative "../test_helper"
+require_relative "../../lib/spoonerize"
 
 ##
 # The test suite for +Spoonerism+.
@@ -7,8 +7,8 @@ class TestSpoonerism < Test::Unit::TestCase
   include TestHelper
 
   def setup
-    @workdir = File.join(__dir__, 'files')
-    @test_config = File.join(@workdir, 'spoonerize.yml')
+    @workdir = File.join(__dir__, "files")
+    @test_config = File.join(@workdir, "spoonerize.yml")
   end
 
   def teardown
@@ -21,15 +21,15 @@ class TestSpoonerism < Test::Unit::TestCase
   end
 
   def test_spoonerize
-    assert_raise('Spoonerize::JakPibError') do
+    assert_raise("Spoonerize::JakPibError") do
       spoonerism(%w[test]).spoonerize
     end
 
-    assert_raise('Spoonerize::JakPibError') do
+    assert_raise("Spoonerize::JakPibError") do
       spoonerism(%w[hello]).spoonerize
     end
 
-    assert_raise('Spoonerize::JakPibError') do
+    assert_raise("Spoonerize::JakPibError") do
       spoonerism(%w[his and hers], lazy: true).spoonerize
     end
 
@@ -60,26 +60,26 @@ class TestSpoonerism < Test::Unit::TestCase
 
   def test_to_s
     s = spoonerism(%w[the ultimate spoonerize test])
-    assert_equal('e spultimate toonerize thest', s.to_s)
+    assert_equal("e spultimate toonerize thest", s.to_s)
   end
 
   def test_to_h
     s = spoonerism(%w[the ultimate spoonerize test])
     assert_equal({
-      'the'        => 'e',
-      'ultimate'   => 'spultimate',
-      'spoonerize' => 'toonerize',
-      'test'       => 'thest'
+      "the" => "e",
+      "ultimate" => "spultimate",
+      "spoonerize" => "toonerize",
+      "test" => "thest"
     }, s.to_h)
   end
 
   def test_to_json
     s = spoonerism(%w[the ultimate spoonerize test])
     assert_equal({
-      'the'        => 'e',
-      'ultimate'   => 'spultimate',
-      'spoonerize' => 'toonerize',
-      'test'       => 'thest'
+      "the"        => "e",
+      "ultimate"   => "spultimate",
+      "spoonerize" => "toonerize",
+      "test"       => "thest"
     }.to_json, s.to_json)
   end
 
@@ -103,7 +103,7 @@ class TestSpoonerism < Test::Unit::TestCase
     assert_empty(s.excluded_words)
     assert_nothing_raised { s.excluded_words = %w[test] }
     assert_equal(%w[test], s.excluded_words)
-    assert_nothing_raised { s.excluded_words << 'ultimate' }
+    assert_nothing_raised { s.excluded_words << "ultimate" }
     assert_equal(%w[test ultimate], s.excluded_words)
   end
 
@@ -111,17 +111,17 @@ class TestSpoonerism < Test::Unit::TestCase
     s = spoonerism(%w[the ultimate spoonerize test])
     assert_empty(s.all_excluded_words)
     s.lazy = true
-    assert_equal(fixtures['lazy_words'], s.all_excluded_words)
+    assert_equal(fixtures["lazy_words"], s.all_excluded_words)
     assert_nothing_raised { s.excluded_words = %w[test] }
-    assert_equal(%w[test] + fixtures['lazy_words'], s.all_excluded_words)
-    assert_nothing_raised { s.excluded_words << 'ultimate' }
-    assert_equal(%w[test ultimate] + fixtures['lazy_words'], s.all_excluded_words)
+    assert_equal(%w[test] + fixtures["lazy_words"], s.all_excluded_words)
+    assert_nothing_raised { s.excluded_words << "ultimate" }
+    assert_equal(%w[test ultimate] + fixtures["lazy_words"], s.all_excluded_words)
   end
 
   def test_logfile_name
     s = spoonerism(%w[the ultimate spoonerize test])
     assert_equal(
-      File.join(ENV['HOME'], '.cache', 'spoonerize', 'spoonerize.csv'),
+      File.join(ENV["HOME"], ".cache", "spoonerize", "spoonerize.csv"),
       s.logfile_name
     )
     assert_nothing_raised { s.logfile_name = test_log_file }
@@ -148,7 +148,7 @@ class TestSpoonerism < Test::Unit::TestCase
     assert_empty(s.config)
     assert_nothing_raised { s.config_file = @test_config }
     assert_nothing_raised { s.load_config_file }
-    assert_equal({'reverse' => true}, s.config)
+    assert_equal({"reverse" => true}, s.config)
     assert(s.reverse?)
   end
 

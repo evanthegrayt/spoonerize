@@ -180,7 +180,7 @@ module Spoonerize
       raise "File #{config_file} does not exist" unless File.file?(config_file)
       @config = YAML.load_file(config_file)
       @config_file_loaded = true
-      @config.each { |k, v| send("#{k}=", v) }
+      @config.each { |k, v| send(:"#{k}=", v) }
     end
 
     private
