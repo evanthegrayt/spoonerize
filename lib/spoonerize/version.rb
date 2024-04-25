@@ -23,4 +23,6 @@ module Spoonerize
       "#{MAJOR}.#{MINOR}.#{PATCH}"
     end
   end
+
+  VERSION = Version.to_s
 end

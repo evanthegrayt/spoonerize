@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spoonerize
   ##
   # Class that handles bumping an index.
