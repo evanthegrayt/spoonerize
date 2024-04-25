@@ -1,32 +1,31 @@
-require 'yaml'
-require 'test/unit'
-require 'fileutils'
-require 'json'
+require "yaml"
+require "test/unit"
+require "fileutils"
+require "json"
 
 ##
 # Module to include in tests that provides helper functions.
 module TestHelper
-
   ##
   # Reads the fixtures in as a hash.
   #
   # @return [Hash]
   def fixtures
-    @fixtures ||= YAML.load_file(File.join(__dir__, 'fixtures.yml'))
+    @fixtures ||= YAML.load_file(File.join(__dir__, "fixtures.yml"))
   end
 
   def spoonerism(words, **opts)
     Spoonerize::Spoonerism.new(words) do |s|
-      opts.each { |k, v| s.send("#{k}=", v) }
+      opts.each { |k, v| s.send(:"#{k}=", v) }
     end
   end
 
   def test_log_directory
-    @tld ||= File.join(__dir__, 'log')
+    @tld ||= File.join(__dir__, "log")
   end
 
   def test_log_file
-    @tlf ||= File.join(test_log_directory, 'spoonerize.csv')
+    @tlf ||= File.join(test_log_directory, "spoonerize.csv")
   end
 
   ##
@@ -36,13 +35,13 @@ module TestHelper
   #
   # @return [Spoonerize::Cli]
   def cli(options = [])
-    Spoonerize::Cli.new(fixtures['default_words'] + options)
+    Spoonerize::Cli.new(fixtures["default_words"] + options)
   end
 
   def create_log_file
     FileUtils.mkdir(test_log_directory) unless File.directory?(test_log_directory)
-    File.open(test_log_file, 'w+') do |line|
-      fixtures['log_output'].each { |o| line.puts o }
+    File.open(test_log_file, "w+") do |line|
+      fixtures["log_output"].each { |o| line.puts o }
     end
   end
 
@@ -53,6 +52,6 @@ module TestHelper
   def create_config_file(file)
     dir = File.dirname(file)
     FileUtils.mkdir(dir) unless File.directory?(dir)
-    File.open(file, 'w+') { |f| f.puts 'reverse: true' }
+    File.open(file, "w+") { |f| f.puts "reverse: true" }
   end
 end

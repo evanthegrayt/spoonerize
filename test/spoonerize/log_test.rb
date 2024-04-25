@@ -1,5 +1,5 @@
-require_relative '../../lib/spoonerize'
-require_relative '../test_helper'
+require_relative "../../lib/spoonerize"
+require_relative "../test_helper"
 
 ##
 # The test suite for +Cli+.
@@ -21,19 +21,19 @@ class TestLog < Test::Unit::TestCase
   def test_contents
     create_log_file
     log = Spoonerize::Log.new(test_log_file)
-    assert_equal(fixtures['log_output'].map { |f| f.split(',')}, log.contents)
+    assert_equal(fixtures["log_output"].map { |f| f.split(",") }, log.contents)
   end
 
   def test_write
     create_log_file
     log = Spoonerize::Log.new(test_log_file)
-    log.write(fixtures['log_output'])
+    log.write(fixtures["log_output"])
     assert_equal(2, log.size)
   end
 
   def test_each
     log = Spoonerize::Log.new(test_log_file)
-    assert_nothing_raised { log.each { |i| i } }
+    assert_nothing_raised { log.each }
   end
 
   def test_size

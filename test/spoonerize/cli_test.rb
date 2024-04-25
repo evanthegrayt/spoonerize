@@ -1,5 +1,5 @@
-require_relative '../../lib/spoonerize'
-require_relative '../test_helper'
+require_relative "../../lib/spoonerize"
+require_relative "../test_helper"
 
 ##
 # The test suite for +Cli+.
@@ -16,7 +16,7 @@ class TestCli < Test::Unit::TestCase
   # The user's preference file is a string.
   def test_PREFERENCE_FILE
     assert_equal(
-      File.expand_path(File.join(ENV['HOME'], '.spoonerize.yml')),
+      File.expand_path(File.join(ENV["HOME"], ".spoonerize.yml")),
       Spoonerize::Cli::PREFERENCE_FILE
     )
   end
@@ -25,20 +25,20 @@ class TestCli < Test::Unit::TestCase
   # The +execute+ method is the entry point for the Cli. It's parameter is an
   # array of command-line flags
   def test_self_execute
-    assert_nothing_raised { Spoonerize::Cli.execute(fixtures['default_words']) }
+    assert_nothing_raised { Spoonerize::Cli.execute(fixtures["default_words"]) }
   end
 
   ##
   # The +options+ should be an array of options passed from the command line.
   def test_options
     c = cli
-    assert_equal(fixtures['default_words'], c.options)
+    assert_equal(fixtures["default_words"], c.options)
   end
 
   ##
   # The +preferences+ are the settings after +options+ are parsed.
   def test_preferences
-    c = cli(['-m'])
+    c = cli(["-m"])
     assert(c.map?)
     refute(c.print?)
     refute(c.save?)
@@ -47,7 +47,7 @@ class TestCli < Test::Unit::TestCase
   ##
   # The +initialize+ method should accept the same parameters as +exectute+.
   def test_initialize
-    assert_nothing_raised { Spoonerize::Cli.new(fixtures['default_words']) }
+    assert_nothing_raised { Spoonerize::Cli.new(fixtures["default_words"]) }
   end
 
   ##
@@ -63,7 +63,7 @@ class TestCli < Test::Unit::TestCase
     c = cli
     refute(c.save?)
 
-    c = cli(['-s'])
+    c = cli(["-s"])
     assert(c.save?)
   end
 
@@ -73,7 +73,7 @@ class TestCli < Test::Unit::TestCase
     c = cli
     refute(c.print?)
 
-    c = cli(['-p'])
+    c = cli(["-p"])
     assert(c.print?)
   end
 
@@ -83,7 +83,7 @@ class TestCli < Test::Unit::TestCase
     c = cli
     refute(c.map?)
 
-    c = cli(['-m'])
+    c = cli(["-m"])
     assert(c.map?)
   end
 

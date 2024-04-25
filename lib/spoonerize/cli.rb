@@ -67,7 +67,7 @@ module Spoonerize
     def spoonerism
       pf = File.file?(PREFERENCE_FILE) ? PREFERENCE_FILE : nil
       @spoonerism ||= Spoonerism.new(options, pf) do |s|
-        preferences.each { |k, v| s.send("#{k}=", v) }
+        preferences.each { |k, v| s.send(:"#{k}=", v) }
       end
     end
 
