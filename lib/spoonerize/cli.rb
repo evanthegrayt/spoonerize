@@ -1,16 +1,16 @@
+# frozen_string_literal: true
+
 require "optparse"
-require "yaml"
 
 module Spoonerize
   ##
   # The class for handling the command-line interface.
   class Cli
     ##
-    # The preferences file the user can create to change runtime options.
+    # The config file the user can create to change default runtime options.
     #
     # @return [String]
-    PREFERENCE_FILE =
-      File.expand_path(File.join(ENV["HOME"], ".spoonerize.yml")).freeze
+    CONFIG_FILE = File.expand_path(File.join(ENV["HOME"], ".spoonerizerc"))
 
     ##
     # Creates an instance of +Spoonerism+ and runs what the user requested.
@@ -19,7 +19,7 @@ module Spoonerize
     def self.execute(options = [])
       exe = new(options)
 
-      if exe.print?
+      if exe.print_log?
         exe.print_log
         return
       end
@@ -52,23 +52,20 @@ module Spoonerize
     #
     # @return [self]
     def initialize(options)
+      Spoonerize.load_config_file(CONFIG_FILE) if File.file?(CONFIG_FILE)
       @map = false
       @save = false
-      @print = false
+      @print_log = false
       @options = options
       @preferences = get_preferences
     end
 
     ##
-    # Sets up an instance of +Spoonerize::Spoonerism+ and passes all user
-    # preferences.
+    # Sets up an instance of +Spoonerize::Spoonerism+
     #
     # @return [Spoonerize::Spoonerism]
     def spoonerism
-      pf = File.file?(PREFERENCE_FILE) ? PREFERENCE_FILE : nil
-      @spoonerism ||= Spoonerism.new(options, pf) do |s|
-        preferences.each { |k, v| s.send(:"#{k}=", v) }
-      end
+      @spoonerism ||= Spoonerism.new(options)
     end
 
     ##
@@ -91,8 +88,8 @@ module Spoonerize
     # Should we print to the command line?
     #
     # @return [Boolean]
-    def print?
-      @print
+    def print_log?
+      @print_log
     end
 
     ##
@@ -100,8 +97,7 @@ module Spoonerize
     #
     # @return [Integer]
     def longest_word_length
-      @longest_word_length ||=
-        spoonerism.spoonerize.group_by(&:size).max.first.size
+      @longest_word_length ||= spoonerism.spoonerize.max_by(&:size).size
     end
 
     ##
@@ -109,8 +105,9 @@ module Spoonerize
     #
     # @return [nil]
     def print_log
-      s = Spoonerize::Log.new(spoonerism.logfile_name)
-      s.each { |row| print row.join(" | ") + "\n" }
+      Spoonerize::Log.new(Spoonerize.config.logfile_name).each do |row|
+        puts row.join(" | ")
+      end
     end
 
     ##
@@ -119,7 +116,7 @@ module Spoonerize
     # @return [nil]
     def print_mappings
       spoonerism.to_h.each do |k, v|
-        printf("%-#{longest_word_length}s => %s\n", k, v)
+        printf("%-#{longest_word_length + 1}s => %s\n", k, v)
       end
     end
 
@@ -132,22 +129,22 @@ module Spoonerize
         OptionParser.new do |o|
           o.version = ::Spoonerize::Version.to_s
           o.on("-r", "--[no-]reverse", "Reverse flipping") do |v|
-            prefs["reverse"] = v
+            Spoonerize.config.reverse = v
           end
           o.on("-l", "--[no-]lazy", "Skip small words") do |v|
-            prefs["lazy"] = v
+            Spoonerize.config.lazy = v
           end
           o.on("-m", "--[no-]map", "Print words mapping") do |v|
             @map = v
           end
-          o.on("-p", "--[no-]print", "Print all entries in the log") do |v|
-            @print = v
+          o.on("-p", "--[no-]print-log", "Print all entries in the log") do |v|
+            @print_log = v
           end
           o.on("-s", "--[no-]save", "Save results in log") do |v|
             @save = v
           end
           o.on("--exclude=WORD", Array, "Words to skip") do |v|
-            prefs["exclude"] = v
+            Spoonerize.config.exclude = v
           end
         end.parse!(options)
       end
