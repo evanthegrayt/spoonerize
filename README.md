@@ -104,15 +104,19 @@ Here is a list of all available options:
 ```
 
 ### Config File
-You can create a config file called `~/.spoonerize.yml`. In this file, you can
-change default options at runtime. Available settings are:
+When using the `spoonerize` executable, you can create a file called
+`~/.spoonerize.rb`. In Rails, the config file would be something like
+`config/initializers/spoonerize.rb`. In this file, you can change default
+options.
 
-```yaml
-# Setting       Default
-excluded_words: []
-lazy:           false
-reverse:        false
-logfile_name:   '~/.cache/spoonerize/spoonerize.csv'
+```ruby
+# In this example, the values are the default.
+Spoonerize.configure do |c|
+  c.excluded_words = []
+  c.lazy = false
+  c.reverse = false
+  c.logfile_name = "~/.cache/spoonerize/spoonerize.csv"
+end
 ```
 
 Options set by this file can be overridden at runtime by the use of the
@@ -124,11 +128,16 @@ documented](https://evanthegrayt.github.io/spoonerize/), but below
 are some quick examples of how you could use this in your ruby code.
 
 ```ruby
-require 'spoonerize'
+require "spoonerize"
 
-spoonerism = Spoonerize::Spoonerism.new(%w[not too shabby]) do |s|
-  s.reverse = true
+# Load a config file.
+Spoonerize.load_config_file("~/.spoonerize.rb")
+# Override any defaults or values from the config file.
+Spoonerize.configure do |c|
+  c.reverse = true
+  c.logfile_name = "~/.cache/spoonerize/spoonerize.csv"
 end
+spoonerism = Spoonerize::Spoonerism.new(%w[not too shabby])
 
 spoonerism.spoonerize
 # => shot noo tabby
@@ -137,28 +146,7 @@ spoonerism.reverse = false
 spoonerism.spoonerize
 # => tot shoo nabby
 
-spoonerism.logfile_name = '~/.cache/spoonerize/spoonerize.csv'
 spoonerism.save
-```
-
-You can also use the [config file](#config-file), either by passing it at
-initialization, or via the setter. The config file will be automatically loaded
-if passed at initialization, before the instance is yielded so you can still
-change the values via the block. If set via the setter, you must call
-`#load_config_file`.
-
-```ruby
-# Config file would be automatically loaded before block is executed.
-s = Spoonerise::Spoonerism.new(%w[not too shabby], '~/.spoonerize.yml') do |sp|
-  sp.reverse = true
-end
-
-# Config file would need to be manually loaded.
-s = Spoonerise::Spoonerism.new(%w[not too shabby]) do |sp|
-  sp.config_file = '~/.spoonerize.yml'
-end
-
-s.load_config_file
 ```
 
 ## Self Promotion
