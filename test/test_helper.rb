@@ -1,4 +1,3 @@
-require "yaml"
 require "test/unit"
 require "fileutils"
 require "json"
@@ -11,13 +10,18 @@ module TestHelper
   #
   # @return [Hash]
   def fixtures
-    @fixtures ||= YAML.load_file(File.join(__dir__, "fixtures.yml"))
+    @fixtures ||= JSON.parse(File.read(File.join(__dir__, "fixtures.json")))
+  end
+
+  def reset_spoonerize_config
+    Spoonerize.reset_config
+    Spoonerize.instance_variable_set("@config_file_loaded", false)
   end
 
   def spoonerism(words, **opts)
-    Spoonerize::Spoonerism.new(words) do |s|
-      opts.each { |k, v| s.send(:"#{k}=", v) }
-    end
+    reset_spoonerize_config
+    opts.each { |k, v| Spoonerize.config.public_send(:"#{k}=", v) }
+    Spoonerize::Spoonerism.new(words)
   end
 
   def test_log_directory
@@ -52,6 +56,12 @@ module TestHelper
   def create_config_file(file)
     dir = File.dirname(file)
     FileUtils.mkdir(dir) unless File.directory?(dir)
-    File.open(file, "w+") { |f| f.puts "reverse: true" }
+    File.open(file, "w+") do |f|
+      f.puts <<~RUBY
+        Spoonerize.configure do |config|
+          config.reverse = true
+        end
+      RUBY
+    end
   end
 end

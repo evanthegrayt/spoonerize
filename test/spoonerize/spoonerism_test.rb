@@ -8,10 +8,12 @@ class TestSpoonerism < Test::Unit::TestCase
 
   def setup
     @workdir = File.join(__dir__, "files")
-    @test_config = File.join(@workdir, "spoonerize.yml")
+    @test_config = File.join(@workdir, "spoonerizerc")
+    reset_spoonerize_config
   end
 
   def teardown
+    FileUtils.rm_f(@test_config)
     FileUtils.rm_r(test_log_directory) if File.directory?(test_log_directory)
   end
 
@@ -44,17 +46,17 @@ class TestSpoonerism < Test::Unit::TestCase
 
   def test_reverse
     s = spoonerism(%w[the ultimate spoonerize test])
-    refute(s.reverse?)
-    assert_nothing_raised { s.reverse = true }
-    assert(s.reverse?)
+    refute(Spoonerize.config.reverse)
+    assert_nothing_raised { Spoonerize.config.reverse = true }
+    assert(Spoonerize.config.reverse)
     assert_equal(%w[te thultimate oonerize spest], s.spoonerize)
   end
 
   def test_lazy
     s = spoonerism(%w[the ultimate spoonerize test])
-    refute(s.lazy?)
-    assert_nothing_raised { s.lazy = true }
-    assert(s.lazy?)
+    refute(Spoonerize.config.lazy)
+    assert_nothing_raised { Spoonerize.config.lazy = true }
+    assert(Spoonerize.config.lazy)
     assert_equal(%w[the spultimate toonerize est], s.spoonerize)
   end
 
@@ -99,75 +101,57 @@ class TestSpoonerism < Test::Unit::TestCase
   end
 
   def test_excluded_words
-    s = spoonerism(%w[the ultimate spoonerize test])
-    assert_empty(s.excluded_words)
-    assert_nothing_raised { s.excluded_words = %w[test] }
-    assert_equal(%w[test], s.excluded_words)
-    assert_nothing_raised { s.excluded_words << "ultimate" }
-    assert_equal(%w[test ultimate], s.excluded_words)
+    assert_empty(Spoonerize.config.excluded_words)
+    assert_nothing_raised { Spoonerize.config.excluded_words = %w[test] }
+    assert_equal(%w[test], Spoonerize.config.excluded_words)
+    assert_nothing_raised { Spoonerize.config.excluded_words << "ultimate" }
+    assert_equal(%w[test ultimate], Spoonerize.config.excluded_words)
   end
 
   def test_all_excluded_words
     s = spoonerism(%w[the ultimate spoonerize test])
     assert_empty(s.all_excluded_words)
-    s.lazy = true
+    Spoonerize.config.lazy = true
     assert_equal(fixtures["lazy_words"], s.all_excluded_words)
-    assert_nothing_raised { s.excluded_words = %w[test] }
+    assert_nothing_raised { Spoonerize.config.excluded_words = %w[test] }
     assert_equal(%w[test] + fixtures["lazy_words"], s.all_excluded_words)
-    assert_nothing_raised { s.excluded_words << "ultimate" }
+    assert_nothing_raised { Spoonerize.config.excluded_words << "ultimate" }
     assert_equal(%w[test ultimate] + fixtures["lazy_words"], s.all_excluded_words)
   end
 
   def test_logfile_name
-    s = spoonerism(%w[the ultimate spoonerize test])
     assert_equal(
       File.join(ENV["HOME"], ".cache", "spoonerize", "spoonerize.csv"),
-      s.logfile_name
+      Spoonerize.config.logfile_name
     )
-    assert_nothing_raised { s.logfile_name = test_log_file }
-    assert_equal(test_log_file, s.logfile_name)
+    assert_nothing_raised { Spoonerize.config.logfile_name = test_log_file }
+    assert_equal(test_log_file, Spoonerize.config.logfile_name)
   end
 
   ##
   # Should be false until config file is loaded.
   def test_config_file_loaded?
-    s = spoonerism(%w[the ultimate spoonerize test])
-    refute(s.config_file_loaded?)
+    refute(Spoonerize.config_file_loaded?)
 
     create_config_file(@test_config)
-    s = ::Spoonerize::Spoonerism.new(%w[the ultimate spoonerize test], @test_config)
-    assert_nothing_raised { s.load_config_file }
-    assert(s.config_file_loaded?)
+    assert_nothing_raised { Spoonerize.load_config_file(@test_config) }
+    assert(Spoonerize.config_file_loaded?)
   end
 
   ##
-  # Config should be a hash, and populated if +config_file+ is loaded.
-  def test_config
-    s = spoonerism(%w[the ultimate spoonerize test])
+  # Config file should update global config when loaded.
+  def test_load_config_file_updates_config
     create_config_file(@test_config)
-    assert_empty(s.config)
-    assert_nothing_raised { s.config_file = @test_config }
-    assert_nothing_raised { s.load_config_file }
-    assert_equal({"reverse" => true}, s.config)
-    assert(s.reverse?)
+    refute(Spoonerize.config.reverse)
+    assert_nothing_raised { Spoonerize.load_config_file(@test_config) }
+    assert(Spoonerize.config.reverse)
   end
 
   ##
-  # Config file should be settable and gettable.
-  def test_config_file
-    s = spoonerism(%w[the ultimate spoonerize test])
-    assert_nil(s.config_file)
-    assert_nothing_raised { s.config_file = @test_config }
-    assert_equal(@test_config, s.config_file)
-  end
-
-  ##
-  # Should raise if +config_file+ wasn't set or if file doesn't exist.
+  # Should raise if file doesn't exist.
   def test_load_config_file
-    s = spoonerism(%w[the ultimate spoonerize test])
-    assert_raise { s.load_config_file }
-    assert_nothing_raised { s.config_file = @test_config }
+    assert_raise { Spoonerize.load_config_file(@test_config) }
     create_config_file(@test_config)
-    assert_nothing_raised { s.load_config_file }
+    assert_nothing_raised { Spoonerize.load_config_file(@test_config) }
   end
 end

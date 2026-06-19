@@ -6,6 +6,10 @@ require_relative "../test_helper"
 class TestCli < Test::Unit::TestCase
   include TestHelper
 
+  def setup
+    reset_spoonerize_config
+  end
+
   ##
   # Destroy the working directory and its contents.
   def teardown
@@ -13,11 +17,11 @@ class TestCli < Test::Unit::TestCase
   end
 
   ##
-  # The user's preference file is a string.
-  def test_PREFERENCE_FILE
+  # The user's config file is a string.
+  def test_CONFIG_FILE
     assert_equal(
-      File.expand_path(File.join(ENV["HOME"], ".spoonerize.yml")),
-      Spoonerize::Cli::PREFERENCE_FILE
+      File.expand_path(File.join(ENV["HOME"], ".spoonerizerc")),
+      Spoonerize::Cli::CONFIG_FILE
     )
   end
 
@@ -40,7 +44,7 @@ class TestCli < Test::Unit::TestCase
   def test_preferences
     c = cli(["-m"])
     assert(c.map?)
-    refute(c.print?)
+    refute(c.print_log?)
     refute(c.save?)
   end
 
@@ -69,12 +73,12 @@ class TestCli < Test::Unit::TestCase
 
   ##
   # False by default. True if flag is passed.
-  def test_print?
+  def test_print_log?
     c = cli
-    refute(c.print?)
+    refute(c.print_log?)
 
     c = cli(["-p"])
-    assert(c.print?)
+    assert(c.print_log?)
   end
 
   ##
@@ -87,8 +91,15 @@ class TestCli < Test::Unit::TestCase
     assert(c.map?)
   end
 
+  def test_exclude
+    assert_empty(Spoonerize.config.excluded_words)
+
+    cli(["--exclude=ultimate,test"])
+    assert_equal(%w[ultimate test], Spoonerize.config.excluded_words)
+  end
+
   def test_longest_word_length
     c = cli
-    assert_equal(8, c.longest_word_length)
+    assert_equal(10, c.longest_word_length)
   end
 end
