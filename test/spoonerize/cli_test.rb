@@ -47,10 +47,11 @@ class TestCli < Test::Unit::TestCase
     refute(c.print_log?)
     refute(c.save?)
 
-    c = cli(["-r", "-l", "--exclude=ultimate,test"])
+    c = cli(["-r", "-l", "-c", "--exclude=ultimate,test"])
     assert_equal({
       reverse: true,
       lazy: true,
+      consonants_only: true,
       excluded_words: %w[ultimate test]
     }, c.overrides)
   end
@@ -106,18 +107,38 @@ class TestCli < Test::Unit::TestCase
     assert_empty(Spoonerize.config.excluded_words)
   end
 
+  def test_consonants_only
+    refute(Spoonerize.config.consonants_only)
+
+    c = cli(["--consonants-only"])
+    assert(c.spoonerism.config.consonants_only)
+    refute(Spoonerize.config.consonants_only)
+  end
+
+  def test_no_consonants_only_overrides_config
+    Spoonerize.config.consonants_only = true
+
+    c = cli(["--no-consonants-only"])
+
+    refute(c.spoonerism.config.consonants_only)
+    assert(Spoonerize.config.consonants_only)
+  end
+
   def test_cli_options_do_not_mutate_global_config
     assert_equal(false, Spoonerize.config.reverse)
     assert_equal(false, Spoonerize.config.lazy)
+    assert_equal(false, Spoonerize.config.consonants_only)
     assert_empty(Spoonerize.config.excluded_words)
 
-    c = cli(["-r", "-l", "--exclude=ultimate,test"])
+    c = cli(["-r", "-l", "-c", "--exclude=ultimate,test"])
 
     assert_equal(true, c.spoonerism.config.reverse)
     assert_equal(true, c.spoonerism.config.lazy)
+    assert_equal(true, c.spoonerism.config.consonants_only)
     assert_equal(%w[ultimate test], c.spoonerism.config.excluded_words)
     assert_equal(false, Spoonerize.config.reverse)
     assert_equal(false, Spoonerize.config.lazy)
+    assert_equal(false, Spoonerize.config.consonants_only)
     assert_empty(Spoonerize.config.excluded_words)
   end
 

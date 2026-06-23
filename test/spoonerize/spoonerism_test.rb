@@ -94,6 +94,11 @@ class TestSpoonerism < Test::Unit::TestCase
     s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test")
 
     assert_equal(%w[te thultimate oonerize spest], s.spoonerize)
+
+    Spoonerize.config.consonants_only = true
+    s = Spoonerize::Spoonerism.new("turn", "up", "son")
+
+    assert_equal(%w[surn up ton], s.spoonerize)
   end
 
   def test_accepts_custom_config
@@ -107,7 +112,16 @@ class TestSpoonerism < Test::Unit::TestCase
   def test_keywords_override_custom_config
     config = Spoonerize::Config.new
     config.reverse = true
-    s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test", config: config, reverse: false)
+    config.consonants_only = true
+    s = Spoonerize::Spoonerism.new(
+      "the",
+      "ultimate",
+      "spoonerize",
+      "test",
+      config: config,
+      reverse: false,
+      consonants_only: false
+    )
 
     assert_equal(%w[e spultimate toonerize thest], s.spoonerize)
   end
@@ -170,6 +184,37 @@ class TestSpoonerism < Test::Unit::TestCase
 
     s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert(s.enough_flippable_words?)
+
+    s = spoonerism("ultimate", "test", "up", consonants_only: true)
+    refute(s.enough_flippable_words?)
+
+    s = spoonerism("the", "ultimate", "spoonerize", "test", consonants_only: true)
+    assert(s.enough_flippable_words?)
+
+    s = spoonerism("the", "ultimate", "spoonerize", "test", consonants_only: true, excluded_words: %w[test])
+    assert(s.enough_flippable_words?)
+
+    s = spoonerism("the", "ultimate", "spoonerize", "test", consonants_only: true, excluded_words: %w[test spoonerize])
+    refute(s.enough_flippable_words?)
+
+    s = spoonerism("his", "up", "hers", consonants_only: true, lazy: true)
+    refute(s.enough_flippable_words?)
+  end
+
+  def test_consonants_only
+    s = spoonerism("turn", "up", "son", consonants_only: true)
+    assert_equal(%w[surn up ton], s.spoonerize)
+
+    s = spoonerism("up", "turn", "around", "son", consonants_only: true)
+    assert_equal(%w[up surn around ton], s.spoonerize)
+
+    s = spoonerism("yttrium", "test", "yellow", consonants_only: true)
+    assert_equal(%w[yttrium yest tellow], s.spoonerize)
+  end
+
+  def test_consonants_only_disabled_keeps_existing_vowel_behavior
+    s = spoonerism("turn", "up", "son", consonants_only: false)
+    assert_equal(%w[urn sup ton], s.spoonerize)
   end
 
   def test_save

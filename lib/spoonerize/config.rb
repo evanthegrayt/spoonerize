@@ -21,6 +21,12 @@ module Spoonerize
     attr_accessor :excluded_words
 
     ##
+    # When true, only consonant-starting words are eligible to be flipped.
+    #
+    # @return [Boolean]
+    attr_accessor :consonants_only
+
+    ##
     # When true, reverse the order of the flipping. Only makes a difference
     # when there are more than two flip-able words.
     #
@@ -41,6 +47,7 @@ module Spoonerize
       @lazy = false
       @lazy_words = %w[i a an and in of the my your his her him hers to is]
       @excluded_words = []
+      @consonants_only = false
       @reverse = false
       @logfile_name = File.expand_path(
         File.join(ENV["HOME"], ".cache", "spoonerize", "spoonerize.csv")
@@ -56,6 +63,7 @@ module Spoonerize
         config.lazy = lazy
         config.lazy_words = lazy_words.dup
         config.excluded_words = excluded_words.dup
+        config.consonants_only = consonants_only
         config.reverse = reverse
         config.logfile_name = logfile_name
 
