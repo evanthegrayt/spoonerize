@@ -26,7 +26,7 @@ class TestCli < Test::Unit::TestCase
   end
 
   ##
-  # The +execute+ method is the entry point for the Cli. It's parameter is an
+  # The +execute+ method is the entry point for the Cli. Its parameter is an
   # array of command-line flags
   def test_self_execute
     assert_nothing_raised { Spoonerize::Cli.execute(fixtures["default_words"]) }
@@ -40,16 +40,23 @@ class TestCli < Test::Unit::TestCase
   end
 
   ##
-  # The +preferences+ are the settings after +options+ are parsed.
-  def test_preferences
+  # The +overrides+ are the settings after +options+ are parsed.
+  def test_overrides
     c = cli(["-m"])
     assert(c.map?)
     refute(c.print_log?)
     refute(c.save?)
+
+    c = cli(["-r", "-l", "--exclude=ultimate,test"])
+    assert_equal({
+      reverse: true,
+      lazy: true,
+      excluded_words: %w[ultimate test]
+    }, c.overrides)
   end
 
   ##
-  # The +initialize+ method should accept the same parameters as +exectute+.
+  # The +initialize+ method should accept the same parameters as +execute+.
   def test_initialize
     assert_nothing_raised { Spoonerize::Cli.new(fixtures["default_words"]) }
   end
@@ -94,8 +101,24 @@ class TestCli < Test::Unit::TestCase
   def test_exclude
     assert_empty(Spoonerize.config.excluded_words)
 
-    cli(["--exclude=ultimate,test"])
-    assert_equal(%w[ultimate test], Spoonerize.config.excluded_words)
+    c = cli(["--exclude=ultimate,test"])
+    assert_equal(%w[ultimate test], c.spoonerism.config.excluded_words)
+    assert_empty(Spoonerize.config.excluded_words)
+  end
+
+  def test_cli_options_do_not_mutate_global_config
+    assert_equal(false, Spoonerize.config.reverse)
+    assert_equal(false, Spoonerize.config.lazy)
+    assert_empty(Spoonerize.config.excluded_words)
+
+    c = cli(["-r", "-l", "--exclude=ultimate,test"])
+
+    assert_equal(true, c.spoonerism.config.reverse)
+    assert_equal(true, c.spoonerism.config.lazy)
+    assert_equal(%w[ultimate test], c.spoonerism.config.excluded_words)
+    assert_equal(false, Spoonerize.config.reverse)
+    assert_equal(false, Spoonerize.config.lazy)
+    assert_empty(Spoonerize.config.excluded_words)
   end
 
   def test_longest_word_length

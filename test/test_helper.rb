@@ -1,6 +1,7 @@
 require "test/unit"
 require "fileutils"
 require "json"
+require "stringio"
 
 ##
 # Module to include in tests that provides helper functions.
@@ -15,13 +16,21 @@ module TestHelper
 
   def reset_spoonerize_config
     Spoonerize.reset_config
-    Spoonerize.instance_variable_set("@config_file_loaded", false)
+    Spoonerize.instance_variable_set(:@config_file_loaded, false)
   end
 
-  def spoonerism(words, **opts)
+  def spoonerism(*words, **opts)
     reset_spoonerize_config
-    opts.each { |k, v| Spoonerize.config.public_send(:"#{k}=", v) }
-    Spoonerize::Spoonerism.new(words)
+    Spoonerize::Spoonerism.new(*words, **opts)
+  end
+
+  def capture_stderr
+    original_stderr = $stderr
+    $stderr = StringIO.new
+    yield
+    $stderr.string
+  ensure
+    $stderr = original_stderr
   end
 
   def test_log_directory

@@ -11,13 +11,41 @@ module Spoonerize
     attr_reader :words
 
     ##
+    # Configuration values for this spoonerism.
+    #
+    # @return [Spoonerize::Config]
+    attr_reader :config
+
+    ##
     # Initialize instance.
     #
-    # @param [Array] words
+    # @param [Array<String>] words Words to spoonerize. Passing a single array
+    #   is deprecated and will be removed in Spoonerize 1.0.
+    # @param [Spoonerize::Config] config Base config to copy.
+    # @param [Boolean, nil] lazy Override lazy mode for this instance.
+    # @param [Array<String>, nil] lazy_words Override lazy words for this instance.
+    # @param [Array<String>, nil] excluded_words Override excluded words for this instance.
+    # @param [Boolean, nil] reverse Override reverse mode for this instance.
+    # @param [String, nil] logfile_name Override the log file path for this instance.
     #
     # @return [Spoonerize::Spoonerism]
-    def initialize(words)
-      @words = words.map(&:downcase)
+    def initialize(
+      *words,
+      config: Spoonerize.config,
+      lazy: nil,
+      lazy_words: nil,
+      excluded_words: nil,
+      reverse: nil,
+      logfile_name: nil
+    )
+      @words = normalize_words(words).map(&:downcase)
+      @config = config.with(**{
+        lazy: lazy,
+        lazy_words: lazy_words,
+        excluded_words: excluded_words,
+        reverse: reverse,
+        logfile_name: logfile_name
+      }.reject { |_, value| value.nil? })
     end
 
     ##
@@ -73,17 +101,33 @@ module Spoonerize
 
     ##
     # Array of words to exclude by combining two arrays:
-    # * Any user-passed words, stored in +Spoonerize.config.excluded_words+
+    # * Any user-passed words, stored in +config.excluded_words+
     # * Any lazy words, if lazy mode is true
     #
     # @return [Array]
     def all_excluded_words
-      (Spoonerize.config.excluded_words + (
-        Spoonerize.config.lazy ? Spoonerize.config.lazy_words : []
+      (config.excluded_words + (
+        config.lazy ? config.lazy_words : []
       )).map(&:downcase)
     end
 
     private
+
+    def normalize_words(words)
+      if words.size == 1 && words.first.is_a?(Array)
+        warn(
+          "Passing words as an array is deprecated and will be removed in Spoonerize 1.0. " \
+          "Pass words as positional arguments instead."
+        )
+        words = words.first
+      end
+
+      unless words.all? { |word| word.is_a?(String) }
+        raise ArgumentError, "Words must be strings"
+      end
+
+      words
+    end
 
     ##
     # Main flipping method. Creates the replacement word from the next
@@ -91,7 +135,7 @@ module Spoonerize
     # through the end of the word.
     def flip_words(word, idx) # :nodoc:
       return word if excluded?(idx)
-      bumper = Bumper.new(idx, words.size, Spoonerize.config.reverse)
+      bumper = Bumper.new(idx, words.size, config.reverse)
       bumper.bump while excluded?(bumper.value)
       words[bumper.value].match(consonants).to_s + word.match(vowels).to_s
     end
@@ -117,17 +161,17 @@ module Spoonerize
     ##
     # Creates and memoizes instance of the log file.
     def log # :nodoc:
-      @log ||= Spoonerize::Log.new(Spoonerize.config.logfile_name)
+      @log ||= Spoonerize::Log.new(config.logfile_name)
     end
 
     ##
     # The options that were passed at runtime as a string
     def options # :nodoc:
       [].tap do |o|
-        o << "Lazy" if Spoonerize.config.lazy
-        o << "Reverse" if Spoonerize.config.reverse
-        if Spoonerize.config.excluded_words.any?
-          o << "Exclude [#{Spoonerize.config.excluded_words.join(", ")}]"
+        o << "Lazy" if config.lazy
+        o << "Reverse" if config.reverse
+        if config.excluded_words.any?
+          o << "Exclude [#{config.excluded_words.join(", ")}]"
         end
         o << "No Options" if o.empty?
       end

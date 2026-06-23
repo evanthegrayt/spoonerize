@@ -18,55 +18,124 @@ class TestSpoonerism < Test::Unit::TestCase
   end
 
   def test_initialize
-    assert_nothing_raised { Spoonerize::Spoonerism.new(%w[test]) }
-    assert_nothing_raised { Spoonerize::Spoonerism.new(%w[the ultimate spoonerize test]) }
+    assert_nothing_raised { Spoonerize::Spoonerism.new("test") }
+    assert_nothing_raised { Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test") }
+    assert_nothing_raised { Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test", reverse: true) }
+  end
+
+  def test_initialize_with_deprecated_array
+    warning = capture_stderr do
+      s = Spoonerize::Spoonerism.new(%w[the ultimate spoonerize test])
+
+      assert_equal(%w[the ultimate spoonerize test], s.words)
+    end
+
+    assert_match(/deprecated.*Spoonerize 1\.0/i, warning)
+  end
+
+  def test_initialize_requires_string_words
+    assert_raise(ArgumentError) do
+      Spoonerize::Spoonerism.new(%w[the ultimate], %w[spoonerize test])
+    end
+
+    assert_raise(ArgumentError) do
+      Spoonerize::Spoonerism.new("the", :ultimate)
+    end
   end
 
   def test_spoonerize
     assert_raise("Spoonerize::JakPibError") do
-      spoonerism(%w[test]).spoonerize
+      spoonerism("test").spoonerize
     end
 
     assert_raise("Spoonerize::JakPibError") do
-      spoonerism(%w[hello]).spoonerize
+      spoonerism("hello").spoonerize
     end
 
     assert_raise("Spoonerize::JakPibError") do
-      spoonerism(%w[his and hers], lazy: true).spoonerize
+      spoonerism("his", "and", "hers", lazy: true).spoonerize
     end
 
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_equal(%w[e spultimate toonerize thest], s.spoonerize)
   end
 
   def test_words
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_equal(%w[the ultimate spoonerize test], s.words)
   end
 
   def test_reverse
-    s = spoonerism(%w[the ultimate spoonerize test])
     refute(Spoonerize.config.reverse)
-    assert_nothing_raised { Spoonerize.config.reverse = true }
-    assert(Spoonerize.config.reverse)
+    s = spoonerism("the", "ultimate", "spoonerize", "test", reverse: true)
+    refute(Spoonerize.config.reverse)
     assert_equal(%w[te thultimate oonerize spest], s.spoonerize)
   end
 
   def test_lazy
-    s = spoonerism(%w[the ultimate spoonerize test])
     refute(Spoonerize.config.lazy)
-    assert_nothing_raised { Spoonerize.config.lazy = true }
-    assert(Spoonerize.config.lazy)
+    s = spoonerism("the", "ultimate", "spoonerize", "test", lazy: true)
+    refute(Spoonerize.config.lazy)
     assert_equal(%w[the spultimate toonerize est], s.spoonerize)
   end
 
+  def test_uses_global_config_defaults_at_initialization
+    Spoonerize.config.reverse = true
+    s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test")
+
+    assert_equal(%w[te thultimate oonerize spest], s.spoonerize)
+  end
+
+  def test_accepts_custom_config
+    config = Spoonerize::Config.new
+    config.lazy = true
+    s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test", config: config)
+
+    assert_equal(%w[the spultimate toonerize est], s.spoonerize)
+  end
+
+  def test_keywords_override_custom_config
+    config = Spoonerize::Config.new
+    config.reverse = true
+    s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test", config: config, reverse: false)
+
+    assert_equal(%w[e spultimate toonerize thest], s.spoonerize)
+  end
+
+  def test_global_config_changes_do_not_affect_existing_instances
+    Spoonerize.config.reverse = true
+    s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test")
+
+    Spoonerize.config.reverse = false
+
+    assert_equal(%w[te thultimate oonerize spest], s.spoonerize)
+  end
+
+  def test_instances_do_not_share_options
+    forward = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test")
+    reverse = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test", reverse: true)
+
+    assert_equal(%w[e spultimate toonerize thest], forward.spoonerize)
+    assert_equal(%w[te thultimate oonerize spest], reverse.spoonerize)
+  end
+
+  def test_array_config_values_are_copied
+    excluded_words = %w[the]
+    s = Spoonerize::Spoonerism.new("the", "ultimate", "spoonerize", "test", excluded_words: excluded_words)
+
+    excluded_words << "ultimate"
+
+    assert_equal(%w[the], s.config.excluded_words)
+    assert_equal(%w[the], s.all_excluded_words)
+  end
+
   def test_to_s
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_equal("e spultimate toonerize thest", s.to_s)
   end
 
   def test_to_h
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_equal({
       "the" => "e",
       "ultimate" => "spultimate",
@@ -76,25 +145,25 @@ class TestSpoonerism < Test::Unit::TestCase
   end
 
   def test_to_json
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_equal({
-      "the"        => "e",
-      "ultimate"   => "spultimate",
+      "the" => "e",
+      "ultimate" => "spultimate",
       "spoonerize" => "toonerize",
-      "test"       => "thest"
+      "test" => "thest"
     }.to_json, s.to_json)
   end
 
   def test_enough_flippable_words?
-    s = spoonerism(%w[test])
+    s = spoonerism("test")
     refute(s.enough_flippable_words?)
 
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert(s.enough_flippable_words?)
   end
 
   def test_save
-    s = spoonerism(%w[the ultimate spoonerize test], logfile_name: test_log_file)
+    s = spoonerism("the", "ultimate", "spoonerize", "test", logfile_name: test_log_file)
     assert_nothing_raised { s.save }
     assert(File.directory?(test_log_directory))
     assert(File.file?(test_log_file))
@@ -109,13 +178,13 @@ class TestSpoonerism < Test::Unit::TestCase
   end
 
   def test_all_excluded_words
-    s = spoonerism(%w[the ultimate spoonerize test])
+    s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_empty(s.all_excluded_words)
-    Spoonerize.config.lazy = true
+    s = spoonerism("the", "ultimate", "spoonerize", "test", lazy: true)
     assert_equal(fixtures["lazy_words"], s.all_excluded_words)
-    assert_nothing_raised { Spoonerize.config.excluded_words = %w[test] }
+    s = spoonerism("the", "ultimate", "spoonerize", "test", lazy: true, excluded_words: %w[test])
     assert_equal(%w[test] + fixtures["lazy_words"], s.all_excluded_words)
-    assert_nothing_raised { Spoonerize.config.excluded_words << "ultimate" }
+    s = spoonerism("the", "ultimate", "spoonerize", "test", lazy: true, excluded_words: %w[test ultimate])
     assert_equal(%w[test ultimate] + fixtures["lazy_words"], s.all_excluded_words)
   end
 

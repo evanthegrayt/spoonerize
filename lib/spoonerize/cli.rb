@@ -40,10 +40,10 @@ module Spoonerize
     attr_reader :options
 
     ##
-    # Preferences after reading config file and parsing ARGV.
+    # Overrides after reading config file and parsing ARGV.
     #
-    # @return [Array]
-    attr_reader :preferences
+    # @return [Hash]
+    attr_reader :overrides
 
     ##
     # Create instance of +Cli+
@@ -57,7 +57,7 @@ module Spoonerize
       @save = false
       @print_log = false
       @options = options
-      @preferences = get_preferences
+      @overrides = get_overrides
     end
 
     ##
@@ -65,7 +65,7 @@ module Spoonerize
     #
     # @return [Spoonerize::Spoonerism]
     def spoonerism
-      @spoonerism ||= Spoonerism.new(options)
+      @spoonerism ||= Spoonerism.new(*options, **overrides)
     end
 
     ##
@@ -124,15 +124,15 @@ module Spoonerize
 
     ##
     # Read in args and set options
-    def get_preferences # :nodoc:
+    def get_overrides # :nodoc:
       {}.tap do |prefs|
         OptionParser.new do |o|
           o.version = ::Spoonerize::Version.to_s
           o.on("-r", "--[no-]reverse", "Reverse flipping") do |v|
-            Spoonerize.config.reverse = v
+            prefs[:reverse] = v
           end
           o.on("-l", "--[no-]lazy", "Skip small words") do |v|
-            Spoonerize.config.lazy = v
+            prefs[:lazy] = v
           end
           o.on("-m", "--[no-]map", "Print words mapping") do |v|
             @map = v
@@ -144,7 +144,7 @@ module Spoonerize
             @save = v
           end
           o.on("--exclude=WORD", Array, "Words to skip") do |v|
-            Spoonerize.config.excluded_words = v
+            prefs[:excluded_words] = v
           end
         end.parse!(options)
       end

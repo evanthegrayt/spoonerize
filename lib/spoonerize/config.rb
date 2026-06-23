@@ -46,5 +46,29 @@ module Spoonerize
         File.join(ENV["HOME"], ".cache", "spoonerize", "spoonerize.csv")
       )
     end
+
+    ##
+    # Create a copy of the current config with optional overrides.
+    #
+    # @return [Spoonerize::Config]
+    def with(**overrides)
+      self.class.new.tap do |config|
+        config.lazy = lazy
+        config.lazy_words = lazy_words.dup
+        config.excluded_words = excluded_words.dup
+        config.reverse = reverse
+        config.logfile_name = logfile_name
+
+        overrides.each do |key, value|
+          config.public_send(:"#{key}=", copy_value(value))
+        end
+      end
+    end
+
+    private
+
+    def copy_value(value)
+      value.is_a?(Array) ? value.dup : value
+    end
   end
 end
