@@ -4,6 +4,10 @@ module Spoonerize
   ##
   # The main word-flipper.
   class Spoonerism
+    VOWEL_LETTERS = "aeio"
+    CONSONANT_LETTERS = "bcdfghjklmnprstvwxz"
+    Y_FOLLOWING_CONSONANTS = "bcdfghjklmnpqrstvwxz"
+
     ##
     # The words originally passed at initialization.
     #
@@ -131,13 +135,13 @@ module Spoonerize
 
     ##
     # Main flipping method. Creates the replacement word from the next
-    # non-excluded word's leading syllables, and the current word's first vowels
-    # through the end of the word.
+    # non-excluded word's leading consonants, and the current word's first
+    # vowel sound through the end of the word.
     def flip_words(word, idx) # :nodoc:
       return word if excluded?(idx)
       bumper = Bumper.new(idx, words.size, config.reverse)
       bumper.bump while excluded?(bumper.value)
-      words[bumper.value].match(consonants).to_s + word.match(vowels).to_s
+      leading_consonants(words[bumper.value]) + retained_suffix(word)
     end
 
     ##
@@ -147,15 +151,61 @@ module Spoonerize
     end
 
     ##
-    # Returns regex to match first vowels through the rest of the word
-    def vowels # :nodoc:
-      /((?<!q)u|[aeio]|(?<=[bcdfghjklmnprstvwxz])y).*$/
+    # Returns the consonant group a word contributes to another word.
+    def leading_consonants(word) # :nodoc:
+      return "qu" if word.start_with?("qu")
+      return "y" if initial_y_consonant?(word)
+
+      index = word.length.times.find do |letter_index|
+        !CONSONANT_LETTERS.include?(word[letter_index])
+      end
+
+      index ? word[0...index] : word
     end
 
     ##
-    # Returns regex to match leading consonants
-    def consonants # :nodoc:
-      /^(y|[bcdfghjklmnprstvwxz]+|qu)/
+    # Returns the part of a word kept after dropping its leading consonants.
+    def retained_suffix(word) # :nodoc:
+      index = first_vowel_sound_index(word)
+
+      index ? word[index..-1] : ""
+    end
+
+    ##
+    # Returns the first index where a word starts sounding vowel-like.
+    def first_vowel_sound_index(word) # :nodoc:
+      word.length.times.find { |index| vowel_sound_at?(word, index) }
+    end
+
+    ##
+    # Returns true when the letter at index starts a vowel sound.
+    def vowel_sound_at?(word, index) # :nodoc:
+      letter = word[index]
+
+      VOWEL_LETTERS.include?(letter) ||
+        (letter == "u" && word[index - 1] != "q") ||
+        y_vowel_sound_at?(word, index)
+    end
+
+    ##
+    # Initial y is vowel-like before a consonant; later y is vowel-like after a
+    # consonant.
+    def y_vowel_sound_at?(word, index) # :nodoc:
+      return false unless word[index] == "y"
+
+      if index.zero?
+        next_letter = word[index + 1]
+
+        next_letter && Y_FOLLOWING_CONSONANTS.include?(next_letter)
+      else
+        CONSONANT_LETTERS.include?(word[index - 1])
+      end
+    end
+
+    ##
+    # Initial y is consonant-like by itself or before a vowel sound.
+    def initial_y_consonant?(word) # :nodoc:
+      word == "y" || (word.start_with?("y") && vowel_sound_at?(word, 1))
     end
 
     ##

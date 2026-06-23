@@ -60,6 +60,16 @@ class TestSpoonerism < Test::Unit::TestCase
     assert_equal(%w[e spultimate toonerize thest], s.spoonerize)
   end
 
+  def test_initial_y_vowel_handling
+    assert_equal("is mis ty thest", spoonerism("this", "is", "my", "test").to_s)
+    assert_equal("tellow yest", spoonerism("yellow", "test").to_s)
+    assert_equal("tyttrium est", spoonerism("yttrium", "test").to_s)
+    assert_equal("est tyttrium", spoonerism("test", "yttrium").to_s)
+    assert_equal("ty mest", spoonerism("my", "test").to_s)
+    assert_equal("ye th", spoonerism("the", "y").to_s)
+    assert_equal("teen quest", spoonerism("queen", "test").to_s)
+  end
+
   def test_words
     s = spoonerism("the", "ultimate", "spoonerize", "test")
     assert_equal(%w[the ultimate spoonerize test], s.words)
