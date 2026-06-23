@@ -9,13 +9,13 @@ module Spoonerize
     # Major version.
     #
     # @return [Integer]
-    MAJOR = 0
+    MAJOR = 1
 
     ##
     # Minor version.
     #
     # @return [Integer]
-    MINOR = 3
+    MINOR = 0
 
     ##
     # Patch version.
