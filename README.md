@@ -26,6 +26,8 @@ consonants, but will still lose its own if it has any.
 - If the word to pull from is excluded, that word is skipped, and you pull the
 leading consonants from the next non-excluded word.
 - "Q" and "U" should stay together (like "queen").
+- "Y" is treated like a leading consonant by itself or before a vowel sound
+(like "yellow"), but like a leading vowel before a consonant (like "yttrium").
 - A lot of the time, the words won't look how they're supposed to sound, as you
 go by how the word *used* to sound, not how it's spelled. For instance,
 `$ spoonerize two new cuties` becomes "no cew twuties", but it would be
