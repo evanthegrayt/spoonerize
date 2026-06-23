@@ -4,8 +4,22 @@ module Spoonerize
   ##
   # The main word-flipper.
   class Spoonerism
+    ##
+    # Letters that always represent vowel sounds.
+    #
+    # @return [String]
     VOWEL_LETTERS = "aeio"
+
+    ##
+    # Letters that always represent consonant sounds.
+    #
+    # @return [String]
     CONSONANT_LETTERS = "bcdfghjklmnprstvwxz"
+
+    ##
+    # Letters that make an initial "y" act like a vowel sound.
+    #
+    # @return [String]
     Y_FOLLOWING_CONSONANTS = "bcdfghjklmnpqrstvwxz"
 
     ##
