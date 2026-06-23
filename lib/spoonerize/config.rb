@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 module Spoonerize
+  ##
+  # Runtime options used by the CLI and Spoonerism instances.
   class Config
     ##
     # Lazy mode. If true, words in +lazy_words+ will not be altered.
