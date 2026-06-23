@@ -53,7 +53,7 @@ module Spoonerize
   ##
   # Loads a config file.
   #
-  # @param [String] file
+  # @param [String] config_file
   #
   # @return [String] file
   def load_config_file(config_file)

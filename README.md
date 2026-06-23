@@ -40,7 +40,7 @@ Just install the gem!
 gem install spoonerize
 ```
 
-If you don't have permission on your system to install ruby or gems, I recommend
+If you don't have permission on your system to install Ruby or gems, I recommend
 using
 [rbenv](http://www.rubyinside.com/rbenv-a-simple-new-ruby-version-management-tool-5302.html),
 or you can try the manual methods below.
@@ -82,10 +82,12 @@ get the results. For example:
 
 ```
 $ spoonerize -s not too shabby
-Saving [tot shoo nabby] to ~/.cache/spoonerize/spoonerize.csv
+tot shoo nabby
+Saving...
 
 $ spoonerize -rs not too shabby
-Saving [shot noo tabby] to ~/.cache/spoonerize/spoonerize.csv
+shot noo tabby
+Saving...
 
 $ spoonerize -p
 not too shabby | tot shoo nabby | No Options
@@ -98,9 +100,9 @@ Here is a list of all available options:
 -r, --[no-]reverse               Reverse flipping
 -l, --[no-]lazy                  Skip small words
 -m, --[no-]map                   Print words mapping
--p, --[no-]print                 Print all entries in the log
+-p, --[no-]print-log             Print all entries in the log
 -s, --[no-]save                  Save results in log
-    --exclude=WORDS              Words to skip
+    --exclude=WORD               Words to skip
 ```
 
 ### Config File
@@ -122,50 +124,56 @@ Because the file is Ruby, you can set only the values you want to change.
 ## API
 The API is [fully
 documented](https://evanthegrayt.github.io/spoonerize/), but below
-are some quick examples of how you could use this in your ruby code.
+are some quick examples of how you could use this in your Ruby code.
 
 ```ruby
 require 'spoonerize'
 
-spoonerism = Spoonerize::Spoonerism.new(%w[not too shabby])
+spoonerism = Spoonerize::Spoonerism.new("not", "too", "shabby")
 
 spoonerism.to_s
 # => tot shoo nabby
 
-Spoonerize.configure do |config|
-  config.reverse = true
-end
-
-spoonerism.to_s
+reversed = Spoonerize::Spoonerism.new("not", "too", "shabby", reverse: true)
+reversed.to_s
 # => shot noo tabby
 
 Spoonerize.configure do |config|
   config.logfile_name = File.expand_path("~/.cache/spoonerize/spoonerize.csv")
 end
-spoonerism.save
+Spoonerize::Spoonerism.new("not", "too", "shabby").save
 ```
 
-You can also configure Spoonerize in Ruby before creating a spoonerism:
+You can also configure global defaults before creating a spoonerism:
 
 ```ruby
 Spoonerize.configure do |config|
   config.reverse = true
 end
 
-s = Spoonerize::Spoonerism.new(%w[not too shabby])
+s = Spoonerize::Spoonerism.new("not", "too", "shabby")
 s.spoonerize
 # => shot noo tabby
+```
+
+Options passed directly to `Spoonerize::Spoonerism.new` only apply to that
+instance.
+
+Passing words as an array is deprecated and will be removed in Spoonerize 1.0:
+
+```ruby
+Spoonerize::Spoonerism.new(%w[not too shabby])
 ```
 
 Or load a config file manually:
 
 ```ruby
 Spoonerize.load_config_file("~/.spoonerizerc")
-s = Spoonerize::Spoonerism.new(%w[not too shabby])
+s = Spoonerize::Spoonerism.new("not", "too", "shabby")
 ```
 
 ## Self Promotion
 I do these projects for fun, and I enjoy knowing that they're helpful to people.
 Consider starring [the repository](https://github.com/evanthegrayt/spoonerize)
 if you like it! If you love it, follow me [on
-github](https://github.com/evanthegrayt)!
+GitHub](https://github.com/evanthegrayt)!

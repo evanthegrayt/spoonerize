@@ -2,7 +2,7 @@ require_relative "../../lib/spoonerize"
 require_relative "../test_helper"
 
 ##
-# The test suite for +Cli+.
+# The test suite for +Bumper+.
 class TestBumper < Test::Unit::TestCase
   include TestHelper
 

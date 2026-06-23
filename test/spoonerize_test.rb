@@ -32,6 +32,21 @@ class TestSpoonerize < Test::Unit::TestCase
     assert_equal(true, Spoonerize.config.lazy)
   end
 
+  def test_config_with_returns_copy_with_overrides
+    Spoonerize.config.lazy_words << "also"
+    copied_config = Spoonerize.config.with(reverse: true, excluded_words: %w[test])
+
+    assert_equal(true, copied_config.reverse)
+    assert_equal(%w[test], copied_config.excluded_words)
+    assert_equal(Spoonerize.config.lazy_words, copied_config.lazy_words)
+
+    copied_config.lazy_words << "copied"
+    copied_config.excluded_words << "only"
+
+    refute_includes(Spoonerize.config.lazy_words, "copied")
+    assert_empty(Spoonerize.config.excluded_words)
+  end
+
   # def test_load_config_file
   #   # create_config_file(test_config_file_name)
   #   refute(Spoonerize.config_file_loaded?)
