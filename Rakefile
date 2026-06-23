@@ -4,6 +4,7 @@ require_relative "lib/spoonerize"
 require "bundler/gem_tasks"
 require "rdoc/task"
 require "rake/testtask"
+require "standard/rake"
 
 Rake::TestTask.new do |t|
   t.libs = ["lib"]
@@ -64,4 +65,3 @@ namespace :version do
     end
   end
 end
-
