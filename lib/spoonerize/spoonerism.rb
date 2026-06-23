@@ -188,7 +188,7 @@ module Spoonerize
     def retained_suffix(word) # :nodoc:
       index = first_vowel_sound_index(word)
 
-      index ? word[index..-1] : ""
+      index ? word[index..] : ""
     end
 
     ##
