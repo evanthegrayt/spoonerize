@@ -26,17 +26,24 @@ class TestSpoonerize < Test::Unit::TestCase
       Spoonerize.configure do |s|
         s.reverse = true
         s.lazy = true
+        s.consonants_only = true
       end
     end
     assert_equal(true, Spoonerize.config.reverse)
     assert_equal(true, Spoonerize.config.lazy)
+    assert_equal(true, Spoonerize.config.consonants_only)
   end
 
   def test_config_with_returns_copy_with_overrides
     Spoonerize.config.lazy_words << "also"
-    copied_config = Spoonerize.config.with(reverse: true, excluded_words: %w[test])
+    copied_config = Spoonerize.config.with(
+      reverse: true,
+      consonants_only: true,
+      excluded_words: %w[test]
+    )
 
     assert_equal(true, copied_config.reverse)
+    assert_equal(true, copied_config.consonants_only)
     assert_equal(%w[test], copied_config.excluded_words)
     assert_equal(Spoonerize.config.lazy_words, copied_config.lazy_words)
 
@@ -45,6 +52,7 @@ class TestSpoonerize < Test::Unit::TestCase
 
     refute_includes(Spoonerize.config.lazy_words, "copied")
     assert_empty(Spoonerize.config.excluded_words)
+    assert_equal(false, Spoonerize.config.consonants_only)
   end
 
   # def test_load_config_file

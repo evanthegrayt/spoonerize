@@ -101,6 +101,7 @@ Here is a list of all available options:
 ```
 -r, --[no-]reverse               Reverse flipping
 -l, --[no-]lazy                  Skip small words
+-c, --[no-]consonants-only       Only flip consonant-starting words
 -m, --[no-]map                   Print words mapping
 -p, --[no-]print-log             Print all entries in the log
 -s, --[no-]save                  Save results in log
@@ -116,6 +117,7 @@ file can still be overridden at runtime by executable flags.
 Spoonerize.configure do |config|
   config.excluded_words = []
   config.lazy = false
+  config.consonants_only = false
   config.reverse = false
   config.logfile_name = File.expand_path("~/.cache/spoonerize/spoonerize.csv")
 end
@@ -144,6 +146,13 @@ Spoonerize.configure do |config|
   config.logfile_name = File.expand_path("~/.cache/spoonerize/spoonerize.csv")
 end
 Spoonerize::Spoonerism.new("not", "too", "shabby").save
+```
+
+To leave vowel-starting words alone, enable consonants-only mode:
+
+```ruby
+Spoonerize::Spoonerism.new("turn", "up", "son", consonants_only: true).to_s
+# => surn up ton
 ```
 
 You can also configure global defaults before creating a spoonerism:

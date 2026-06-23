@@ -134,6 +134,9 @@ module Spoonerize
           o.on("-l", "--[no-]lazy", "Skip small words") do |v|
             prefs[:lazy] = v
           end
+          o.on("-c", "--[no-]consonants-only", "Only flip consonant-starting words") do |v|
+            prefs[:consonants_only] = v
+          end
           o.on("-m", "--[no-]map", "Print words mapping") do |v|
             @map = v
           end

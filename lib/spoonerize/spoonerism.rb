@@ -29,6 +29,7 @@ module Spoonerize
     # @param [Boolean, nil] lazy Override lazy mode for this instance.
     # @param [Array<String>, nil] lazy_words Override lazy words for this instance.
     # @param [Array<String>, nil] excluded_words Override excluded words for this instance.
+    # @param [Boolean, nil] consonants_only Override consonants-only mode for this instance.
     # @param [Boolean, nil] reverse Override reverse mode for this instance.
     # @param [String, nil] logfile_name Override the log file path for this instance.
     #
@@ -39,6 +40,7 @@ module Spoonerize
       lazy: nil,
       lazy_words: nil,
       excluded_words: nil,
+      consonants_only: nil,
       reverse: nil,
       logfile_name: nil
     )
@@ -47,6 +49,7 @@ module Spoonerize
         lazy: lazy,
         lazy_words: lazy_words,
         excluded_words: excluded_words,
+        consonants_only: consonants_only,
         reverse: reverse,
         logfile_name: logfile_name
       }.reject { |_, value| value.nil? })
@@ -92,7 +95,7 @@ module Spoonerize
     #
     # @return [Boolean]
     def enough_flippable_words?
-      (words - all_excluded_words).size > 1
+      words.each_index.count { |index| flippable?(index) } > 1
     end
 
     ##
@@ -138,9 +141,10 @@ module Spoonerize
     # non-excluded word's leading consonants, and the current word's first
     # vowel sound through the end of the word.
     def flip_words(word, idx) # :nodoc:
-      return word if excluded?(idx)
+      return word unless flippable?(idx)
+
       bumper = Bumper.new(idx, words.size, config.reverse)
-      bumper.bump while excluded?(bumper.value)
+      bumper.bump until flippable?(bumper.value)
       leading_consonants(words[bumper.value]) + retained_suffix(word)
     end
 
@@ -148,6 +152,22 @@ module Spoonerize
     # Returns true if word[index] is in the excluded_words array
     def excluded?(index) # :nodoc:
       all_excluded_words.include?(words[index])
+    end
+
+    ##
+    # Returns true if word[index] can participate in a spoonerism.
+    def flippable?(index) # :nodoc:
+      return false if excluded?(index)
+
+      !config.consonants_only || consonant_sound_start?(words[index])
+    end
+
+    ##
+    # Returns true when a word starts with a consonant sound.
+    def consonant_sound_start?(word) # :nodoc:
+      return false if word.empty?
+
+      !vowel_sound_at?(word, 0)
     end
 
     ##
@@ -219,6 +239,7 @@ module Spoonerize
     def options # :nodoc:
       [].tap do |o|
         o << "Lazy" if config.lazy
+        o << "Consonants Only" if config.consonants_only
         o << "Reverse" if config.reverse
         if config.excluded_words.any?
           o << "Exclude [#{config.excluded_words.join(", ")}]"
