@@ -9,7 +9,7 @@ module Spoonerize
     # Major version.
     #
     # @return [Integer]
-    MAJOR = 1
+    MAJOR = 2
 
     ##
     # Minor version.

@@ -100,7 +100,7 @@ Here is a list of all available options:
 
 ```
 -r, --[no-]reverse               Reverse flipping
--l, --[no-]lazy                  Skip small words
+-l, --[no-]lazy                  Skip common words
 -c, --[no-]consonants-only       Only flip consonant-starting words
 -m, --[no-]map                   Print words mapping
 -p, --[no-]print-log             Print all entries in the log
@@ -108,10 +108,34 @@ Here is a list of all available options:
     --exclude=WORD               Words to skip
 ```
 
+## Web Usage
+The gem also installs a small Sinatra app:
+
+```sh
+spoonerize-web
+```
+
+By default, Sinatra starts on its normal local development address. You can
+choose a host or port when you need to:
+
+```sh
+spoonerize-web --host 127.0.0.1 --port 9292
+```
+
+Open the printed local URL in your browser, enter a phrase, choose any options,
+and submit the form. The page reloads with the spoonerized result and keeps
+your phrase and options in the form. Check "Save result" to write a successful
+result to the configured log file.
+
+The web app ships with the main gem for now, so `gem install spoonerize`
+installs both `spoonerize` and `spoonerize-web`.
+
 ### Config File
 You can create a Ruby config file called `~/.spoonerizerc`. The CLI loads this
 file automatically before it parses command-line options, so options set in the
-file can still be overridden at runtime by executable flags.
+file can still be overridden at runtime by executable flags. The web app loads
+the same file when it starts, and uses those values for the initial form
+defaults.
 
 ```ruby
 Spoonerize.configure do |config|

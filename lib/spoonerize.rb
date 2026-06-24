@@ -1,5 +1,15 @@
 # frozen_string_literal: true
 
+##
+# The main namespace for the gem.
+module Spoonerize
+  ##
+  # The config file the user can create to change default runtime options.
+  #
+  # @return [String]
+  CONFIG_FILE = File.expand_path(File.join(ENV["HOME"], ".spoonerizerc"))
+end
+
 require_relative "spoonerize/config"
 require_relative "spoonerize/spoonerism"
 require_relative "spoonerize/bumper"

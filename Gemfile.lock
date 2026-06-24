@@ -1,19 +1,26 @@
 PATH
   remote: .
   specs:
-    spoonerize (1.0.0)
+    spoonerize (2.0.0)
       csv
+      puma (~> 8.0)
+      rackup (~> 2.3)
+      sinatra (~> 4.2)
 
 GEM
   remote: https://rubygems.org/
   specs:
     ast (2.4.3)
+    base64 (0.3.0)
     csv (3.3.5)
     date (3.5.1)
     erb (6.0.4)
     json (2.20.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
+    logger (1.7.0)
+    mustermann (3.1.1)
+    nio4r (2.7.5)
     parallel (1.28.0)
     parser (3.3.11.1)
       ast (~> 2.4.1)
@@ -23,7 +30,19 @@ GEM
     psych (5.4.0)
       date
       stringio
+    puma (8.0.2)
+      nio4r (~> 2.0)
     racc (1.8.1)
+    rack (3.2.6)
+    rack-protection (4.2.1)
+      base64 (>= 0.1.0)
+      logger (>= 1.6.0)
+      rack (>= 3.0.0, < 4)
+    rack-session (2.1.2)
+      base64 (>= 0.1.0)
+      rack (>= 3.0.0)
+    rackup (2.3.1)
+      rack (>= 3)
     rainbow (3.1.1)
     rake (13.4.2)
     rdoc (7.2.0)
@@ -50,6 +69,13 @@ GEM
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.47.1, < 2.0)
     ruby-progressbar (1.13.0)
+    sinatra (4.2.1)
+      logger (>= 1.6.0)
+      mustermann (~> 3.0)
+      rack (>= 3.0.0, < 4)
+      rack-protection (= 4.2.1)
+      rack-session (>= 2.0.0, < 3)
+      tilt (~> 2.0)
     standard (1.54.0)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
@@ -65,6 +91,7 @@ GEM
     stringio (3.2.0)
     test-unit (3.7.8)
       power_assert
+    tilt (2.7.0)
     tsort (0.2.0)
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)

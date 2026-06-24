@@ -10,6 +10,7 @@ Gem::Specification.new do |spec|
   spec.summary = %(Spoonerize phrases from the command line.)
   spec.description = %(Spoonerize phrases from the command line. Comes with an API)
   spec.homepage = "https://evanthegrayt.github.io/spoonerize/"
+  spec.required_ruby_version = ">= 3.2"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -29,6 +30,9 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
   spec.add_dependency "csv"
+  spec.add_dependency "puma", "~> 8.0"
+  spec.add_dependency "rackup", "~> 2.3"
+  spec.add_dependency "sinatra", "~> 4.2"
   spec.add_development_dependency "rdoc"
   spec.add_development_dependency "rake", "~> 13.0", ">= 13.0.1"
   spec.add_development_dependency "standard", "= 1.54.0"
