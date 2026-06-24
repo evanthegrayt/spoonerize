@@ -18,6 +18,7 @@ class TestWeb < Test::Unit::TestCase
     body = get("/")
 
     assert_match(/<form action="\/" method="post"/, body)
+    assert_match(%r{href="/saved/">Saved spoonerisms</a>}, body)
     assert_match(%r{href="https://github\.com/evanthegrayt">evanthegrayt</a>}, body)
     assert_match(%r{href="https://github\.com/evanthegrayt/spoonerize">spoonerize</a>}, body)
     assert_match(/placeholder="Enter phrase to spoonerize\.\.\."/m, body)
@@ -72,6 +73,13 @@ class TestWeb < Test::Unit::TestCase
     assert_match(/name="excluded_words"\s+value="ultimate test"/m, body)
   end
 
+  def test_saved_entry_can_be_loaded_on_initial_render
+    body = get("/", phrase: "big fun", result: "fig bun")
+
+    assert_match(/class="result">fig bun</, body)
+    assert_match(/name="phrase"\s+value="big fun"/m, body)
+  end
+
   def test_save_writes_successful_result_to_log
     Spoonerize.config.logfile_name = test_log_file
 
@@ -88,15 +96,55 @@ class TestWeb < Test::Unit::TestCase
 
     body = post("/", phrase: "test", save: "1")
 
-    assert_match(/class="notice">Not enough words to flip\.<\/p>/, body)
+    assert_match(/class="notice">Not enough words to spoonerize\.<\/p>/, body)
     refute(File.file?(test_log_file))
   end
 
   def test_errors_are_friendly
     body = post("/", phrase: "test")
 
-    assert_match(/class="notice">Not enough words to flip\.<\/p>/, body)
+    assert_match(/class="notice">Not enough words to spoonerize\.<\/p>/, body)
     refute_match(/class="result"/, body)
+  end
+
+  def test_saved_render_lists_log_entries
+    Spoonerize.config.logfile_name = test_log_file
+    Spoonerize::Log.new(test_log_file).write(["not too shabby", "shot noo tabby", "Reverse"])
+    Spoonerize::Log.new(test_log_file).write(["big fun", "fig bun", "No Options"])
+
+    body = get("/saved/")
+
+    assert_match(/<h1>Saved spoonerisms<\/h1>/, body)
+    assert_match(/2 saved spoonerisms/, body)
+    assert_match(%r{href="/">New spoonerism</a>}, body)
+    assert_match(%r{href="/\?phrase=big\+fun&amp;result=fig\+bun">big fun</a>}, body)
+    assert_match(%r{href="/\?phrase=big\+fun&amp;result=fig\+bun"><strong>fig bun</strong></a>}, body)
+    assert_match(%r{href="/\?phrase=big\+fun&amp;result=fig\+bun">No Options</a>}, body)
+    assert_match(%r{href="/\?phrase=not\+too\+shabby&amp;result=shot\+noo\+tabby">not too shabby</a>}, body)
+    assert_match(%r{href="/\?phrase=not\+too\+shabby&amp;result=shot\+noo\+tabby"><strong>shot noo tabby</strong></a>}, body)
+    assert_match(%r{href="/\?phrase=not\+too\+shabby&amp;result=shot\+noo\+tabby">Reverse</a>}, body)
+  end
+
+  def test_saved_render_escapes_log_entries
+    Spoonerize.config.logfile_name = test_log_file
+    Spoonerize::Log.new(test_log_file).write(["<b>bold</b> words", "<i>spoonerize</i> words", "No Options"])
+
+    body = get("/saved/")
+
+    assert_match(/&lt;b&gt;bold&lt;\/b&gt; words/, body)
+    assert_match(/&lt;i&gt;spoonerize&lt;\/i&gt; words/, body)
+    refute_match(/<b>bold<\/b>/, body)
+    refute_match(/<i>spoonerize<\/i>/, body)
+  end
+
+  def test_saved_render_has_empty_state
+    Spoonerize.config.logfile_name = test_log_file
+
+    body = get("/saved/")
+
+    assert_match(/0 saved spoonerisms/, body)
+    assert_match(/class="notice">No saved spoonerisms yet\.<\/p>/, body)
+    refute_match(/class="saved-table"/, body)
   end
 
   private

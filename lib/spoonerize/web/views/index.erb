@@ -1,6 +1,7 @@
 <section class="shell">
-  <header class="masthead">
-    <h1>Flip a phrase</h1>
+  <header class="masthead masthead-with-action">
+    <h1>Spoonerize a phrase</h1>
+    <a class="action-link" href="/saved/">Saved spoonerisms</a>
   </header>
 
   <% if @result %>
@@ -9,7 +10,8 @@
       <p class="notice">Saved.</p>
     <% end %>
   <% elsif @error %>
-    <p class="notice"><%= h @error %></p>
+    <% display_error = @error == "Not enough words to flip." ? "Not enough words to spoonerize." : @error %>
+    <p class="notice"><%= h display_error %></p>
   <% end %>
 
   <form action="/" method="post" class="spoonerize-form">
@@ -28,7 +30,7 @@
 
       <label class="check">
         <input type="checkbox" name="reverse" value="1" <%= checked?("reverse") %>>
-        <span>Reverse flipping</span>
+        <span>Reverse spoonerizing</span>
       </label>
 
       <label class="check">
@@ -38,7 +40,7 @@
 
       <label class="check">
         <input type="checkbox" name="consonants_only" value="1" <%= checked?("consonants_only") %>>
-        <span>Only flip consonant-starting words</span>
+        <span>Only spoonerize consonant-starting words</span>
       </label>
 
       <label class="check">

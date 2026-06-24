@@ -54,11 +54,25 @@ module Spoonerize
       def h(value)
         Rack::Utils.escape_html(value)
       end
+
+      def saved_entry_path(phrase, result)
+        "/?#{Rack::Utils.build_query("phrase" => phrase, "result" => result)}"
+      end
     end
 
     get "/" do
       prepare_request(false)
+      @result = params["result"].to_s unless params["result"].to_s.empty?
       erb :index
+    end
+
+    get "/saved" do
+      redirect "/saved/"
+    end
+
+    get "/saved/" do
+      @entries = saved_entries
+      erb :saved
     end
 
     post "/" do
@@ -94,6 +108,10 @@ module Spoonerize
       @excluded_words = excluded_words_from_params
       @excluded_words_value = @excluded_words.join(" ")
       @save = @submitted && params.key?("save")
+    end
+
+    def saved_entries
+      Spoonerize::Log.new(Spoonerize.config.logfile_name).contents.reverse
     end
 
     def spoonerize_phrase
