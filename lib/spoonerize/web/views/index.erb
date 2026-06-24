@@ -1,0 +1,61 @@
+<section class="shell">
+  <header class="masthead">
+    <h1>Flip a phrase</h1>
+  </header>
+
+  <% if @result %>
+    <p class="result"><%= h @result %></p>
+    <% if @saved %>
+      <p class="notice">Saved.</p>
+    <% end %>
+  <% elsif @error %>
+    <p class="notice"><%= h @error %></p>
+  <% end %>
+
+  <form action="/" method="post" class="spoonerize-form">
+    <label class="field">
+      <span>Phrase</span>
+      <input
+        type="text"
+        name="phrase"
+        value="<%= h @phrase %>"
+        placeholder="Enter phrase to spoonerize..."
+        autofocus>
+    </label>
+
+    <fieldset>
+      <legend>Options</legend>
+
+      <label class="check">
+        <input type="checkbox" name="reverse" value="1" <%= checked?("reverse") %>>
+        <span>Reverse flipping</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" name="lazy" value="1" <%= checked?("lazy") %>>
+        <span>Skip common words</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" name="consonants_only" value="1" <%= checked?("consonants_only") %>>
+        <span>Only flip consonant-starting words</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" name="save" value="1" <%= @save ? "checked" : nil %>>
+        <span>Save result</span>
+      </label>
+    </fieldset>
+
+    <label class="field">
+      <span>Excluded words</span>
+      <input
+        type="text"
+        name="excluded_words"
+        value="<%= h @excluded_words_value %>"
+        placeholder="word another">
+    </label>
+
+    <button type="submit">Spoonerize</button>
+  </form>
+</section>

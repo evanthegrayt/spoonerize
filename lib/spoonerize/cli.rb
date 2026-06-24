@@ -7,10 +7,10 @@ module Spoonerize
   # The class for handling the command-line interface.
   class Cli
     ##
-    # The config file the user can create to change default runtime options.
+    # The config file the CLI loads before parsing runtime options.
     #
     # @return [String]
-    CONFIG_FILE = File.expand_path(File.join(ENV["HOME"], ".spoonerizerc"))
+    CONFIG_FILE = Spoonerize::CONFIG_FILE
 
     ##
     # Creates an instance of +Spoonerism+ and runs what the user requested.
@@ -131,7 +131,7 @@ module Spoonerize
           o.on("-r", "--[no-]reverse", "Reverse flipping") do |v|
             prefs[:reverse] = v
           end
-          o.on("-l", "--[no-]lazy", "Skip small words") do |v|
+          o.on("-l", "--[no-]lazy", "Skip common words") do |v|
             prefs[:lazy] = v
           end
           o.on("-c", "--[no-]consonants-only", "Only flip consonant-starting words") do |v|
