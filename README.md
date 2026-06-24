@@ -1,6 +1,7 @@
 # Welcome to Spoonerize -- a word game.
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fevanthegrayt%2Fspoonerize%2Fbadge%3Fref%3Dmaster&style=flat)](https://actions-badge.atrox.dev/evanthegrayt/spoonerize/goto?ref=master)
-[![Gem Version](https://badge.fury.io/rb/spoonerize.svg)](https://badge.fury.io/rb/spoonerize)
+[![Gem Version](https://img.shields.io/gem/v/spoonerize.svg)](https://rubygems.org/gems/spoonerize)
+![Language: Ruby](https://img.shields.io/static/v1?label=language&message=Ruby&color=CC342D&style=flat&logo=ruby&logoColor=CC342D)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > Spoonerism *[noun]* a verbal error in which a speaker accidentally transposes
