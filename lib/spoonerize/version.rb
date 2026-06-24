@@ -15,7 +15,7 @@ module Spoonerize
     # Minor version.
     #
     # @return [Integer]
-    MINOR = 0
+    MINOR = 1
 
     ##
     # Patch version.

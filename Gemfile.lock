@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    spoonerize (2.0.0)
+    spoonerize (2.1.0)
       csv
       puma (~> 8.0)
       rackup (~> 2.3)

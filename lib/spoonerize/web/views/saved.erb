@@ -1,0 +1,44 @@
+<section class="shell">
+  <header class="masthead masthead-with-action">
+    <div>
+      <h1>Saved spoonerisms</h1>
+      <p class="lede"><%= @entries.size %> saved <%= @entries.size == 1 ? "spoonerism" : "spoonerisms" %></p>
+    </div>
+    <a class="action-link" href="/">New spoonerism</a>
+  </header>
+
+  <% if @entries.empty? %>
+    <p class="notice">No saved spoonerisms yet.</p>
+  <% else %>
+    <div class="table-wrap">
+      <table class="saved-table">
+        <thead>
+          <tr>
+            <th scope="col">Phrase</th>
+            <th scope="col">Result</th>
+            <th scope="col">Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @entries.each do |entry| %>
+            <% phrase = entry[0].to_s %>
+            <% result = entry[1].to_s %>
+            <% options = entry[2].to_s %>
+            <% entry_path = saved_entry_path(phrase, result) %>
+            <tr>
+              <td data-label="Phrase">
+                <a class="row-link" href="<%= h entry_path %>"><%= h phrase %></a>
+              </td>
+              <td data-label="Result">
+                <a class="row-link" href="<%= h entry_path %>"><strong><%= h result %></strong></a>
+              </td>
+              <td data-label="Options">
+                <a class="row-link" href="<%= h entry_path %>"><%= h options %></a>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</section>
