@@ -55,6 +55,13 @@ module Spoonerize
         Rack::Utils.escape_html(value)
       end
 
+      ##
+      # Path for loading a saved spoonerism on the main web form.
+      #
+      # @param [String] phrase The original phrase.
+      # @param [String] result The saved spoonerized result.
+      #
+      # @return [String]
       def saved_entry_path(phrase, result)
         "/?#{Rack::Utils.build_query("phrase" => phrase, "result" => result)}"
       end
