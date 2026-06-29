@@ -7,7 +7,7 @@
 > Spoonerism *[noun]* a verbal error in which a speaker accidentally transposes
 > the initial sounds or letters of two or more words, often to humorous effect.
 
-You can view the documentation [here](https://evanthegrayt.github.io/spoonerize/)
+You can view the documentation [here](https://evanthegrayt.github.io/spoonerize/).
 
 ## About
 We've all done it; someone says a phrase, and you flip the first few letters
@@ -208,8 +208,9 @@ Spoonerize.load_config_file("~/.spoonerizerc")
 s = Spoonerize::Spoonerism.new("not", "too", "shabby")
 ```
 ## Support this project
-I love knowing when people find my work useful!
+I love knowing when people find my work useful. Any kind of support is very much
+appreciated!
 
-:star: Like the project? Consider starring [the repository](https://github.com/evanthegrayt/spoonerize).\
-:heart: Love the project? Follow me [on GitHub](https://github.com/evanthegrayt).\
-:money_with_wings: *Really* love it? Consider [buying me a tea](https://paypal.me/evanrgray)!
+- ⭐️ Like the project? Star [the repository](https://github.com/evanthegrayt/spoonerize)!
+- ❤️ Love the project? Follow me [on GitHub](https://github.com/evanthegrayt)!
+- 💸 *Really* love it? Consider [buying me a tea](https://paypal.me/evanrgray)!
