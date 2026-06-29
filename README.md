@@ -207,9 +207,9 @@ Or load a config file manually:
 Spoonerize.load_config_file("~/.spoonerizerc")
 s = Spoonerize::Spoonerism.new("not", "too", "shabby")
 ```
+## Support this project
+I love knowing when people find my work useful!
 
-## Self Promotion
-I do these projects for fun, and I enjoy knowing that they're helpful to people.
-Consider starring [the repository](https://github.com/evanthegrayt/spoonerize)
-if you like it! If you love it, follow me [on
-GitHub](https://github.com/evanthegrayt)!
+:star: Like the project? Consider starring [the repository](https://github.com/evanthegrayt/spoonerize).\
+:heart: Love the project? Follow me [on GitHub](https://github.com/evanthegrayt).\
+:money_with_wings: *Really* love it? Consider [buying me a tea](https://paypal.me/evanrgray)!
