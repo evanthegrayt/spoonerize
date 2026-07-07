@@ -69,6 +69,7 @@ GEM
       rubocop (>= 1.75.0, < 2.0)
       rubocop-ast (>= 1.47.1, < 2.0)
     ruby-progressbar (1.13.0)
+    semverve (0.4.0)
     sinatra (4.2.1)
       logger (>= 1.6.0)
       mustermann (~> 3.0)
@@ -105,6 +106,7 @@ PLATFORMS
 DEPENDENCIES
   rake (~> 13.0, >= 13.0.1)
   rdoc
+  semverve
   spoonerize!
   standard (= 1.54.0)
   test-unit (~> 3.3, >= 3.3.5)

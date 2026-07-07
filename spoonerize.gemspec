@@ -35,6 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "sinatra", "~> 4.2"
   spec.add_development_dependency "rdoc"
   spec.add_development_dependency "rake", "~> 13.0", ">= 13.0.1"
+  spec.add_development_dependency "semverve"
   spec.add_development_dependency "standard", "= 1.54.0"
   spec.add_development_dependency "test-unit", "~> 3.3", ">= 3.3.5"
 end
